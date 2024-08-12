@@ -5,7 +5,7 @@
 
 from TC_eqs import *
 from RE_eqs import *
-from Synapses_propre import *
+from Synapses import *
 from brian2 import *
 import numpy as np
 import scipy as sp

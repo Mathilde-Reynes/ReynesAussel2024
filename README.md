@@ -1,1 +1,0 @@
-# Thalamocortical model

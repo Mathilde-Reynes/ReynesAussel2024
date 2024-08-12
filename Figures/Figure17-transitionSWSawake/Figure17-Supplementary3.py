@@ -78,13 +78,13 @@ ax[0].plot(time_s, VPY_A1_v2, color="tab:blue")
 configure_axis(ax[0], 'PY, slow wave sleep', 'mV', 25, 0, 30)
 #
 ax[1].plot(time_s, VPY_A2_v2, color="tab:blue")
-configure_axis(ax[1], 'PY', 'mV', 25, 0, 30, show_legend=True)
+configure_axis(ax[1], 'PY', 'mV', 25, 0, 30)
 #
 ax[2].plot(time_s, VPY_A3_v2, color="tab:blue")
-configure_axis(ax[2], 'PY', 'mV', 25, 0, 30, show_legend=True)
+configure_axis(ax[2], 'PY', 'mV', 25, 0, 30)
 #
 ax[3].plot(time_s, VPY_A4_v2, color="tab:blue")
-configure_axis(ax[3], 'PY, activated', 'mV', 25, 0, 30, show_legend=True)
+configure_axis(ax[3], 'PY, activated', 'mV', 25, 0, 30)
 ax[3].set_xlabel('Time (ms)', size=30, labelpad=25)
 #
 #plt.savefig('Figure17Top.png', dpi=300, bbox_inches='tight')
@@ -97,13 +97,13 @@ ax[0].plot(time_s, VPY_A1_v3, color="tab:blue")
 configure_axis(ax[0], 'PY, slow wave sleep', 'mV', 25, 0, 30)
 #
 ax[1].plot(time_s, VPY_A2_v3, color="tab:blue")
-configure_axis(ax[1], 'PY', 'mV', 25, 0, 30, show_legend=True)
+configure_axis(ax[1], 'PY', 'mV', 25, 0, 30)
 #
 ax[2].plot(time_s, VPY_A3_v3, color="tab:blue")
-configure_axis(ax[2], 'PY', 'mV', 25, 0, 30, show_legend=True)
+configure_axis(ax[2], 'PY', 'mV', 25, 0, 30)
 #
 ax[3].plot(time_s, VPY_A4_v3, color="tab:blue")
-configure_axis(ax[3], 'PY, activated', 'mV', 25, 0, 30, show_legend=True)
+configure_axis(ax[3], 'PY, activated', 'mV', 25, 0, 30)
 ax[3].set_xlabel('Time (ms)', size=30, labelpad=25)
 #
 plt.savefig('Supplementary3Top.png', dpi=300, bbox_inches='tight')

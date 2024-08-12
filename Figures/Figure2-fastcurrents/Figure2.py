@@ -169,5 +169,5 @@ ax[4].plot(time_bazhenov, hna_bazhenov[:int((simulation_time / 0.02) / ms)], lab
 configure_axis(ax[4], 'Inactivation gating variable, $h$', '', 0.5, 414.25, 415.5, show_legend=True)
 ax[4].set_xlabel('Time (ms)', size=30, labelpad=25)
 #
-plt.savefig('Figure2B.png', dpi=300, bbox_inches='tight')
+#plt.savefig('Figure2B.png', dpi=300, bbox_inches='tight')
 plt.show()
