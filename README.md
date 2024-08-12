@@ -8,7 +8,7 @@ The model used in this simulator is detailed in an article [1] that is yet to be
 
 
 ## 2. Requirements
-This simulator was developed using Python 3.6 and the following packages: brian2=2.5.1, python=3.8.19, numpy=1.24.4. It was developed on Windows 11 and tested on Linux. The specifications for the Windows environment are available in the environment.yaml file in the GitHub repository. You can create a similar virtual environment with Conda using the command:
+This simulator was developed using Python 3.6 and the following packages: brian2=2.5.1, python=3.8.19, numpy=1.24.4. It was developed on Windows 11 and tested on Linux. The specifications for the Windows environment are available in the environment.yaml file in the Model folder of this GitHub repository. You can create a similar virtual environment with Conda using the command:
 
 ```bash
 conda env create -f environment.yaml
@@ -33,8 +33,10 @@ The model is organized with each component in its own Python file:
 ### Simulation:
 Thalamo_cortical.py: Simulates the full model, allowing selection of neuron numbers and simulation duration. Data can be saved from this file.
 
+
 ## 4. Additional Files
-Code for plotting each figure is available in the ‘Figures’ folder on the GitHub repository.
+Code for plotting each figure is available in the ‘Figures’ folder on the GitHub repository. [Dataset 1](https://doi.org/10.5281/zenodo.13308394) generated from the present model and [Dataset 2](https://doi.org/10.5281/zenodo.13308394) generated from the original model are both accessible via Zenodo.
+
 
 References
 [1] Reynes, M., & Aussel, A., to be published

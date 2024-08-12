@@ -4,6 +4,8 @@ Data_bazhenov/
 
 Model_bazhenov/
 
+*.zip
+
 *.txt
 
 *.png
