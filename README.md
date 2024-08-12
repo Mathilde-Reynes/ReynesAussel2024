@@ -1,4 +1,4 @@
-# Model of Thalamocortical Slow-Wave Sleep Oscillations and Transitions to Activated States
+# [Re] Model of Thalamocortical Slow-Wave Sleep Oscillations and Transitions to Activated States
 
 **Authors:** Mathilde Reynes, Amélie Aussel  
 **Contact:** mathilde.reynes@u-bordeaux.fr
