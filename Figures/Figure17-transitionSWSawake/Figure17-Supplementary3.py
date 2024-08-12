@@ -9,11 +9,11 @@ def normalize(array, min_val, max_val):
 
 #Make sure you are working in the proper depository
 #Data v2
-VPY_A1_v2=loadtxt('FigureA1v2/PY_v.txt')
-VPY_A2_v2=loadtxt('FigureA2v2/PY_v.txt')
-VPY_A3_v2=loadtxt('FigureA3v2/PY_v.txt')
-VPY_A4_v2=loadtxt('FigureA4v2/PY_v.txt')
-time=loadtxt('FigureA-1/time.txt')
+VPY_A1_v2=loadtxt('../../Data/FigureA1v2/PY_v.txt')
+VPY_A2_v2=loadtxt('../../Data/FigureA2v2/PY_v.txt')
+VPY_A3_v2=loadtxt('../../Data/FigureA3v2/PY_v.txt')
+VPY_A4_v2=loadtxt('../../Data/FigureA4v2/PY_v.txt')
+time=loadtxt('../../Data/FigureA-1/time.txt')
 time_s = time/1000
 #See the file spectral_powers
 freq1_v2=[2.89E-05,2.55E-05,1.84E-05,1.63E-05,1.34E-05,6.91E-06,3.44E-06]
@@ -33,11 +33,11 @@ normalized_v2_freq3 = normalize(freq3_v2_array, min_freq_v2, max_freq_v2)
 normalized_v2_freq4 = normalize(freq4_v2_array, min_freq_v2, max_freq_v2)
 
 #Data v2
-VPY_A1_v3=loadtxt('FigureA1v3/PY_v.txt')
-VPY_A2_v3=loadtxt('FigureA2v3/PY_v.txt')
-VPY_A3_v3=loadtxt('FigureA3v3/PY_v.txt')
-VPY_A4_v3=loadtxt('FigureA4v3/PY_v.txt')
-time=loadtxt('FigureA-1/time.txt')
+VPY_A1_v3=loadtxt('../../Data/FigureA1v3/PY_v.txt')
+VPY_A2_v3=loadtxt('../../Data/FigureA2v3/PY_v.txt')
+VPY_A3_v3=loadtxt('../../Data/FigureA3v3/PY_v.txt')
+VPY_A4_v3=loadtxt('../../Data/FigureA4v3/PY_v.txt')
+time=loadtxt('../../Data/FigureA-1/time.txt')
 time_s = time/1000
 #See the file spectral_powers
 freq1_v3=[3.20E-05,1.99E-05,1.26E-05,4.24E-06,4.27E-06,4.24E-06,2.30E-06]

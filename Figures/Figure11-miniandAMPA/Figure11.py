@@ -5,11 +5,10 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import numpy as np
 
-#Make sure your working directory is properly set to access the .txt
-VPY_1 = np.loadtxt('PY_v_disconnectedfromthalamus.txt')
-VPY_2 = np.loadtxt('PY_v_disconnectedfromthalamus_mini50.txt')
-VPY_3 = np.loadtxt('PY_v_disconnectedfromthalamus_synapses50.txt')
-time = np.loadtxt('time_20.txt')
+VPY_1 = np.loadtxt('../../Data/PY_v_disconnectedfromthalamus.txt')
+VPY_2 = np.loadtxt('../../Data/PY_v_disconnectedfromthalamus_mini50.txt')
+VPY_3 = np.loadtxt('../../Data/PY_v_disconnectedfromthalamus_synapses50.txt')
+time = np.loadtxt('../../Data/time_20.txt')
 
 ###Figure 11
 fig,ax = subplots(3,1, sharex = True,figsize=(20,15))

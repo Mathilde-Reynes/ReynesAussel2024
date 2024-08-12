@@ -6,12 +6,12 @@ from matplotlib.ticker import MultipleLocator
 
 simulation_time=6000*ms
 
-v_bazhenov=genfromtxt('v_SOMA_IN')
-Ik_bazhenov=genfromtxt('I_k_IN')[:,15]
-Ina_bazhenov=genfromtxt('I_na_IN_soma')[:,15]
-hna_bazhenov=genfromtxt('h_na_IN')[:,15]
-mna_bazhenov=genfromtxt('m_na_IN')[:,15]
-v_Ena=genfromtxt('v_m_E_Na_in')[:,15]
+v_bazhenov=genfromtxt('../../Data/v_SOMA_IN')
+Ik_bazhenov=genfromtxt('../../Data/I_k_IN')[:,15]
+Ina_bazhenov=genfromtxt('../../Data/I_na_IN_soma')[:,15]
+hna_bazhenov=genfromtxt('../../Data/h_na_IN')[:,15]
+mna_bazhenov=genfromtxt('../../Data/m_na_IN')[:,15]
+v_Ena=genfromtxt('../../Data/v_m_E_Na_in')[:,15]
 time_bazhenov=arange(0,int(simulation_time/ms),0.02)
 array_v_bazhenov=TimedArray(v_bazhenov[:,15],0.02*ms)
 

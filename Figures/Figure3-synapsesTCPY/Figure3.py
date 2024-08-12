@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-
 from brian2 import *
 from Synapses_propre import *
 from Layer_Thalamus import *
@@ -15,19 +14,19 @@ defaultclock.dt = 0.02*ms
 
 simulation_time=1000*ms
 
-v_PY_soma_bazhenov=genfromtxt('v_SOMA')
-v_PY_dend_bazhenov=genfromtxt('time_cx_dend')
+v_PY_soma_bazhenov=genfromtxt('../../Data/v_SOMA')
+v_PY_dend_bazhenov=genfromtxt('../../Data/time_cx_dend')
 array_v_PY_soma_bazhenov=TimedArray(v_PY_soma_bazhenov[:,50],0.02*ms)
 array_v_PY_dend_bazhenov=TimedArray(v_PY_dend_bazhenov[:,50],0.02*ms)
 
-v_TC_bazhenov=genfromtxt('v_TC')
+v_TC_bazhenov=genfromtxt('../../Data/v_TC')
 array_v_TC_bazhenov=TimedArray(v_TC_bazhenov[:,25],0.02*ms)
 
 
 time_bazhenov=arange(0,int(simulation_time/ms),0.02)
 
-a_CX_TC_bazhenov=genfromtxt('a_cx_tc')[:,10] #synapse from neuron 50 to neuron 25 should be k=10 since radius PY_TC = 5 and N_PY = 2*N_TC
-a_TC_CX_bazhenov=genfromtxt('a_tc_cx')[:,5] #synapse from neuron 25 to neuron 50 should be k=5 since radius TC_PY = 10 and N_TC = 0.5*N_PY
+a_CX_TC_bazhenov=genfromtxt('../../Data/a_cx_tc')[:,10] #synapse from neuron 50 to neuron 25 should be k=10 since radius PY_TC = 5 and N_PY = 2*N_TC
+a_TC_CX_bazhenov=genfromtxt('../../Data/a_tc_cx')[:,5] #synapse from neuron 25 to neuron 50 should be k=5 since radius TC_PY = 10 and N_TC = 0.5*N_PY
 
 eq_PY_soma='''
     v = array_v_PY_soma_bazhenov(t)*mV  : volt  (constant over dt)
@@ -96,10 +95,10 @@ Bazhenov_PY_dendrite = NeuronGroup(1,eq_PY_dend,method='rk4',threshold='v>0*mV',
 Bazhenov_TC = NeuronGroup(1,eq_TC,method='rk4',threshold='v>0*mV',refractory=3*ms)
 
 #Check AMPA "thal" synapses
-S_AMPA_PYTC = syn_ampa_thal(Bazhenov_PY_soma,Bazhenov_TC,'IsynAMPA_PY_TC',s_TC,'',g_syn_ampa_pytc,20) 
+S_AMPA_PYTC = syn_ampa_thal(Bazhenov_PY_soma,Bazhenov_TC,'IsynAMPA_PY_TC',s_TC,'',g_syn_ampa_pytc) 
 S_AMPA_PYTC.t_last_spike = -100*ms
         
-S_AMPA_TCPY = syn_ampa_thal(Bazhenov_TC,Bazhenov_PY_dendrite,'IsynAMPA_TC_PY',s_Dend_PY,'',g_syn_ampa_tcpy,10) 
+S_AMPA_TCPY = syn_ampa_thal(Bazhenov_TC,Bazhenov_PY_dendrite,'IsynAMPA_TC_PY',s_Dend_PY,'',g_syn_ampa_tcpy) 
 S_AMPA_TCPY.t_last_spike = -1000*ms
 
 V_PY_dend = StateMonitor(Bazhenov_PY_dendrite,('v','IsynAMPA_TC_PY','IsynGABAA_IN_PY','IEPSPs_IN_PY'),record=True)

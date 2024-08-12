@@ -5,20 +5,19 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import numpy as np
 
-#Make sure your working directory is properly set to access the .txt
-VPY_1 = np.loadtxt('PY_v_withoutkleak_strong.txt')
-VRE_1 = np.loadtxt('RE_v_withoutkleak_strong.txt')
-VTC_1 = np.loadtxt('TC_v_withoutkleak_strong.txt')
+VPY_1 = np.loadtxt('../../Data/PY_v_withoutkleak_strong.txt')
+VRE_1 = np.loadtxt('../../Data/RE_v_withoutkleak_strong.txt')
+VTC_1 = np.loadtxt('../../Data/TC_v_withoutkleak_strong.txt')
 
-VPY_2 = np.loadtxt('PY_v_withoutkleak_weakPY.txt')
-VRE_2 = np.loadtxt('RE_v_withoutkleak_weakPY.txt')
-VTC_2 = np.loadtxt('TC_v_withoutkleak_weakPY.txt')
+VPY_2 = np.loadtxt('../../Data/PY_v_withoutkleak_weakPY.txt')
+VRE_2 = np.loadtxt('../../Data/RE_v_withoutkleak_weakPY.txt')
+VTC_2 = np.loadtxt('../../Data/TC_v_withoutkleak_weakPY.txt')
 
-VPY_3 = np.loadtxt('PY_v_withoutkleak_weakPYRETC.txt')
-VRE_3 = np.loadtxt('RE_v_withoutkleak_weakPYRETC.txt')
-VTC_3 = np.loadtxt('TC_v_withoutkleak_weakPYRETC.txt')
+VPY_3 = np.loadtxt('../../Data/PY_v_withoutkleak_weakPYRETC.txt')
+VRE_3 = np.loadtxt('../../Data/RE_v_withoutkleak_weakPYRETC.txt')
+VTC_3 = np.loadtxt('../../Data/TC_v_withoutkleak_weakPYRETC.txt')
 
-time = np.loadtxt('time_10.txt')
+time = np.loadtxt('../../Data/time_10.txt')
 
 #For firing frequency measures see the file FiringFrequency.ods
 gPYPY=[0.08,0.10,0.12,0.14,0.16]

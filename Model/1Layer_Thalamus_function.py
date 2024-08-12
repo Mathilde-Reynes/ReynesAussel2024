@@ -10,7 +10,7 @@ from Soma_eqs import *
 from Dendritic_eqs import *
 from TC_eqs import *
 from RE_eqs import *
-from Synapses_propre import *
+from Synapses import *
 from Cortical_layer import *
 from Thalamus import *
 

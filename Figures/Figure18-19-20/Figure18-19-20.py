@@ -8,52 +8,52 @@ from matplotlib.ticker import MultipleLocator
 
 #Open files
 #Input modulated at 0.4Hz, SWS
-raster_PY_i_04Hz_sws=loadtxt('stimfreq_04_sws/raster_PY_i.txt')
-raster_PY_t_04Hz_sws=loadtxt('stimfreq_04_sws/raster_PY_t.txt')
-raster_TC_i_04Hz_sws=loadtxt('stimfreq_04_sws/raster_TC_i.txt')
-raster_TC_t_04Hz_sws=loadtxt('stimfreq_04_sws/raster_TC_t.txt')
-raster_input_i_04Hz_sws=loadtxt('stimfreq_04_sws/input_i.txt')
-raster_input_t_04Hz_sws=loadtxt('stimfreq_04_sws/input_t.txt')
+raster_PY_i_04Hz_sws=loadtxt('../../Data/stimfreq_04_sws/raster_PY_i.txt')
+raster_PY_t_04Hz_sws=loadtxt('../../Data/stimfreq_04_sws/raster_PY_t.txt')
+raster_TC_i_04Hz_sws=loadtxt('../../Data/stimfreq_04_sws/raster_TC_i.txt')
+raster_TC_t_04Hz_sws=loadtxt('../../Data/stimfreq_04_sws/raster_TC_t.txt')
+raster_input_i_04Hz_sws=loadtxt('../../Data/stimfreq_04_sws/input_i.txt')
+raster_input_t_04Hz_sws=loadtxt('../../Data/stimfreq_04_sws/input_t.txt')
 
 #Input modulated at 1Hz, SWS
-raster_PY_i_1Hz_sws=loadtxt('stimfreq_1_sws/raster_PY_i.txt')
-raster_PY_t_1Hz_sws=loadtxt('stimfreq_1_sws/raster_PY_t.txt')
-raster_TC_i_1Hz_sws=loadtxt('stimfreq_1_sws/raster_TC_i.txt')
-raster_TC_t_1Hz_sws=loadtxt('stimfreq_1_sws/raster_TC_t.txt')
-raster_input_i_1Hz_sws=loadtxt('stimfreq_1_sws/input_i.txt')
-raster_input_t_1Hz_sws=loadtxt('stimfreq_1_sws/input_t.txt')
+raster_PY_i_1Hz_sws=loadtxt('../../Data/stimfreq_1_sws/raster_PY_i.txt')
+raster_PY_t_1Hz_sws=loadtxt('../../Data/stimfreq_1_sws/raster_PY_t.txt')
+raster_TC_i_1Hz_sws=loadtxt('../../Data/stimfreq_1_sws/raster_TC_i.txt')
+raster_TC_t_1Hz_sws=loadtxt('../../Data/stimfreq_1_sws/raster_TC_t.txt')
+raster_input_i_1Hz_sws=loadtxt('../../Data/stimfreq_1_sws/input_i.txt')
+raster_input_t_1Hz_sws=loadtxt('../../Data/stimfreq_1_sws/input_t.txt')
 
 #Input modulated at 2.5Hz, SWS
-raster_PY_i_25Hz_sws=loadtxt('stimfreq_25_sws/raster_PY_i.txt')
-raster_PY_t_25Hz_sws=loadtxt('stimfreq_25_sws/raster_PY_t.txt')
-raster_TC_i_25Hz_sws=loadtxt('stimfreq_25_sws/raster_TC_i.txt')
-raster_TC_t_25Hz_sws=loadtxt('stimfreq_25_sws/raster_TC_t.txt')
-raster_input_i_25Hz_sws=loadtxt('stimfreq_25_sws/input_i.txt')
-raster_input_t_25Hz_sws=loadtxt('stimfreq_25_sws/input_t.txt')
+raster_PY_i_25Hz_sws=loadtxt('../../Data/stimfreq_25_sws/raster_PY_i.txt')
+raster_PY_t_25Hz_sws=loadtxt('../../Data/stimfreq_25_sws/raster_PY_t.txt')
+raster_TC_i_25Hz_sws=loadtxt('../../Data/stimfreq_25_sws/raster_TC_i.txt')
+raster_TC_t_25Hz_sws=loadtxt('../../Data/stimfreq_25_sws/raster_TC_t.txt')
+raster_input_i_25Hz_sws=loadtxt('../../Data/stimfreq_25_sws/input_i.txt')
+raster_input_t_25Hz_sws=loadtxt('../../Data/stimfreq_25_sws/input_t.txt')
 
 #Input modulated at 0.4Hz, activated state
-raster_PY_i_04Hz_wake=loadtxt('stimfreq_04_wake/raster_PY_i.txt')
-raster_PY_t_04Hz_wake=loadtxt('stimfreq_04_wake/raster_PY_t.txt')
-raster_TC_i_04Hz_wake=loadtxt('stimfreq_04_wake/raster_TC_i.txt')
-raster_TC_t_04Hz_wake=loadtxt('stimfreq_04_wake/raster_TC_t.txt')
-raster_input_i_04Hz_wake=loadtxt('stimfreq_04_wake/input_i.txt')
-raster_input_t_04Hz_wake=loadtxt('stimfreq_04_wake/input_t.txt')
+raster_PY_i_04Hz_wake=loadtxt('../../Data/stimfreq_04_wake/raster_PY_i.txt')
+raster_PY_t_04Hz_wake=loadtxt('../../Data/stimfreq_04_wake/raster_PY_t.txt')
+raster_TC_i_04Hz_wake=loadtxt('../../Data/stimfreq_04_wake/raster_TC_i.txt')
+raster_TC_t_04Hz_wake=loadtxt('../../Data/stimfreq_04_wake/raster_TC_t.txt')
+raster_input_i_04Hz_wake=loadtxt('../../Data/stimfreq_04_wake/input_i.txt')
+raster_input_t_04Hz_wake=loadtxt('../../Data/stimfreq_04_wake/input_t.txt')
 
 #Input modulated at 1Hz, activated state
-raster_PY_i_1Hz_wake=loadtxt('stimfreq_1_wake/raster_PY_i.txt')
-raster_PY_t_1Hz_wake=loadtxt('stimfreq_1_wake/raster_PY_t.txt')
-raster_TC_i_1Hz_wake=loadtxt('stimfreq_1_wake/raster_TC_i.txt')
-raster_TC_t_1Hz_wake=loadtxt('stimfreq_1_wake/raster_TC_t.txt')
-raster_input_i_1Hz_wake=loadtxt('stimfreq_1_wake/input_i.txt')
-raster_input_t_1Hz_wake=loadtxt('stimfreq_1_wake/input_t.txt')
+raster_PY_i_1Hz_wake=loadtxt('../../Data/stimfreq_1_wake/raster_PY_i.txt')
+raster_PY_t_1Hz_wake=loadtxt('../../Data/stimfreq_1_wake/raster_PY_t.txt')
+raster_TC_i_1Hz_wake=loadtxt('../../Data/stimfreq_1_wake/raster_TC_i.txt')
+raster_TC_t_1Hz_wake=loadtxt('../../Data/stimfreq_1_wake/raster_TC_t.txt')
+raster_input_i_1Hz_wake=loadtxt('../../Data/stimfreq_1_wake/input_i.txt')
+raster_input_t_1Hz_wake=loadtxt('../../Data/stimfreq_1_wake/input_t.txt')
 
 #Input modulated at 2.5Hz, activated state
-raster_PY_i_25Hz_wake=loadtxt('stimfreq_25_wake/raster_PY_i.txt')
-raster_PY_t_25Hz_wake=loadtxt('stimfreq_25_wake/raster_PY_t.txt')
-raster_TC_i_25Hz_wake=loadtxt('stimfreq_25_wake/raster_TC_i.txt')
-raster_TC_t_25Hz_wake=loadtxt('stimfreq_25_wake/raster_TC_t.txt')
-raster_input_i_25Hz_wake=loadtxt('stimfreq_25_wake/input_i.txt')
-raster_input_t_25Hz_wake=loadtxt('stimfreq_25_wake/input_t.txt')
+raster_PY_i_25Hz_wake=loadtxt('../../Data/stimfreq_25_wake/raster_PY_i.txt')
+raster_PY_t_25Hz_wake=loadtxt('../../Data/stimfreq_25_wake/raster_PY_t.txt')
+raster_TC_i_25Hz_wake=loadtxt('../../Data/stimfreq_25_wake/raster_TC_i.txt')
+raster_TC_t_25Hz_wake=loadtxt('../../Data/stimfreq_25_wake/raster_TC_t.txt')
+raster_input_i_25Hz_wake=loadtxt('../../Data/stimfreq_25_wake/input_i.txt')
+raster_input_t_25Hz_wake=loadtxt('../../Data/stimfreq_25_wake/input_t.txt')
 
 #Compute "Running Spike Histograms" (RHS)
 #The time window used to compute the RSH is not provided, nor the overlap between these windows
@@ -403,9 +403,9 @@ plt.show()
 
 
 #Figure 20
-PY_v_close=loadtxt('stimfreq_04_sws/PY_v_close.txt')
-PY_v_away=loadtxt('stimfreq_04_sws/PY_v_away.txt')
-time=loadtxt('stimfreq_04_sws/time.txt')
+PY_v_close=loadtxt('../../Data/stimfreq_04_sws/PY_v_close.txt')
+PY_v_away=loadtxt('../../Data/stimfreq_04_sws/PY_v_away.txt')
+time=loadtxt('../../Data/stimfreq_04_sws/time.txt')
 
 def configure_axis(axis, title, ylabel, y_major_locator_base, beg, end, show_legend=False):
     axis.set_title(title, size=35, loc='left')

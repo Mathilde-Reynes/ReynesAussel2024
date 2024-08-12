@@ -6,23 +6,23 @@ from matplotlib.ticker import MultipleLocator
 
 simulation_time=6000*ms
 
-v_bazhenov=genfromtxt('v_TC')
-Ik_bazhenov=genfromtxt('I_k_TC')[:,15]
-Ina_bazhenov=genfromtxt('I_na_TC')[:,15]
-It_bazhenov=genfromtxt('I_t_TC')[:,15]
-Ih_bazhenov=genfromtxt('I_h_TC')[:,15]
-Il_bazhenov=genfromtxt('I_l_TC')[:,15]
-Ikl_bazhenov=genfromtxt('I_kl_TC')[:,15]
-hna_bazhenov=genfromtxt('h_na_TC')[:,15]
-mna_bazhenov=genfromtxt('m_na_TC')[:,15]
-mnainf_bazhenov=genfromtxt('m_inf_na_tc')[:,15]
-hnainf_bazhenov=genfromtxt('h_inf_na_tc')[:,15]
-taumna_bazhenov=genfromtxt('tau_m_na_tc')[:,15]
-tauhna_bazhenov=genfromtxt('tau_h_na_tc')[:,15]
-alphamna_bazhenov=genfromtxt('alpha_m_TC')[:,15]
-alphahna_bazhenov=genfromtxt('alpha_h_TC')[:,15]
-betamna_bazhenov=genfromtxt('beta_m_TC')[:,15]
-betahna_bazhenov=genfromtxt('beta_h_TC')[:,15]
+v_bazhenov=genfromtxt('../../Data/v_TC')
+Ik_bazhenov=genfromtxt('../../Data/I_k_TC')[:,15]
+Ina_bazhenov=genfromtxt('../../Data/I_na_TC')[:,15]
+It_bazhenov=genfromtxt('../../Data/I_t_TC')[:,15]
+Ih_bazhenov=genfromtxt('../../Data/I_h_TC')[:,15]
+Il_bazhenov=genfromtxt('../../Data/I_l_TC')[:,15]
+Ikl_bazhenov=genfromtxt('../../Data/I_kl_TC')[:,15]
+hna_bazhenov=genfromtxt('../../Data/h_na_TC')[:,15]
+mna_bazhenov=genfromtxt('../../Data/m_na_TC')[:,15]
+mnainf_bazhenov=genfromtxt('../../Data/m_inf_na_tc')[:,15]
+hnainf_bazhenov=genfromtxt('../../Data/h_inf_na_tc')[:,15]
+taumna_bazhenov=genfromtxt('../../Data/tau_m_na_tc')[:,15]
+tauhna_bazhenov=genfromtxt('../../Data/tau_h_na_tc')[:,15]
+alphamna_bazhenov=genfromtxt('../../Data/alpha_m_TC')[:,15]
+alphahna_bazhenov=genfromtxt('../../Data/alpha_h_TC')[:,15]
+betamna_bazhenov=genfromtxt('../../Data/beta_m_TC')[:,15]
+betahna_bazhenov=genfromtxt('../../Data/beta_h_TC')[:,15]
 
 time_bazhenov=arange(0,int(simulation_time/ms),0.02)
 array_v_bazhenov=TimedArray(v_bazhenov[:,15],0.02*ms)

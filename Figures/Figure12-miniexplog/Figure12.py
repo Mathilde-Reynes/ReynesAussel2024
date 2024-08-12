@@ -4,9 +4,9 @@ from brian2 import *
 import matplotlib.pyplot as plt
 
 #Make sure your working directory is properly set to access the .txt
-VPY_1 = np.loadtxt('PY_v.txt')
-VPY_2 = np.loadtxt('PY_v_Miniexp.txt')
-time_10 = np.loadtxt('time_10.txt')
+VPY_1 = np.loadtxt('../../Data/PY_v.txt')
+VPY_2 = np.loadtxt('../../Data/PY_v_Miniexp.txt')
+time_10 = np.loadtxt('../../Data/time_10.txt')
 time_array = np.arange(0, 30000, 0.02)
 
 ###Figure 12

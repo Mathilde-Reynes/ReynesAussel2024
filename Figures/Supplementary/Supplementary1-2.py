@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Aug  6 12:30:05 2024
-
-@author: Mathilde
-"""
 
 ###Figure S1
 fig,ax = subplots(4,1, sharex = True,figsize=(19,24))
