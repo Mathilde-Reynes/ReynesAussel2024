@@ -24,7 +24,7 @@ E_kl = -95*mV
 E_l_TC = -70*mV
 E_h = -40*mV
 E_na = 50*mV
-E_k = -95*mV
+E_k_TC = -95*mV
 E_ca0 = 1000*8.31441*(273.15 + 36)/(2*96489)*mV #13.31*mV approx
 
 #Calcium parameters
@@ -38,8 +38,6 @@ T = 36
 Qm_TC = 3.55**((T-24)/10)
 Qh_TC = 3**((T-24)/10)
 Qhyp = pow(3,((T-36)/10))
-Qt = 2.9529
-Q = 2.3
 Tad = pow(3,((T-23.5)/10))
 
 #Rates for open and close channels dynamics
@@ -56,7 +54,6 @@ pc=0.007
 #Parameters to match modelDB
 Vtr_TC= -40*mV
 VtrK_TC= -25*mV
-tau_m_nap = 0.1991*ms
 
 
 ###Equations
@@ -85,7 +82,7 @@ TC_eqs = '''
         tau_h_na =  1/(alphah_na + betah_na) / Qhyp : second
         hna_inf = alphah_na/(alphah_na + betah_na) : 1
         
-    I_k = g_k_TC * (n_k ** 4) * (v - E_k) : amp * meter**-2
+    I_k = g_k_TC * (n_k ** 4) * (v - E_k_TC) : amp * meter**-2
         dn_k/dt = -(n_k - nk_inf) / tau_n_k : 1
         
         alphan_k = 0.032*(mV**-1)*5*mV/exprel((15*mV - v2K)/(5*mV))/ms : Hz
@@ -122,7 +119,7 @@ TC_eqs = '''
         k1ca = k2 * (CA_i_TC/cac)**4 : Hz
         k3p = k4 * (P1/pc) : Hz 
         
-    I_a = g_a * (m_a **4) * h_a * (v - E_k) : amp * meter**-2
+    I_a = g_a * (m_a **4) * h_a * (v - E_k_TC) : amp * meter**-2
         dm_a/dt = -(1/tau_m_a)*(m_a - m_ainf) : 1
         dh_a/dt = -(1/tau_h_a)*(h_a - h_ainf) : 1
         

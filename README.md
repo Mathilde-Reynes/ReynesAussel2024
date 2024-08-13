@@ -14,6 +14,8 @@ This simulator was developed using Python 3.6 and the following packages: brian2
 conda env create -f environment.yaml
 ```
 
+This simulator was tested on the latest python (3.11.7) and brian2 (2.7) versions and reproducibility was ensured.
+
 ## 3. User Interface
 The model is organized with each component in its own Python file:
 
@@ -31,13 +33,15 @@ The model is organized with each component in its own Python file:
 - Thalamus.py: Defines the thalamic compartment, including thalamic relay and reticular cells, and their synapses.
 
 ### Simulation:
-Thalamo_cortical.py: Simulates the full model, allowing selection of neuron numbers and simulation duration. Data can be saved from this file.
+- Thalamo_cortical.py: Simulates the full model, allowing selection of neuron numbers and simulation duration. Data can be saved from this file.
 
 
 ## 4. Additional Files
-Code for plotting each figure is available in the ‘Figures’ folder on the GitHub repository. [Dataset 1](https://doi.org/10.5281/zenodo.13308394) generated from the present model and [Dataset 2](https://doi.org/10.5281/zenodo.13308394) generated from the original model are both accessible via Zenodo.
+Code for plotting each figure is available in the ‘Figures’ folder on the GitHub repository. [Dataset 1](https://doi.org/10.5281/zenodo.13308394) generated from the present model and [Dataset 2](https://doi.org/10.5281/zenodo.13308394) generated from the original model are both accessible via Zenodo. After download, both folders should be placed in \Reynes_Aussel, alongside Figures and Model folders.
 
 
 References
+
 [1] Reynes, M., & Aussel, A., to be published
+
 [2] Stimberg, M., Brette, R., & Goodman, D. F. M. (2019). “Brian 2, an Intuitive and Efficient Neural Simulator.” eLife, 8, e47314. doi: 10.7554/eLife.47314

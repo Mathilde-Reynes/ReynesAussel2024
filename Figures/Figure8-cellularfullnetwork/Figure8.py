@@ -5,6 +5,12 @@ Created on Tue Aug  6 11:56:29 2024
 @author: Mathilde
 """
 
+VPY=loadtxt('../../Data/PY_v50.txt')
+VTC=loadtxt('../../Data/IN_v12.txt')
+VIN=loadtxt('../../Data/TC_v25.txt')
+VRE=loadtxt('../../Data/RE_v25.txt')
+time=loadtxt('../../Data/time30.txt')
+
 ###Figure 8 
 #top
 fig,ax = subplots(4,1, sharex = True,figsize=(19,18))

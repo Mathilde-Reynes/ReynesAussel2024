@@ -22,7 +22,7 @@ E_kl = -95*mV
 E_l_TC = -70*mV
 E_l_RE = -77*mV
 E_na = 50*mV
-E_k = -95*mV
+E_k_RE = -95*mV
 E_ca0 = 1000*8.31441*(273.15 + 36)/(2*96489)*mV #13.31*mV
 
 #Calcium parameters
@@ -35,7 +35,6 @@ CA_0 = 2*mM
 T = 36
 Qm_RE = 5**((T-24)/10)
 Qh_RE = 3**((T-24)/10)
-Qt = 2.9529
 Q = 2.3
 Qhyp = pow(3,((T-36)/10))
 
@@ -66,7 +65,7 @@ RE_eqs = '''
         alphah_na = 0.128 * exp((17*mV - v2)/18/mV)/ms : Hz
         betah_na = 4/(exp((40*mV - v2)/5/mV) + 1)/ms  : Hz 
 
-    I_k = g_k_RE * (n_k ** 4) * (v - E_k) : amp * meter**-2 
+    I_k = g_k_RE * (n_k ** 4) * (v - E_k_RE) : amp * meter**-2 
         dn_k/dt = Qhyp*(alphan_k*(1-n_k)-betan_k*n_k) : 1
         
         alphan_k = 0.032/ms * (15*mV - v2K)/mV / (exp((15*mV - v2K)/5/mV) - 1) : Hz

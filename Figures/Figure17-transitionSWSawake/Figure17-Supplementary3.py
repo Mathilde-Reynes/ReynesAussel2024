@@ -13,7 +13,7 @@ VPY_A1_v2=loadtxt('../../Data/FigureA1v2/PY_v.txt')
 VPY_A2_v2=loadtxt('../../Data/FigureA2v2/PY_v.txt')
 VPY_A3_v2=loadtxt('../../Data/FigureA3v2/PY_v.txt')
 VPY_A4_v2=loadtxt('../../Data/FigureA4v2/PY_v.txt')
-time=loadtxt('../../Data/FigureA-1/time.txt')
+time=loadtxt('../../Data/FigureA4v2/time.txt')
 time_s = time/1000
 #See the file spectral_powers
 freq1_v2=[2.89E-05,2.55E-05,1.84E-05,1.63E-05,1.34E-05,6.91E-06,3.44E-06]
@@ -37,7 +37,7 @@ VPY_A1_v3=loadtxt('../../Data/FigureA1v3/PY_v.txt')
 VPY_A2_v3=loadtxt('../../Data/FigureA2v3/PY_v.txt')
 VPY_A3_v3=loadtxt('../../Data/FigureA3v3/PY_v.txt')
 VPY_A4_v3=loadtxt('../../Data/FigureA4v3/PY_v.txt')
-time=loadtxt('../../Data/FigureA-1/time.txt')
+time=loadtxt('../../Data/FigureA4v3/time.txt')
 time_s = time/1000
 #See the file spectral_powers
 freq1_v3=[3.20E-05,1.99E-05,1.26E-05,4.24E-06,4.27E-06,4.24E-06,2.30E-06]
@@ -87,7 +87,7 @@ ax[3].plot(time_s, VPY_A4_v2, color="tab:blue")
 configure_axis(ax[3], 'PY, activated', 'mV', 25, 0, 30)
 ax[3].set_xlabel('Time (ms)', size=30, labelpad=25)
 #
-#plt.savefig('Figure17Top.png', dpi=300, bbox_inches='tight')
+plt.savefig('Figure17Top.png', dpi=300, bbox_inches='tight')
 plt.show()
 
 #Supplementary3Top
@@ -137,7 +137,7 @@ ax.tick_params(axis='both', which='major', labelsize=20, width=2)
 ax.legend(fontsize=20)
 
 plt.tight_layout()
-plt.savefig('Figure17Bottom.png', dpi=300, bbox_inches='tight')
+#plt.savefig('Figure17Bottom.png', dpi=300, bbox_inches='tight')
 plt.show()
 
 #Supplementary3Bottom
@@ -163,5 +163,5 @@ ax.tick_params(axis='both', which='major', labelsize=20, width=2)
 ax.legend(fontsize=20)
 
 plt.tight_layout()
-plt.savefig('Supplementary3Bottom.png', dpi=300, bbox_inches='tight')
+#plt.savefig('Supplementary3Bottom.png', dpi=300, bbox_inches='tight')
 plt.show()

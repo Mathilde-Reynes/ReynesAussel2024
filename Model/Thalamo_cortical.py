@@ -7,7 +7,7 @@ import scipy as sp
 import matplotlib.pyplot as plt
 from brian2.units.constants import *
 import matplotlib.gridspec as gridspec
-seed(4168)
+seed(4068)
 from Soma_eqs import *
 from Dendritic_eqs import *
 from TC_eqs import *
@@ -55,7 +55,7 @@ net.add(all_neurons_T)
 net.add(all_synapses_T)
 net.add(all_monitors_T) 
 #Layer Cortex
-all_neurons, all_synapses, all_gap_junctions, all_monitors = create_cortical_layer(N,5)
+all_neurons, all_synapses, all_gap_junctions, all_monitors = create_cortical_layer(N)
 PY_dendrite, PY_soma, IN_dendrite, IN_soma = all_neurons
 V1_PYd,V2_PYs,V3_INd,V4_INs,R2_PYs,R4_INs,I1_PYd,I2_INd,S1,S2,M0,M1 = all_monitors
 S_AMPA_PY_PY,S_AMPA_PY_IN,S_NMDA_PY_PY,S_NMDA_PY_IN,S_GABAA_IN_PY = all_synapses
@@ -237,7 +237,7 @@ net.add(S_AMPA_TC_IN)
 ###Simulation
 
 #Define the parameters of the simulation
-runtime=10*second
+runtime=30*second
 np.seterr(all='raise')
 prefs.codegen.target = 'cython'
 #
@@ -299,22 +299,47 @@ print(len(R2_PYs.t)/N_PY/runtime)
 #Uncomment to save the raw data in .txt as needed
 
 # savetxt('PY_v.txt',V2_PYs.v/mV) #All PY soma membrane potentials
-# savetxt('PY_v.txt',V4_INs.v/mV) #All IN soma membrane potentials
-# savetxt('PY_v.txt',V1_PYd.v/mV) #All PY dendrite membrane potentials
-# savetxt('PY_v.txt',V3_INd.v/mV) #All IN dendrite membrane potentials
-# savetxt('PY_v.txt',V2_TC.v/mV) #All TC membrane potentials
-# savetxt('PY_v.txt',V1_RE.v/mV) #All RE membrane potentials
-# savetxt('time.txt',V2_PYs.t/ms) #Time array
+# savetxt('IN_v.txt',V4_INs.v/mV) #All IN soma membrane potentials
+# savetxt('PYdend_v.txt',V1_PYd.v/mV) #All PY dendrite membrane potentials
+# savetxt('INdend_v.txt',V3_INd.v/mV) #All IN dendrite membrane potentials
+# savetxt('TC_v.txt',V2_TC.v/mV) #All TC membrane potentials
+# savetxt('RE_v.txt',V1_RE.v/mV) #All RE membrane potentials
+# savetxt('time30.txt',V2_PYs.t/ms) #Time array
 
-# savetxt('PY_v.txt',V2_PYs.v[N_PY//2]/mV) #One PY soma membrane potential
-# savetxt('PY_v.txt',V4_INs.v[N_IN//2]/mV) #One IN soma membrane potential
-# savetxt('PY_v.txt',V1_PYd.v[N_PY//2]/mV) #One PY dendrite membrane potential
-# savetxt('PY_v.txt',V3_INd.v[N_IN//2]/mV) #One IN dendrite membrane potential
-# savetxt('PY_v.txt',V2_TC.v[N_TC//2]/mV) #One TC membrane potential
-# savetxt('PY_v.txt',V1_RE.v[N_RE//2]/mV) #One RE membrane potential
-# savetxt('time.txt',V2_PYs.t[N_PY//2]/ms) #Time array
+# savetxt('PY_v_c.txt',V2_PYs.v[N_PY/2]/mV) #One PY soma membrane potential
+# savetxt('IN_v_c.txt',V4_INs.v[N_IN/2]/mV) #One IN soma membrane potential
+# savetxt('PYdend_v_c.txt',V1_PYd.v[N_PY/2]/mV) #One PY dendrite membrane potential
+# savetxt('INdend_v_c.txt',V3_INd.v[N_IN/2]/mV) #One IN dendrite membrane potential
+# savetxt('TC_v_c.txt',V2_TC.v[N_TC/2]/mV) #One TC membrane potential
+# savetxt('RE_v_c.txt',V1_RE.v[N_RE/2]/mV) #One RE membrane potential
+# savetxt('time_c.txt',V2_PYs.t[N_PY/2]/ms) #Time array
 
-# savetxt('PY_v.txt',R2_PYs.i) #PY soma spikes
-# savetxt('PY_v.txt',R4_INs.i) #IN soma spikes
-# savetxt('PY_v.txt',R2_TC.i) #TC spikes
-# savetxt('PY_v.txt',R1_RE.i) #RE spikes
+# savetxt('PY_raster.txt',R2_PYs.i) #PY soma spikes
+# savetxt('IN_v.txt',R4_INs.i) #IN soma spikes
+# savetxt('TC_v.txt',R2_TC.i) #TC spikes
+# savetxt('RE_v.txt',R1_RE.i) #RE spikes
+
+# ###Figure 6
+# fig,ax = subplots(2,1, sharex = True,figsize=(19,15))
+# ax[0].spines['top'].set_visible(False)
+# ax[0].spines['right'].set_visible(False)
+# ax[0].spines['bottom'].set_visible(True)
+# ax[0].spines['left'].set_visible(True)
+# ax[0].plot(R2_PYs.t/second, R2_PYs.i,'.',markersize=2,alpha=0.5,color="tab:blue")
+# ax[0].set_ylabel('Neuron index',fontsize=30)
+# ax[0].set_xlabel('Time (s)',size=30)
+# ax[0].tick_params(axis='both', which='major', labelsize=25, width=2)
+# ax[0].set_title('PY', size=30, loc='left')
+# ax[1].plot(R4_INs.t/second, R4_INs.i, '.',markersize=2,alpha=0.5,color="tab:green")
+# ax[1].spines['top'].set_visible(False)
+# ax[1].spines['right'].set_visible(False)
+# ax[1].spines['bottom'].set_visible(True)
+# ax[1].spines['left'].set_visible(True)
+# ax[1].set_ylabel('Neuron index',fontsize=30)
+# ax[1].set_xlabel('Time (s)',size=30)
+# ax[1].tick_params(axis='both', which='major', labelsize=25, width=2)
+# ax[1].set_title('IN', size=30, loc='left')
+# ax[1].set_xlim([0,10])
+# fig.suptitle('Cortical cells raster plot',fontsize=30)
+# fig.tight_layout()
+# #plt.savefig('Figure6Disconnected', dpi=300)

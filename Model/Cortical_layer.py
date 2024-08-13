@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 #The function create_cortical_layer permits the generation of a single cortical layer of the prefrontal cortex. A cortical layer is composed of pyramidal (PY) and interneurons/inhibitory cells (IN).
 #N is considered to be the number of PY cells needed. The number of IN is logically deduced from it (N/4).
 
-def create_cortical_layer(N,PY_PY):
+def create_cortical_layer(N):
     
     ###PREFERENCES
     prefs.codegen.target = 'cython'
@@ -69,6 +69,7 @@ def create_cortical_layer(N,PY_PY):
     #Radii
     PY_IN = 1
     IN_PY = 5
+    PY_PY = 5
     
     print('gPYPY/sPYdend')
     print(g_syn_ampa_pypy/s_Dend_PY)

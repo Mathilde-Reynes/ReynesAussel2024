@@ -103,7 +103,7 @@ def thalamocortical_network(seed_value, N, runtime, analyze_speed):
     net.add(all_monitors_T)
     
     # Layer Cortex
-    all_neurons, all_synapses, all_gap_junctions, all_monitors = create_cortical_layer(N, 5)
+    all_neurons, all_synapses, all_gap_junctions, all_monitors = create_cortical_layer(N)
     PY_dendrite, PY_soma, IN_dendrite, IN_soma = all_neurons
     V1_PYd, V2_PYs, V3_INd, V4_INs, R2_PYs, R4_INs, I1_PYd, I2_INd, S1, S2, M0, M1 = all_monitors
     S_AMPA_PY_PY, S_AMPA_PY_IN, S_NMDA_PY_PY, S_NMDA_PY_IN, S_GABAA_IN_PY = all_synapses
