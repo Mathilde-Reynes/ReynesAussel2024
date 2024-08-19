@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Aug  6 11:53:05 2024
+Created on Wed Aug 14 17:38:07 2024
 
 @author: Mathilde
 """
@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 RPY_1 = np.loadtxt('../../Data/PY_raster.txt')
 RPY_2 = np.loadtxt('../../Data/PY_raster_disconnected.txt')
-time20=np.arange(0, 54848, 1)
+time20=np.arange(0, 20000, 0.02)
 time20_s=time20/1000
 time30=np.arange(0, 30000, 0.02)
 time30_s=time20/1000
@@ -21,12 +21,12 @@ ax[0].spines['top'].set_visible(False)
 ax[0].spines['right'].set_visible(False)
 ax[0].spines['bottom'].set_visible(True)
 ax[0].spines['left'].set_visible(True)
-ax[0].plot(time20_s, RPY_1,'.',markersize=2,alpha=0.5,color="tab:blue")
+ax[0].plot(time30_s, RPY_1,'.',markersize=2,alpha=0.5,color="tab:blue")
 ax[0].set_ylabel('Neuron index',fontsize=30)
 ax[0].set_xlabel('Time (s)',size=30)
 ax[0].tick_params(axis='both', which='major', labelsize=25, width=2)
 ax[0].set_title('PY', size=30, loc='left')
-ax[1].plot(time30_s, RPY_2, '.',markersize=2,alpha=0.5,color="tab:green")
+ax[1].plot(time20_s, RPY_2, '.',markersize=2,alpha=0.5,color="tab:green")
 ax[1].spines['top'].set_visible(False)
 ax[1].spines['right'].set_visible(False)
 ax[1].spines['bottom'].set_visible(True)

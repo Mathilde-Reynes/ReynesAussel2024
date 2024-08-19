@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
 #Make sure you are working in the good directory
-VPY_1=loadtxt('../../Data/PY_v_disconnected_gPYIN_02.txt')
-VPY_2=loadtxt('../../Data/PY_v_disconnected_gPYIN_07.txt')
+VPY_1=loadtxt('../../Data/PY_v_disconnected_02.txt')
+VPY_2=loadtxt('../../Data/PY_v_disconnected_07.txt')
 runtime=10
 N=100
 #see file "propagation_speeds.ods
@@ -64,5 +64,5 @@ ax2.spines['right'].set_visible(False)
 ax2.spines['bottom'].set_visible(True)
 ax2.spines['left'].set_visible(True)
 ax2.tick_params(axis='both', which='major', labelsize=30, width=2)
-plt.savefig('Figure13velocity.png', dpi=300, bbox_inches='tight')
+#plt.savefig('Figure13velocity.png', dpi=300, bbox_inches='tight')
 plt.show()

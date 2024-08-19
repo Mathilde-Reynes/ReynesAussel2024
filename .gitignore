@@ -17,3 +17,5 @@ Model_bazhenov/
 *.pyc
 
 *.pdf
+
+.~lock.velocity.ods#

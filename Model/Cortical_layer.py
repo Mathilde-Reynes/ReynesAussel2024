@@ -27,23 +27,7 @@ def create_cortical_layer(N):
     g_syn_nmda_pypy = 0.00001*msiemens
     g_syn_ampa_pyin = 0.00005*msiemens #0.00005
     g_syn_nmda_pyin = 0.000008*msiemens
-    g_syn_gabaa_inpy = 0.00005*msiemens
-    
-    #For comparison with Figure4
-    # # #Channel-specific conductances per unit of surface
-    # g_syn_ampa_pypy = 0.00015*msiemens*0.6
-    # g_syn_nmda_pypy = 0.00001*msiemens*0.6
-    # g_syn_ampa_pyin = 0.00005*msiemens*0.6
-    # g_syn_nmda_pyin = 0.000008*msiemens*0.6
-    # g_syn_gabaa_inpy = 0.00005*msiemens*0.6
-    
-    # #For comparison with Figure5
-    # g_syn_ampa_pypy = 0.00015*msiemens
-    # g_syn_nmda_pypy = 0.00001*msiemens
-    # g_syn_ampa_pyin = 0.00005*msiemens
-    # g_syn_nmda_pyin = 0.000008*msiemens
-    # g_syn_gabaa_inpy = 0.00005*msiemens   
-    
+    g_syn_gabaa_inpy = 0.00005*msiemens  
     
     #Rate constants
     alpha_gabaa = 10*ms**-1*mM**-1
@@ -250,12 +234,12 @@ def create_cortical_layer(N):
     R4=SpikeMonitor(IN_soma,record=True)
     
     #Synaptic currents monitoring
-    I1=StateMonitor(PY_dendrite,('I_na','I_nap','I_kca','IEPSPs_PY_PY','IEPSPs_IN_PY','IsynAMPA_PY_PY','IsynNMDA_PY_PY','IsynGABAA_IN_PY'),record=True)
+    I1=StateMonitor(PY_dendrite,('I_na','I_nap','I_kca','IEPSPs_PY_PY','IEPSPs_IN_PY','IsynAMPA_PY_PY','IsynNMDA_PY_PY','IsynGABAA_IN_PY'),record=False)
     # I2=StateMonitor(IN_dendrite,('IEPSPs_PY_IN','IsynAMPA_PY_IN','IsynNMDA_PY_IN'),record=True)
     I2=StateMonitor(IN_dendrite,('I_na','I_nap','I_kca'),record=False)
     
     #Synapses monitoring
-    S1=StateMonitor(S_AMPA_PY_PY,('D'),record=True)
+    S1=StateMonitor(S_AMPA_PY_PY,('D'),record=False)
     S2=StateMonitor(S_AMPA_PY_IN,('D','t_last_spike_Poisson_IN','W'),record=False)
     #S3=StateMonitor(S_NMDA_PY_PY,('W'),record=True)
     #S4=StateMonitor(S_NMDA_PY_IN,('W'),record=True)

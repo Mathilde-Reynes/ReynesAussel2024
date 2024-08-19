@@ -127,7 +127,7 @@ net.add(S_AMPA_TC_IN)
 # g_syn_ampa_pyre = 0*msiemens
 
 #Figure 16
-#Strong PYPY: gPYPY=0.15uS, gRETC=0.2, gTC-RE=0.4
+# Strong PYPY: gPYPY=0.15uS, gRETC=0.2, gTC-RE=0.4
 # PY_dendrite.g_kl=0*msiemens*cm**-2
 # TC.g_kl_TC = 0*msiemens*cm**-2
 # RE.g_kl_RE = 0*msiemens*cm**-2
@@ -233,11 +233,76 @@ net.add(S_AMPA_TC_IN)
 # monitor_poisson=SpikeMonitor(Poisson_stim)
 # net.add([Poisson_stim,S_AMPA_stim_TC,monitor_poisson])
 
+#Supplementary 3 (transition from sleep to (wakefulness)
+#A: gPYPY=0.15uS, gRETC=0.2, gTC-RE=0.4, gKL=0.3 #v2 : gKL=0.25 in cortex
+# PY_dendrite.g_kl=0.0025*msiemens*cm**-2 #0.003*msiemens*cm**-2
+# TC.g_kl_TC = 0.003*msiemens*cm**-2
+# syn_PYPY=all_synapses[0]
+# syn_PYPY.g_syn=0.00015*msiemens
+# syn_RETC=all_synapses_T[0]
+# syn_RETC.g_syn=0.0002*msiemens
+# syn_TCRE=all_synapses_T[-1]
+# syn_TCRE.g_syn=0.0004*msiemens
+#B:
+# PY_dendrite.g_kl=0.0025*5/6*msiemens*cm**-2
+# TC.g_kl_TC = 0.0025*msiemens*cm**-2
+# syn_PYPY=all_synapses[0]
+# syn_PYPY.g_syn=0.00013833*msiemens
+# syn_RETC=all_synapses_T[0]
+# syn_RETC.g_syn=0.0002*msiemens
+# syn_TCRE=all_synapses_T[-1]
+# syn_TCRE.g_syn=0.0004*msiemens
+#C:
+# PY_dendrite.g_kl=0.0025*4/6*msiemens*cm**-2
+# TC.g_kl_TC = 0.002*msiemens*cm**-2
+# syn_PYPY=all_synapses[0]
+# syn_PYPY.g_syn=0.0001266*msiemens
+# syn_RETC=all_synapses_T[0]
+# syn_RETC.g_syn=0.0002*msiemens
+# syn_TCRE=all_synapses_T[-1]
+# syn_TCRE.g_syn=0.0004*msiemens
+#D:
+# PY_dendrite.g_kl=0.0025*3/6*msiemens*cm**-2
+# TC.g_kl_TC = 0.0015*msiemens*cm**-2
+# syn_PYPY=all_synapses[0]
+# syn_PYPY.g_syn=0.000115*msiemens
+# syn_RETC=all_synapses_T[0]
+# syn_RETC.g_syn=0.0002*msiemens
+# syn_TCRE=all_synapses_T[-1]
+# syn_TCRE.g_syn=0.0004*msiemens
+#E:
+# PY_dendrite.g_kl=0.0025*2/6*msiemens*cm**-2
+# TC.g_kl_TC = 0.001*msiemens*cm**-2
+# syn_PYPY=all_synapses[0]
+# syn_PYPY.g_syn=0.0001033*msiemens
+# syn_RETC=all_synapses_T[0]
+# syn_RETC.g_syn=0.0002*msiemens
+# syn_TCRE=all_synapses_T[-1]
+# syn_TCRE.g_syn=0.0004*msiemens
+#F:
+# PY_dendrite.g_kl=0.00025*1/6*msiemens*cm**-2
+# TC.g_kl_TC = 0.0005*msiemens*cm**-2
+# syn_PYPY=all_synapses[0]
+# syn_PYPY.g_syn=0.00009166*msiemens
+# syn_RETC=all_synapses_T[0]
+# syn_RETC.g_syn=0.0002*msiemens
+# syn_TCRE=all_synapses_T[-1]
+# syn_TCRE.g_syn=0.0004*msiemens
+#G:"Activated state"
+# PY_dendrite.g_kl=0*msiemens*cm**-2
+# TC.g_kl_TC = 0*msiemens*cm**-2
+# syn_PYPY=all_synapses[0]
+# syn_PYPY.g_syn=0.00008*msiemens
+# syn_RETC=all_synapses_T[0]
+# syn_RETC.g_syn=0.0002*msiemens
+# syn_TCRE=all_synapses_T[-1]
+# syn_TCRE.g_syn=0.0004*msiemens
+
 
 ###Simulation
 
 #Define the parameters of the simulation
-runtime=30*second
+runtime=20*second
 np.seterr(all='raise')
 prefs.codegen.target = 'cython'
 #
@@ -293,6 +358,21 @@ analyze_propagation_speed(R2_PYs)
 print('Mean firing rate of PY neurons:')
 print(len(R2_PYs.t)/N_PY/runtime)
 
+#Compute spectral power in four different frequency bands
+from scipy import signal
+sampling_freq=1/(0.02*ms)/Hz
+freqs,Spectrum=signal.periodogram(V2_PYs.v[50], sampling_freq,'flattop', scaling='spectrum')
+figure()
+plot(freqs,Spectrum)
+print()
+power_0_2_Hz=sum(Spectrum[where(freqs<2)[0]])
+print('Power in the 0-2Hz band: '+str(power_0_2_Hz))
+power_10_20_Hz=sum(Spectrum[where(freqs<10)[0][-1]:where(freqs>20)[0][0]])
+print('Power in the 10-20Hz band: '+str(power_10_20_Hz))
+power_20_30_Hz=sum(Spectrum[where(freqs<20)[0][-1]:where(freqs>30)[0][0]])
+print('Power in the 20-30Hz band: '+str(power_20_30_Hz))
+power_30_40_Hz=sum(Spectrum[where(freqs<30)[0][-1]:where(freqs>40)[0][0]])
+print('Power in the 30-40Hz band: '+str(power_30_40_Hz))
 
 ###Export raw data
 
@@ -306,40 +386,16 @@ print(len(R2_PYs.t)/N_PY/runtime)
 # savetxt('RE_v.txt',V1_RE.v/mV) #All RE membrane potentials
 # savetxt('time30.txt',V2_PYs.t/ms) #Time array
 
-# savetxt('PY_v_c.txt',V2_PYs.v[N_PY/2]/mV) #One PY soma membrane potential
-# savetxt('IN_v_c.txt',V4_INs.v[N_IN/2]/mV) #One IN soma membrane potential
-# savetxt('PYdend_v_c.txt',V1_PYd.v[N_PY/2]/mV) #One PY dendrite membrane potential
+# savetxt('PY_v_c.txt',V2_PYs.v[N_PY//2]/mV) #One PY soma membrane potential
+# savetxt('IN_v_c.txt',V4_INs.v[12]/mV) #One IN soma membrane potential
+# savetxt('PYdend_v_c.txt',V1_PYd.v[12]/mV) #One PY dendrite membrane potential
 # savetxt('INdend_v_c.txt',V3_INd.v[N_IN/2]/mV) #One IN dendrite membrane potential
-# savetxt('TC_v_c.txt',V2_TC.v[N_TC/2]/mV) #One TC membrane potential
-# savetxt('RE_v_c.txt',V1_RE.v[N_RE/2]/mV) #One RE membrane potential
-# savetxt('time_c.txt',V2_PYs.t[N_PY/2]/ms) #Time array
+# savetxt('TC_v_c.txt',V2_TC.v[25]/mV) #One TC membrane potential
+# savetxt('RE_v_c.txt',V1_RE.v[25]/mV) #One RE membrane potential
+# savetxt('time_c.txt',V2_PYs.t[N_PY//2]/ms) #Time array
 
 # savetxt('PY_raster.txt',R2_PYs.i) #PY soma spikes
-# savetxt('IN_v.txt',R4_INs.i) #IN soma spikes
-# savetxt('TC_v.txt',R2_TC.i) #TC spikes
-# savetxt('RE_v.txt',R1_RE.i) #RE spikes
-
-# ###Figure 6
-# fig,ax = subplots(2,1, sharex = True,figsize=(19,15))
-# ax[0].spines['top'].set_visible(False)
-# ax[0].spines['right'].set_visible(False)
-# ax[0].spines['bottom'].set_visible(True)
-# ax[0].spines['left'].set_visible(True)
-# ax[0].plot(R2_PYs.t/second, R2_PYs.i,'.',markersize=2,alpha=0.5,color="tab:blue")
-# ax[0].set_ylabel('Neuron index',fontsize=30)
-# ax[0].set_xlabel('Time (s)',size=30)
-# ax[0].tick_params(axis='both', which='major', labelsize=25, width=2)
-# ax[0].set_title('PY', size=30, loc='left')
-# ax[1].plot(R4_INs.t/second, R4_INs.i, '.',markersize=2,alpha=0.5,color="tab:green")
-# ax[1].spines['top'].set_visible(False)
-# ax[1].spines['right'].set_visible(False)
-# ax[1].spines['bottom'].set_visible(True)
-# ax[1].spines['left'].set_visible(True)
-# ax[1].set_ylabel('Neuron index',fontsize=30)
-# ax[1].set_xlabel('Time (s)',size=30)
-# ax[1].tick_params(axis='both', which='major', labelsize=25, width=2)
-# ax[1].set_title('IN', size=30, loc='left')
-# ax[1].set_xlim([0,10])
-# fig.suptitle('Cortical cells raster plot',fontsize=30)
-# fig.tight_layout()
-# #plt.savefig('Figure6Disconnected', dpi=300)
+# savetxt('PY_raster_time.txt',R2_PYs.t) #time PY soma spikes
+# savetxt('IN_raster.txt',R4_INs.i) #IN soma spikes
+# savetxt('TC_raster.txt',R2_TC.i) #TC spikes
+# savetxt('RE_raster.txt',R1_RE.i) #RE spikes
