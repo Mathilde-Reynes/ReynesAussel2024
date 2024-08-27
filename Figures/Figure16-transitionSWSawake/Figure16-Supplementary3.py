@@ -9,17 +9,17 @@ def normalize(array, min_val, max_val):
 
 #Make sure you are working in the proper depository
 #Data v2
-VPY_A1_v2=loadtxt('../../Data/FigureA1v2/PY_v.txt')
-VPY_A2_v2=loadtxt('../../Data/FigureA2v2/PY_v.txt')
-VPY_A3_v2=loadtxt('../../Data/FigureA3v2/PY_v.txt')
-VPY_A4_v2=loadtxt('../../Data/FigureA4v2/PY_v.txt')
-time=loadtxt('../../Data/FigureA4v2/time.txt')
+VPY_A1_v2=loadtxt('../../Data/PY_v_c_A.txt')
+VPY_A2_v2=loadtxt('../../Data/PY_v_c_C.txt')
+VPY_A3_v2=loadtxt('../../Data/PY_v_c_E.txt')
+VPY_A4_v2=loadtxt('../../Data/PY_v_c_G.txt')
+time=np.arange(0, 30000, 0.02)
 time_s = time/1000
 #See the file spectral_powers
-freq1_v2=[2.89E-05,2.55E-05,1.84E-05,1.63E-05,1.34E-05,6.91E-06,3.44E-06]
-freq2_v2=[5.79E-06,6.01E-06,9.06E-06,7.70E-06,1.06E-05,1.23E-05,7.34E-06]
-freq3_v2=[8.13E-06,9.75E-06,1.07E-05,7.95E-06,1.11E-05,1.17E-05,6.86E-06]
-freq4_v2=[9.27E-06,8.02E-06,1.34E-05,1.03E-05,1.09E-05,9.66E-06,5.21E-06]
+freq1_v2=[4.32E-05,3.77E-05,3.18E-05,2.49E-05,1.82E-05,5.03E-06,4.02E-06]
+freq2_v2=[7.77E-06,7.57E-06,5.98E-061,8.55E-06,1.06E-05,1.91E-05,1.24E-05]
+freq3_v2=[9.25E-06,1.12E-05,9.28E-06,8.32E-06,1.19E-05,1.40E-05,8.25E-06]
+freq4_v2=[1.26E-05,8.55E-06,8.19E-06,1.21E-05,1.04E-05,9.48E-06,5.93E-06]
 freq1_v2_array = np.array(freq1_v2)
 freq2_v2_array = np.array(freq2_v2)
 freq3_v2_array = np.array(freq3_v2)
@@ -33,17 +33,15 @@ normalized_v2_freq3 = normalize(freq3_v2_array, min_freq_v2, max_freq_v2)
 normalized_v2_freq4 = normalize(freq4_v2_array, min_freq_v2, max_freq_v2)
 
 #Data v2
-VPY_A1_v3=loadtxt('../../Data/FigureA1v3/PY_v.txt')
-VPY_A2_v3=loadtxt('../../Data/FigureA2v3/PY_v.txt')
-VPY_A3_v3=loadtxt('../../Data/FigureA3v3/PY_v.txt')
-VPY_A4_v3=loadtxt('../../Data/FigureA4v3/PY_v.txt')
-time=loadtxt('../../Data/FigureA4v3/time.txt')
-time_s = time/1000
+VPY_A1_v3=loadtxt('../../Data/PY_v_c_A_supp3.txt')
+VPY_A2_v3=loadtxt('../../Data/PY_v_c_C_supp3.txt')
+VPY_A3_v3=loadtxt('../../Data/PY_v_c_G_supp3.txt')
+VPY_A4_v3=loadtxt('../../Data/PY_v_c_E_supp3.txt')
 #See the file spectral_powers
-freq1_v3=[3.20E-05,1.99E-05,1.26E-05,4.24E-06,4.27E-06,4.24E-06,2.30E-06]
-freq2_v3=[7.44E-06,1.02E-05,1.29E-05,1.71E-05,1.22E-05,1.80E-05,1.65E-05]
-freq3_v3=[8.38E-06,1.29E-05,1.41E-05,1.81E-05,1.66E-05,1.55E-05,1.44E-05]
-freq4_v3=[1.10E-05,1.47E-05,1.62E-05,1.11E-05,8.69E-06,8.47E-06,9.40E-06]
+freq1_v3=[4.32E-05,3.47E-05,2.10E-05,5.18E-06,3.60E-06,1.68E-06,2.84E-06]
+freq2_v3=[7.77E-06,7.65E-06,9.63E-06,1.46E-05,1.81E-05,1.86E-05,2.02E-05]
+freq3_v3=[9.25E-06,1.09E-05,1.46E-05,2.09E-05,1.85E-05,1.94E-05,1.56E-05]
+freq4_v3=[1.26E-05,1.21E-05,1.54E-05,1.44E-05,1.52E-05,1.41E-05,9.94E-06]
 freq1_v3_array = np.array(freq1_v3)
 freq2_v3_array = np.array(freq2_v3)
 freq3_v3_array = np.array(freq3_v3)
@@ -58,7 +56,7 @@ normalized_v3_freq4 = normalize(freq4_v3_array, min_freq_v3, max_freq_v3)
 
 
 
-#Figure17Top
+#Figure16Top
 fig, ax = plt.subplots(4, 1, sharex=True, figsize=(15, 20))
 
 def configure_axis(axis, title, ylabel, y_major_locator_base, beg, end, show_legend=False):
@@ -87,7 +85,7 @@ ax[3].plot(time_s, VPY_A4_v2, color="tab:blue")
 configure_axis(ax[3], 'PY, activated', 'mV', 25, 0, 30)
 ax[3].set_xlabel('Time (ms)', size=30, labelpad=25)
 #
-plt.savefig('Figure17Top.png', dpi=300, bbox_inches='tight')
+#plt.savefig('Figure16Top.png', dpi=300, bbox_inches='tight')
 plt.show()
 
 #Supplementary3Top
@@ -106,10 +104,10 @@ ax[3].plot(time_s, VPY_A4_v3, color="tab:blue")
 configure_axis(ax[3], 'PY, activated', 'mV', 25, 0, 30)
 ax[3].set_xlabel('Time (ms)', size=30, labelpad=25)
 #
-plt.savefig('Supplementary3Top.png', dpi=300, bbox_inches='tight')
+#plt.savefig('Supplementary3Top.png', dpi=300, bbox_inches='tight')
 plt.show()
 
-#Figure17Bottom
+#Figure16Bottom
 x_labels = ['SWS', '', '', '', '', '', 'Activated']  # X-axis labels
 
 def plot_spectral_data(ax, data, label, color):
@@ -137,7 +135,7 @@ ax.tick_params(axis='both', which='major', labelsize=20, width=2)
 ax.legend(fontsize=20)
 
 plt.tight_layout()
-#plt.savefig('Figure17Bottom.png', dpi=300, bbox_inches='tight')
+plt.savefig('Figure16Bottom.png', dpi=300, bbox_inches='tight')
 plt.show()
 
 #Supplementary3Bottom
@@ -163,5 +161,5 @@ ax.tick_params(axis='both', which='major', labelsize=20, width=2)
 ax.legend(fontsize=20)
 
 plt.tight_layout()
-#plt.savefig('Supplementary3Bottom.png', dpi=300, bbox_inches='tight')
+plt.savefig('Supplementary3Bottom.png', dpi=300, bbox_inches='tight')
 plt.show()

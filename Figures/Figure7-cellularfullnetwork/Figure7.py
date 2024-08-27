@@ -18,7 +18,7 @@ VRE=loadtxt('../../Data/RE_v_c.txt')
 time=np.arange(0, 30000, 0.02)
 time_s=time/1000
 
-###Figure 8 
+###Figure 7
 #top
 fig,ax = subplots(4,1, sharex = True,figsize=(19,18))
 ax[0].plot(time_s, VPY,color="tab:blue",linewidth=1.5)
@@ -63,7 +63,7 @@ ax[3].spines['bottom'].set_visible(True)
 ax[3].spines['left'].set_visible(True)
 ax[3].yaxis.set_major_locator(MultipleLocator(base=25))
 ax[3].tick_params(axis='both', which='major', labelsize=25, width=2)
-#plt.savefig('Figure8top.png', dpi=300)
+#plt.savefig('Figure7top.png', dpi=300)
 
 #bottom
 fig,ax = subplots(4,1, sharex = True,figsize=(19,18))
@@ -120,4 +120,4 @@ ax[3].spines['bottom'].set_visible(True)
 ax[3].spines['left'].set_visible(True)
 ax[3].yaxis.set_major_locator(MultipleLocator(base=25))
 ax[3].tick_params(axis='both', which='major', labelsize=25, width=2)
-#plt.savefig('Figure8bottom.png', dpi=300)
+#plt.savefig('Figure7bottom.png', dpi=300)

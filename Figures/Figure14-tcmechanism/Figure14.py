@@ -88,7 +88,7 @@ ax[4].set_ylabel(r'$1 \, \mathrm{mA} \cdot \mathrm{m}^{-2}$',size=30,  labelpad=
 ax[4].legend(fontsize=25, loc='lower right')
 ax[4].set_xlabel('ms',size=30,  labelpad=30)
 fig.tight_layout()
-#plt.savefig('ThalamusSpontaneous.jpg', dpi=300)
+#plt.savefig('Figure14.jpg', dpi=300)
 ax[5].plot(I2_TC_TCo.t/ms, I2_TC_TCo.ratio[n_choice]/1e7,color="black",linewidth=1.5)
 ax[5].set_ylim([0,0.005])
 ax[6].plot(I2_TC_TCo.t/ms, I2_TC_TCo.E_ca_Thal[n_choice]/mV,color="black",linewidth=1.5)

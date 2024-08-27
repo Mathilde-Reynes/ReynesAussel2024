@@ -11,7 +11,7 @@ time30_s = time30/1000
 time10 = np.arange(0, 10000, 0.02)
 time10_s = time10/1000
 
-###Figure 12
+###Figure 11
 fig,ax = subplots(2,1, sharex = True,figsize=(10,6))
 ax[0].plot(time30_s, VPY_1, color="tab:blue", linewidth=1.5)
 ax[0].set_title('PY, logarithmic based mini rate', size=25, loc='left')
@@ -34,4 +34,4 @@ ax[1].spines['left'].set_visible(True)
 ax[1].yaxis.set_major_locator(MultipleLocator(base=25))
 ax[1].set_xlim([0, 8])
 ax[1].tick_params(axis='both', which='major', labelsize=20, width=2)
-plt.savefig('Figure12.png', dpi=300, bbox_inches='tight')
+#plt.savefig('Figure11.png', dpi=300, bbox_inches='tight')

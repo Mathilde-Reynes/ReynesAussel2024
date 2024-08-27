@@ -98,7 +98,7 @@ rhs_input_25Hz_wake=RHS(raster_input_i_25Hz_wake,raster_input_t_25Hz_wake,list(r
 
 close('all')
 
-#Figure18
+#Figure17
 time_rhs=arange(0,15000,OVERLAP)/1000
 plt.figure(figsize=(20, 20))
 plt.subplots_adjust(hspace=0.5)
@@ -184,11 +184,11 @@ plot_with_fill(plt.gca(), time_rhs, rhs_input_25Hz_sws, 'Input', show_xlabel=Tru
 
 plt.xlim(5, 15)
 
-plt.savefig('Figure18.png', dpi=300, bbox_inches='tight')
+plt.savefig('Figure17.png', dpi=300, bbox_inches='tight')
 plt.show()
 
 
-#For figure 19, we're going to need the crosscorrelation of PY and input RSHs
+#For figure 18, we're going to need the crosscorrelation of PY and input RSHs
 #and the power spectra of all RSHs
 
 crosscorr_04Hz_sws=signal.correlate(rhs_PY_04Hz_sws,rhs_input_04Hz_sws)
@@ -230,7 +230,7 @@ _,Spectrum_TC_25_wake=signal.periodogram(rhs_TC_25Hz_wake, rhs_sampling_freq, sc
 _,Spectrum_input_25_wake=signal.periodogram(rhs_input_25Hz_wake, rhs_sampling_freq, scaling='spectrum')
 
 
-#Figure19
+#Figure18
 # Define the figure and adjust spacing
 plt.figure(figsize=(22, 25))
 plt.subplots_adjust(hspace=1.4, wspace=0.3)
@@ -398,14 +398,15 @@ plot_without_fill(plt.gca(), freqs, Spectrum_input_25_sws, 'Frequency (Hz)', '',
 plt.xlim(0, 4)
 
 # Save and show the figure
-plt.savefig('Figure19.png', dpi=300, bbox_inches='tight')
+plt.savefig('Figure18.png', dpi=300, bbox_inches='tight')
 plt.show()
 
 
-#Figure 20
+#Figure 19
 PY_v_close=loadtxt('../../Data/stimfreq_04_sws/PY_v_close.txt')
 PY_v_away=loadtxt('../../Data/stimfreq_04_sws/PY_v_away.txt')
 time=loadtxt('../../Data/stimfreq_04_sws/time.txt')
+time_s=time/1000
 
 def configure_axis(axis, title, ylabel, y_major_locator_base, beg, end, show_legend=False):
     axis.set_title(title, size=35, loc='left')
@@ -423,14 +424,14 @@ def configure_axis(axis, title, ylabel, y_major_locator_base, beg, end, show_leg
 plt.figure(figsize=(12,12))
 #
 ax1 = plt.subplot(211)
-ax1.plot(time, PY_v_away, color='tab:blue')
-configure_axis(ax1, 'Away from stimulus', 'mV', 50, 0, 5000)
+ax1.plot(time_s, PY_v_away, color='tab:blue')
+configure_axis(ax1, 'Away from stimulus', 'mV', 50, 0, 5)
 #
 ax2 = plt.subplot(212)
-ax2.plot(time, PY_v_close, color='tab:blue')
+ax2.plot(time_s, PY_v_close, color='tab:blue')
 ax2.set_xlabel('Time (ms)', size=30, labelpad=25)
-configure_axis(ax2, 'Close to stimulus', 'mV', 50, 0, 5000)
+configure_axis(ax2, 'Close to stimulus', 'mV', 50, 0, 5)
 plt.tight_layout()
-plt.savefig('Figure20.png', dpi=300, bbox_inches='tight')
+plt.savefig('Figure19.png', dpi=300, bbox_inches='tight')
 plt.show()
 

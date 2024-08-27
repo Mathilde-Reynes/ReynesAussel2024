@@ -1,0 +1,129 @@
+# To be filled by the author(s) at the time of submission
+# -------------------------------------------------------
+
+# Title of the article:
+#  - For a successful replication, it shoudl be prefixed with "[Re]"
+#  - For a failed replication, it should be prefixed with "[¬Re]"
+#  - For other article types, no instruction (but please, not too long)
+title: "[Re] Model of thalamocortical slow-wave sleep oscillations and transitions to activated states"
+
+# List of authors with name, orcid number, email and affiliation
+# Affiliation "*" means contact author
+authors:
+  - name: Mathilde Reynes
+    orcid: 0009-0008-8046-2251
+    email: mathilde.reynes@u-bordeaux.fr
+    affiliations: 1,2*
+    
+  - name: Amélie Aussel
+    orcid: 0000-0003-0498-2905
+    email: amelie.aussel@inria.fr
+    affiliations: 1,2
+
+# List of affiliations with code (corresponding to author affiliations), name
+# and address. You can also use these affiliations to add text such as "Equal
+# contributions" as name (with no address).
+affiliations:
+
+  - code:    1
+    name:    INRIA Bordeaux Sud-Ouest
+    address: Bordeaux, France
+    
+  - code:    2
+    name:    Institut des Maladies Neurodégénératives, Université  de Bordeaux,
+             Centre National de la Recherche Scientifique, UMR 5293
+    address: Bordeaux, France
+
+# List of keywords (adding the programming language might be a good idea)
+keywords: python, computational neuroscience, hodgkin huxley, thalamo-cortical model, thalamus, cortex, spiking neurons
+
+# Code URL and DOI (url is mandatory for replication, doi after acceptance)
+# You can get a DOI for your code from Zenodo,
+#   see https://guides.github.com/activities/citable-code/
+code:
+  - url: https://github.com/Mathilde-Reynes/ReynesAussel2024.git
+  - doi: 
+
+# Data URL and DOI (optional if no data)
+data:
+  - url: https://doi.org/10.5281/zenodo.13376370
+  - doi:
+
+# Information about the original article that has been replicated
+replication:
+ - cite: Bazhenov M, Timofeev I, Steriade M, Sejnowski TJ. Model of thalamo‐
+cortical slow‐wave sleep oscillations and transitions to activated states. J Neurosci. 2002
+Oct 1;22(19):8691‐704
+ - bib:  Bazhenov:2002
+ - url:  https://www.jneurosci.org/content/22/19/8691
+ - doi:  10.1523/JNEUROSCI.22-19-08691.2002
+
+# Don't forget to surround abstract with double quotes
+abstract: "During sleep, distinct electrophysiological rhythms can be observed, which form the basis for classifying sleep into various stages: rapid eye movement (REM) sleep, and non-REM sleep stages N1 (Stage 1), N2 (Stage 2), and N3 (Stage 3, also known as slow wave sleep or SWS) \cite{Rechtschaffen:1968, Iber:2007}. Although a definitive consensus on the precise role of SWS in memory consolidation remains elusive \cite{Diekelmann:2010}, substantial evidence suggests that SWS-rich sleep is crucial for the consolidation of both declarative (hippocampus-dependent) memories \cite{Plihal:1997, Maquet:2001, Diekelmann:2009} but also non-declarative memories (hippocampus-independent) ones \cite{Huber:2004, Holz:2012, Menicucci:2020}. While these findings can sometimes appear contradictory, they largely converge on the 'sequential hypothesis' which posits that the optimal consolidation of both declarative and non-declarative memories occurs when SWS and rapid eye movement (REM) sleep sequentially follow one another  \cite{Giuditta:1995}. Consolidation refers to the process wherein, after an experience is initially encoded, a series of automatic and unconscious changes at the cellular, molecular, and systems levels occur, leading to the transformation of recently acquired, unstable memories into stable, long-term ones \cite{Muller:1900, Lechner:1999, Stickgold:2005, Squire:2015}. \newline
+
+The features of memory consolidation can be attributed to the specific patterns of the brain electrical activity as well as their precise coordination during the various stages of sleep. During SWS, slow oscillations are predominantly observed, characterized by alternating active (Up) and silent (Down) cortical states at a frequency of 0.2–1 Hz. These oscillations are prominently visible in EEG, as well as in extracellular and intracellular recordings \cite{Steriade:1993, Werth:1996, Timofeev:2000}. During Up states, most cortical cells are relatively depolarized and capable of generating action potentials. Conversely, during Down states, most cortical neurons are hyperpolarized and remain inactive \cite{Steriade:1993, Contreras:1995, Timofeev:2000}. Additionally, these slow oscillations may nest faster spindles, commonly occurring during down-to-Up state transitions and observed in the thalamus \cite{Molle:2002, Clemens:2007}. 
+
+Such slow oscillations are believed to establish a supra-ordinate temporal framework for communication between areas, unifying cortical, thalamic and hippocampal structures, promoting a synchronized reactivation of memory representations \cite{Sirota:2003, Sirota:2005,Navarrete:2020, Sanda:2020}. \newline
+
+Timofeev and colleagues \cite{Timofeev:2000} as well as Bazhenov et al. \cite{Bazhenov:2002} conducted seminal research investigating the thalamo-cortical system during slow wave sleep, with an integrated approach combining experimental and modeling work. These two papers laid the groundwork for a series of publications geared towards the elucidation of the role of the thalamo-cortical system in memory consolidation and the interaction between the different subsystems involved \cite{Bonjean:2012, Lemieux:2014, Wei:2016, Krishnan:2016, Wei:2018}. The robustness of these papers stems from their commitment to achieving biological plausibility, evident in the attention given to both the connectivity and anatomical features of the modeled areas, as well as the precision of neuronal modeling which included a wide range of distinct ionic currents. 
+
+Because this specific model successfully depicted two areas involved in memory consolidation and replicated the associated oscillations during SWS (cortical slow wave and thalamic spindles), it holds particular relevance in the pursuit of developing a biologically realistic system for studying memory processes. Thus, we decided to work towards the reproduction of this model and its results. 
+
+We chose to develop in Brian2 \cite{Stimberg:2019}, ensuring ease of use regardless of one's background. As a python-based simulator specifically designed for neural simulations, Brian2 allowed us to write concise and readable code, with an easier and straightforward syntax, while leveraging well-known and widely used scientific libraries. Additionally, the extensive support provided by the Brian2 team, its rich community and the comprehensive documentation are also enormous advantage over C++. \newline
+Replication of the original results was hindered due to the paper's omissions and inconsistencies with the provided code on ModelDB. Furthermore, while the authors have made some efforts in commenting few sections of the code, the code readability could be enhanced by reviewing the implementation in light of current coding standards. \newline
+Replication is still considered successful as we were able to reproduce most of the original paper's claims and results. We believe our work can help facilitate access to this important original piece of work."
+
+# Bibliography file (yours)
+bibliography: bibliography.bib
+  
+# Type of the article
+# Type can be:
+#  * Editorial
+#  * Letter
+#  * Replication
+type: Replication
+
+# Scientific domain of the article (e.g. Computational Neuroscience)
+#  (one domain only & try to be not overly specific)
+domain: Computational Neuroscience
+
+# Coding language (main one only if several)
+language: Python
+
+  
+# To be filled by the author(s) after acceptance
+# -----------------------------------------------------------------------------
+
+# For example, the URL of the GitHub issue where review actually occured
+review: 
+  - url: 
+
+contributors:
+  - name:
+    orcid: 
+    role: editor
+  - name:
+    orcid:
+    role: reviewer
+  - name:
+    orcid:
+    role: reviewer
+
+# This information will be provided by the editor
+dates:
+  - received:  November 1, 2018
+  - accepted:
+  - published: 
+
+# This information will be provided by the editor
+article:
+  - number: # Article number will be automatically assigned during publication
+  - doi:    # DOI from Zenodo
+  - url:    # Final PDF URL (Zenodo or rescience website?)
+
+# This information will be provided by the editor
+journal:
+  - name:   "ReScience C"
+  - issn:   2430-3658
+  - volume: 4
+  - issue:  1

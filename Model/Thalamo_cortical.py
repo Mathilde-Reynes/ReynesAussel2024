@@ -72,7 +72,7 @@ S_AMPA_PY_TC.t_last_spike = -100*ms
 net.add(S_AMPA_PY_TC)
 S_AMPA_PY_RE = syn_ampa_thal(PY_soma,RE,'IsynAMPA_PY_RE',s_RE,'abs(floor(i*'+str(N_RE)+'/'+str(N_PY)+') -j)<='+str(PY_RE)+'',g_syn_ampa_pyre) 
 S_AMPA_PY_RE.t_last_spike = -100*ms
-net.add(S_AMPA_PY_RE) 
+net.add(S_AMPA_PY_RE)
 #Thalamo-cortical synapses
 S_AMPA_TC_PY = syn_ampa_thal(TC,PY_dendrite,'IsynAMPA_TC_PY',s_Dend_PY,'abs(floor(i*'+str(N_PY)+'/'+str(N_TC)+') -j)<='+str(TC_PY)+'',g_syn_ampa_tcpy) 
 S_AMPA_TC_PY.t_last_spike = -1000*ms
@@ -118,7 +118,7 @@ net.add(S_AMPA_TC_IN)
 # g_syn_ampa_tcin = 0*msiemens 
 # g_syn_ampa_pytc = 0*msiemens 
 # g_syn_ampa_pyre = 0*msiemens
-# g_syn_ampa_pyin = 0.00007*msiemens #or 0.00002*msiemens
+# g_syn_ampa_pyin = 0.00005*msiemens
 
 #Figure 14 (disconnected versus connected)
 # g_syn_ampa_tcpy = 0*msiemens 
@@ -160,7 +160,7 @@ net.add(S_AMPA_TC_IN)
 
 #Figure 17 (transition from sleep to (wakefulness)
 #A: gPYPY=0.15uS, gRETC=0.2, gTC-RE=0.4, gKL=0.3 #v2 : gKL=0.25 in cortex
-# PY_dendrite.g_kl=0.0025*msiemens*cm**-2 #0.003*msiemens*cm**-2
+# PY_dendrite.g_kl=0.003*msiemens*cm**-2 #0.0025*msiemens*cm**-2
 # TC.g_kl_TC = 0.003*msiemens*cm**-2
 # syn_PYPY=all_synapses[0]
 # syn_PYPY.g_syn=0.00015*msiemens
@@ -302,7 +302,7 @@ net.add(S_AMPA_TC_IN)
 ###Simulation
 
 #Define the parameters of the simulation
-runtime=20*second
+runtime=10*second
 np.seterr(all='raise')
 prefs.codegen.target = 'cython'
 #

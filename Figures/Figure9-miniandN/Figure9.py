@@ -16,7 +16,7 @@ time_s=time/1000
 time20=np.arange(0, 20000, 0.02)
 time20_s=time20/1000
 
-###Figure 10
+###Figure 9
 fig,ax = subplots(3,1, sharex = True,figsize=(15,15))
 ax[0].plot(time_s, VPY_1,color="tab:blue",linewidth=1.5)
 ax[0].set_title('PY, N=20', size=35, loc='left')
@@ -49,7 +49,7 @@ ax[2].spines['left'].set_visible(True)
 ax[2].yaxis.set_major_locator(MultipleLocator(base=25))
 ax[2].set_xlim([0,8])
 ax[2].tick_params(axis='both', which='major', labelsize=30, width=2)
-plt.savefig('Figure10Apy.png', dpi=300, bbox_inches='tight')
+#plt.savefig('Figure9Apy.png', dpi=300, bbox_inches='tight')
 
 fig,ax = subplots(3,1, sharex = True,figsize=(15,15))
 ax[0].plot(time_s, VPY_4,color="tab:blue",linewidth=1.5)
@@ -83,4 +83,4 @@ ax[2].spines['left'].set_visible(True)
 ax[2].yaxis.set_major_locator(MultipleLocator(base=25))
 ax[2].set_xlim([0,8])
 ax[2].tick_params(axis='both', which='major', labelsize=30, width=2)
-plt.savefig('Figure10Bpy.png', dpi=300, bbox_inches='tight')
+#plt.savefig('Figure9Bpy.png', dpi=300, bbox_inches='tight')

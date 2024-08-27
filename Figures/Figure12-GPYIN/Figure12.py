@@ -10,13 +10,13 @@ VPY_2=loadtxt('../../Data/PY_v_disconnected_07.txt')
 runtime=10
 N=100
 #see file "propagation_speeds.ods
-gPYPY=[0.12,0.13,0.14,0.15,0.16,0.17,0.18]
-speed_gPYPY=[48.255,153.439,236.683,296.382,394.173,445.183,503.808]
-std_gPYPY=[39.044,111.567,125.536,154.122,135.885,135.915,183.156]
+gPYPY=[0.12,0.13,0.14,0.15,0.16]
+speed_gPYPY=[140.058830623526,217.821159932437,257.209284928657,295.81064194477295,314.53219726645415]
+std_gPYPY=[92.063885282553,118.561802997673,136.616568606629,84.49404861794169,123.67190859817416]
 
-gPYIN=[0.02,0.03,0.04,0.05,0.06,0.07,0.08]
-speed_gPYIN=[423.773,420.824,346.384,296.382,266.485,256.199,152.877]
-std_gPYIN=[237.496,159.579,110.732,154.122,152.759,125.132,78.666]
+gPYIN=[0.02,0.03,0.04,0.05,0.06]
+speed_gPYIN=[418.946549551418,337.888173205426,298.894122048514,316.857506963284,259.261546250333]
+std_gPYIN=[143.770337191745,112.911177154143,129.743217746648,171.336013907523,103.000087226226]
 
 #Top pannel
 fig = plt.figure(figsize=(15, 12))
@@ -42,7 +42,7 @@ cbar_ax = plt.subplot(gs[:, 1])
 cbar = fig.colorbar(im1, cax=cbar_ax, orientation='vertical')
 cbar.set_label('Membrane potential (mV)', size=30, labelpad=30)
 cbar.ax.tick_params(labelsize=25, width=2)
-plt.savefig('Figure13cmap.png', dpi=300,bbox_inches='tight')
+#plt.savefig('Figure12cmap.png', dpi=300,bbox_inches='tight')
 plt.show()
 
 #Bottom pannel
@@ -64,5 +64,5 @@ ax2.spines['right'].set_visible(False)
 ax2.spines['bottom'].set_visible(True)
 ax2.spines['left'].set_visible(True)
 ax2.tick_params(axis='both', which='major', labelsize=30, width=2)
-#plt.savefig('Figure13velocity.png', dpi=300, bbox_inches='tight')
+plt.savefig('Figure12velocity.png', dpi=300, bbox_inches='tight')
 plt.show()

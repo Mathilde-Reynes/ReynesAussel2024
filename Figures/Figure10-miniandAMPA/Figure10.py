@@ -11,7 +11,7 @@ VPY_3 = np.loadtxt('../../Data/PY_v_c_disconnected_synapses50.txt')
 time20=np.arange(0, 20000, 0.02)
 time20_s=time20/1000
 
-###Figure 11
+###Figure 10
 fig,ax = subplots(3,1, sharex = True,figsize=(20,15))
 ax[0].plot(time20_s, VPY_1,color="tab:blue",linewidth=1.5)
 ax[0].set_title('PY, 100% synaptic conductance, 100% mini conductance', size=25, loc='left')
@@ -44,4 +44,4 @@ ax[2].spines['left'].set_visible(True)
 ax[2].yaxis.set_major_locator(MultipleLocator(base=25))
 ax[2].set_xlim([0,20])
 ax[2].tick_params(axis='both', which='major', labelsize=20, width=2)
-plt.savefig('Figure11.png', dpi=300, bbox_inches='tight')
+#plt.savefig('Figure10.png', dpi=300, bbox_inches='tight')

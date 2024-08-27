@@ -5,7 +5,7 @@ Created on Tue Aug  6 12:18:37 2024
 @author: Mathilde
 """
 
-###Figure 9
+###Figure 8
 n_start = 75
 fig,ax = subplots(7,1, sharex = True,figsize=(19,34))
 ax[0].plot(V2_PYs.t/ms, V2_PYs.v[n_start-4]/mV,linewidth=0.4, color='tab:blue', alpha=0.6)
@@ -90,4 +90,4 @@ ax[6].tick_params(axis='both', which='major', labelsize=25, width=2)
 ax[6].set_title('AMPA synaptic depression from input synapses', size=30, loc='left')
 ax[6].set_xlabel('ms',size=30,  labelpad=30)
 fig.tight_layout()
-#plt.savefig('Figure5.jpg', dpi=300)
+#plt.savefig('Figure8.jpg', dpi=300)
