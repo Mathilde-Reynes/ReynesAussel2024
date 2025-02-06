@@ -8,7 +8,7 @@ The model used in this simulator is detailed in an article [1] that is yet to be
 
 
 ## 2. Requirements
-This simulator was developed using Python 3.6 and the following packages: brian2=2.5.1, python=3.8.19, numpy=1.24.4. It was developed on Windows 11 and tested on Linux. The specifications for the Windows environment are available in the environment.yaml file in the Model folder of this GitHub repository. You can create a similar virtual environment with Conda using the command:
+This simulator was developed using Python 3.8 and the following packages: brian2=2.5.1, python=3.8.19, numpy=1.24.4. It was developed on Windows 11 and tested on Linux. The specifications for the Windows environment are available in the environment.yml file in the Model folder of this GitHub repository. You can create a similar virtual environment with Conda using the command:
 
 ```bash
 conda env create -f environment.yml
