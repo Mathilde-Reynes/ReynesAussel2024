@@ -249,7 +249,7 @@ def syn_gabab(source,target,syntype,surfacetarget,connection_pattern):
     else :
         S.connect(condition=connection_pattern, skip_if_invalid=True)
     S.surfacetarget = surfacetarget
-    print("GABAB synapses from "+str(source)+" to "+str(target))
-    print(S.N_incoming_post)
+    # print("GABAB synapses from "+str(source)+" to "+str(target))
+    # print(S.N_incoming_post)
     return S
 

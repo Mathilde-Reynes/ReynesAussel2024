@@ -4,6 +4,7 @@
 #Cortical_layer.ipy provides a function to create the cortical subpart of the model.
 
 from Soma_eqs import *
+from Soma_eqs_exp import *
 from Dendritic_eqs import *
 from Synapses import *
 from brian2 import *
@@ -15,7 +16,7 @@ import matplotlib.pyplot as plt
 #The function create_cortical_layer permits the generation of a single cortical layer of the prefrontal cortex. A cortical layer is composed of pyramidal (PY) and interneurons/inhibitory cells (IN).
 #N is considered to be the number of PY cells needed. The number of IN is logically deduced from it (N/4).
 
-def create_cortical_layer(N):
+def create_cortical_layer(N,mini_form,A_PY_PY,A_PY_IN):
     
     ###PREFERENCES
     prefs.codegen.target = 'cython'
@@ -36,14 +37,6 @@ def create_cortical_layer(N):
     N_PY,N_IN = N,N/4
     #Fictional & arbitrary position of neurons for proper synapses.connect() condition
     neuron_spacing = 1*um
-    #Amplitudes for minis
-    A_PY_PY = 0.00006*msiemens
-    A_PY_IN = 0.000025*msiemens
-    
-    # #For reproduction of Figure4
-    # A_PY_PY = 0.00006*msiemens*1.5
-    # A_PY_IN = (0.000025*msiemens)*1.5
-    # A_PY_IN = (0.000025*msiemens)*0.1
     
     #Areas of the different neurons
     s_Soma_PYIN = 10**-6*cm**2
@@ -54,15 +47,6 @@ def create_cortical_layer(N):
     PY_IN = 1
     IN_PY = 5
     PY_PY = 5
-    
-    print('gPYPY/sPYdend')
-    print(g_syn_ampa_pypy/s_Dend_PY)
-    print('gPYPY_mini/sPYdend')
-    print(A_PY_PY/s_Dend_PY)
-    print('gPYIN/sINdend')
-    print(g_syn_ampa_pyin/s_Dend_IN)
-    print('gPYIN_mini/sINdend')
-    print(A_PY_IN/s_Dend_IN)
     
     ###Instantiate neurons
     
@@ -84,7 +68,10 @@ def create_cortical_layer(N):
     PY_dendrite.rho = 165
     
     #Pyramidal axosomatic
-    PY_soma = NeuronGroup(N_PY,Soma_eqs,method='rk4',threshold='v>40*mV',refractory=3*ms,events={'custom_poisson_PY':'rand()<mean_rate_PY*dt','custom_poisson_IN':'rand()<mean_rate_IN*dt'})
+    if mini_form == "exp":
+        PY_soma = NeuronGroup(N_PY,Soma_eqs_exp,method='rk4',threshold='v>40*mV',refractory=3*ms,events={'custom_poisson_PY':'rand()<mean_rate_PY*dt','custom_poisson_IN':'rand()<mean_rate_IN*dt'})
+    else: #in case other value, take the standard log minis
+        PY_soma = NeuronGroup(N_PY,Soma_eqs_exp,method='rk4',threshold='v>40*mV',refractory=3*ms,events={'custom_poisson_PY':'rand()<mean_rate_PY*dt','custom_poisson_IN':'rand()<mean_rate_IN*dt'})
     PY_soma.h_na = 0.95
     PY_soma.m_na = 0.05
     PY_soma.m_nap = 0.00
@@ -112,7 +99,10 @@ def create_cortical_layer(N):
     IN_dendrite.rho = 50 
     
     #Interneurons axosomatic
-    IN_soma = NeuronGroup(N_IN,Soma_eqs,method='rk4',threshold='v>20*mV',refractory=3*ms,events={'custom_poisson_gabaa':'rand()<mean_rate_GABAA*dt'})
+    if mini_form == "exp":
+        IN_soma = NeuronGroup(N_IN,Soma_eqs_exp,method='rk4',threshold='v>20*mV',refractory=3*ms,events={'custom_poisson_gabaa':'rand()<mean_rate_GABAA*dt'})
+    else: #in case other value, take the standard log minis
+        IN_soma = NeuronGroup(N_IN,Soma_eqs,method='rk4',threshold='v>20*mV',refractory=3*ms,events={'custom_poisson_gabaa':'rand()<mean_rate_GABAA*dt'})
     IN_soma.h_na = 0.95
     IN_soma.m_na = 0.05
     IN_soma.m_nap = 0.00
@@ -234,12 +224,12 @@ def create_cortical_layer(N):
     R4=SpikeMonitor(IN_soma,record=True)
     
     #Synaptic currents monitoring
-    I1=StateMonitor(PY_dendrite,('I_na','I_nap','I_kca','IEPSPs_PY_PY','IEPSPs_IN_PY','IsynAMPA_PY_PY','IsynNMDA_PY_PY','IsynGABAA_IN_PY'),record=False)
+    I1=StateMonitor(PY_dendrite,('I_na','I_nap','I_kca','IEPSPs_PY_PY','IEPSPs_IN_PY','IsynAMPA_PY_PY','IsynNMDA_PY_PY','IsynGABAA_IN_PY'),record=True)
     # I2=StateMonitor(IN_dendrite,('IEPSPs_PY_IN','IsynAMPA_PY_IN','IsynNMDA_PY_IN'),record=True)
     I2=StateMonitor(IN_dendrite,('I_na','I_nap','I_kca'),record=False)
     
     #Synapses monitoring
-    S1=StateMonitor(S_AMPA_PY_PY,('D'),record=False)
+    S1=StateMonitor(S_AMPA_PY_PY,('D'),record=True)
     S2=StateMonitor(S_AMPA_PY_IN,('D','t_last_spike_Poisson_IN','W'),record=False)
     #S3=StateMonitor(S_NMDA_PY_PY,('W'),record=True)
     #S4=StateMonitor(S_NMDA_PY_IN,('W'),record=True)
@@ -254,4 +244,4 @@ def create_cortical_layer(N):
     all_synapses=S_AMPA_PY_PY,S_AMPA_PY_IN,S_NMDA_PY_PY,S_NMDA_PY_IN,S_GABAA_IN_PY
     all_monitors=V1,V2,V3,V4,R2,R4,I1,I2,S1,S2,M0,M1
     
-    return all_neurons,all_synapses,all_gap_junctions,all_monitors  
+    return all_neurons,all_synapses,all_gap_junctions,all_monitors

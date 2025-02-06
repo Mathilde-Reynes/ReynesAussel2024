@@ -3,318 +3,22 @@
 
 from brian2 import *
 import numpy as np
-import scipy as sp
 import matplotlib.pyplot as plt
 from brian2.units.constants import *
 import matplotlib.gridspec as gridspec
-seed(4068)
 from Soma_eqs import *
+from Soma_eqs_exp import *
 from Dendritic_eqs import *
 from TC_eqs import *
 from RE_eqs import *
 from Synapses import *
 from Cortical_layer import *
 from Thalamus import *
+from Figure_conditions import *
+from Figure_rawdata import *
+from Figure_plotting import *
 
-close('all')
-#clear_cache('cython')
-
-###Parameters
-
-#Number of pyramidal neurons
-N = 100
-N_PY = N
-N_TC = N_PY/2
-N_RE = N_PY/2
-N_IN = N_PY/4 
-#Conductances
-g_syn_ampa_tcpy = 0.0001*msiemens
-g_syn_ampa_tcin = 0.0001*msiemens
-g_syn_ampa_pytc = 0.000025*msiemens
-g_syn_ampa_pyre = 0.00005*msiemens
-#Areas of the different neurons
-s_Soma_PYIN = 10**-6*cm**2
-s_Dend_PY = 165*s_Soma_PYIN
-s_Dend_IN = 50*s_Soma_PYIN
-s_TC = 2.9E-4*cm**2
-s_RE = 1.43e-4*cm**2
-#Radius of connection
-TC_PY = 10 
-TC_IN = 2 
-PY_RE = 5 
-PY_TC = 5 
-
-###Creation of the substructures
-
-net=Network(collect())
-#Thalamus ("T")
-all_neurons_T, all_synapses_T, all_monitors_T = create_thalamic_subparts(N/2)
-RE,TC = all_neurons_T  
-V1_RE,V2_TC,R1_RE,R2_TC,I1_RE,I2_TC = all_monitors_T
-net.add(all_neurons_T)
-net.add(all_synapses_T)
-net.add(all_monitors_T) 
-#Layer Cortex
-all_neurons, all_synapses, all_gap_junctions, all_monitors = create_cortical_layer(N)
-PY_dendrite, PY_soma, IN_dendrite, IN_soma = all_neurons
-V1_PYd,V2_PYs,V3_INd,V4_INs,R2_PYs,R4_INs,I1_PYd,I2_INd,S1,S2,M0,M1 = all_monitors
-S_AMPA_PY_PY,S_AMPA_PY_IN,S_NMDA_PY_PY,S_NMDA_PY_IN,S_GABAA_IN_PY = all_synapses
-net.add(all_neurons)
-net.add(all_synapses)
-net.add(all_gap_junctions)
-net.add(all_monitors)
-        
-###Creation of the synapses
-        
-#Cortico-thalamic synapses
-S_AMPA_PY_TC = syn_ampa_thal(PY_soma,TC,'IsynAMPA_PY_TC',s_TC,'abs(floor(i*'+str(N_TC)+'/'+str(N_PY)+') -j)<='+str(PY_TC)+'',g_syn_ampa_pytc) 
-S_AMPA_PY_TC.t_last_spike = -100*ms
-net.add(S_AMPA_PY_TC)
-S_AMPA_PY_RE = syn_ampa_thal(PY_soma,RE,'IsynAMPA_PY_RE',s_RE,'abs(floor(i*'+str(N_RE)+'/'+str(N_PY)+') -j)<='+str(PY_RE)+'',g_syn_ampa_pyre) 
-S_AMPA_PY_RE.t_last_spike = -100*ms
-net.add(S_AMPA_PY_RE)
-#Thalamo-cortical synapses
-S_AMPA_TC_PY = syn_ampa_thal(TC,PY_dendrite,'IsynAMPA_TC_PY',s_Dend_PY,'abs(floor(i*'+str(N_PY)+'/'+str(N_TC)+') -j)<='+str(TC_PY)+'',g_syn_ampa_tcpy) 
-S_AMPA_TC_PY.t_last_spike = -1000*ms
-net.add(S_AMPA_TC_PY)
-S_AMPA_TC_IN = syn_ampa_thal(TC,IN_dendrite,'IsynAMPA_TC_IN',s_Dend_IN,'abs(floor(i*'+str(N_IN)+'/'+str(N_TC)+') -j)<='+str(TC_IN)+'',g_syn_ampa_tcin) 
-S_AMPA_TC_IN.t_last_spike = -1000*ms
-net.add(S_AMPA_TC_IN)
-
-###Change parameters as needed
-
-#Figure 6
-# TC.g_t_TC = 2*msiemens*cm**-2 
-
-#Figure 10 (N=20,60,100 or minis=120%,140%,170%)
-# N = 20
-# g_syn_ampa_tcpy = 0*msiemens 
-# g_syn_ampa_tcin = 0*msiemens 
-# g_syn_ampa_pytc = 0*msiemens 
-# g_syn_ampa_pyre = 0*msiemens
-#to implement in Cortical_layer.py
-# A_PY_PY = 0.00006*msiemens*1.4
-# A_PY_IN = 0.000025*msiemens*1.4
-
-#Figure 11 (minis=50% or cortical synapses 50%)
-# g_syn_ampa_tcpy = 0*msiemens 
-# g_syn_ampa_tcin = 0*msiemens 
-# g_syn_ampa_pytc = 0*msiemens 
-# g_syn_ampa_pyre = 0*msiemens
-#to implement in Cortical_layer.py
-# A_PY_PY = 0.00006*msiemens*0.5
-# A_PY_IN = 0.000025*msiemens*0.5
-# g_syn_ampa_pypy = 0.00015*msiemens*0.5
-# g_syn_nmda_pypy = 0.00001*msiemens*0.5
-# g_syn_ampa_pyin = 0.00005*msiemens*0.5
-# g_syn_nmda_pyin = 0.000008*msiemens*0.5
-# g_syn_gabaa_inpy = 0.00005*msiemens*0.5
-
-#Figure 12 (exp or log mini arrival)
-# changes to implement in Soma_eqs.py
-
-#Figure 13 (g PY-IN)
-# g_syn_ampa_tcpy = 0*msiemens 
-# g_syn_ampa_tcin = 0*msiemens 
-# g_syn_ampa_pytc = 0*msiemens 
-# g_syn_ampa_pyre = 0*msiemens
-# g_syn_ampa_pyin = 0.00005*msiemens
-
-#Figure 14 (disconnected versus connected)
-# g_syn_ampa_tcpy = 0*msiemens 
-# g_syn_ampa_tcin = 0*msiemens 
-# g_syn_ampa_pytc = 0*msiemens 
-# g_syn_ampa_pyre = 0*msiemens
-
-#Figure 16
-# Strong PYPY: gPYPY=0.15uS, gRETC=0.2, gTC-RE=0.4
-# PY_dendrite.g_kl=0*msiemens*cm**-2
-# TC.g_kl_TC = 0*msiemens*cm**-2
-# RE.g_kl_RE = 0*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.00015*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0002*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0004*msiemens
-#Weak PYPY : gPYPY=0.09uS, gRETC=0.2, gTC-RE=0.4
-# PY_dendrite.g_kl=0*msiemens*cm**-2
-# TC.g_kl_TC = 0*msiemens*cm**-2
-# RE.g_kl_RE = 0*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.00009*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0002*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0004*msiemens
-#Weak PYRETC : gPYPY=0.09uS, gRETC=0.1, gTC-RE=0.2
-# PY_dendrite.g_kl=0*msiemens*cm**-2
-# TC.g_kl_TC = 0*msiemens*cm**-2
-# RE.g_kl_RE = 0*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.00009*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0001*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0002*msiemens
-
-#Figure 17 (transition from sleep to (wakefulness)
-#A: gPYPY=0.15uS, gRETC=0.2, gTC-RE=0.4, gKL=0.3 #v2 : gKL=0.25 in cortex
-# PY_dendrite.g_kl=0.003*msiemens*cm**-2 #0.0025*msiemens*cm**-2
-# TC.g_kl_TC = 0.003*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.00015*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0002*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0004*msiemens
-#B:
-# PY_dendrite.g_kl=0.0025*5/6*msiemens*cm**-2
-# TC.g_kl_TC = 0.0025*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.00013833*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.00018333*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0003666*msiemens
-#C:
-# PY_dendrite.g_kl=0.0025*4/6*msiemens*cm**-2
-# TC.g_kl_TC = 0.002*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.0001266*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0001666*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.000333*msiemens
-#D:
-# PY_dendrite.g_kl=0.0025*3/6*msiemens*cm**-2
-# TC.g_kl_TC = 0.0015*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.000115*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.00015*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0003*msiemens
-#E:
-# PY_dendrite.g_kl=0.0025*2/6*msiemens*cm**-2
-# TC.g_kl_TC = 0.001*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.0001033*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0001333*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0002666*msiemens
-#F:
-# PY_dendrite.g_kl=0.00025*1/6*msiemens*cm**-2
-# TC.g_kl_TC = 0.0005*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.00009166*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0001166*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0002333*msiemens
-#G:"Activated state"
-# PY_dendrite.g_kl=0*msiemens*cm**-2
-# TC.g_kl_TC = 0*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.00008*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0001*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0002*msiemens
-
-#Figures 18-20: with stimulation to 25% of TC cells, which is about 12 cells
-# base_rate=25*Hz
-# modulation=2.5*Hz #0.4 or 1 or 2.5 Hz
-# g_syn_ampa_stim = 0.0004*msiemens #g_syn_ampa_tcre=0.0004*msiemens
-# Poisson_stim=PoissonGroup(N_TC//4, rates='base_rate+0.9*base_rate*sin(2*pi*modulation*t)')
-# S_AMPA_stim_TC = syn_ampa_thal(Poisson_stim,TC_TCo,'IsynAMPA_stim_TC',s_TC,'j>18 and j<31',g_syn_ampa_stim,10) 
-# S_AMPA_stim_TC.t_last_spike = -1000*ms
-# monitor_poisson=SpikeMonitor(Poisson_stim)
-# net.add([Poisson_stim,S_AMPA_stim_TC,monitor_poisson])
-
-#Supplementary 3 (transition from sleep to (wakefulness)
-#A: gPYPY=0.15uS, gRETC=0.2, gTC-RE=0.4, gKL=0.3 #v2 : gKL=0.25 in cortex
-# PY_dendrite.g_kl=0.0025*msiemens*cm**-2 #0.003*msiemens*cm**-2
-# TC.g_kl_TC = 0.003*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.00015*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0002*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0004*msiemens
-#B:
-# PY_dendrite.g_kl=0.0025*5/6*msiemens*cm**-2
-# TC.g_kl_TC = 0.0025*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.00013833*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0002*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0004*msiemens
-#C:
-# PY_dendrite.g_kl=0.0025*4/6*msiemens*cm**-2
-# TC.g_kl_TC = 0.002*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.0001266*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0002*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0004*msiemens
-#D:
-# PY_dendrite.g_kl=0.0025*3/6*msiemens*cm**-2
-# TC.g_kl_TC = 0.0015*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.000115*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0002*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0004*msiemens
-#E:
-# PY_dendrite.g_kl=0.0025*2/6*msiemens*cm**-2
-# TC.g_kl_TC = 0.001*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.0001033*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0002*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0004*msiemens
-#F:
-# PY_dendrite.g_kl=0.00025*1/6*msiemens*cm**-2
-# TC.g_kl_TC = 0.0005*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.00009166*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0002*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0004*msiemens
-#G:"Activated state"
-# PY_dendrite.g_kl=0*msiemens*cm**-2
-# TC.g_kl_TC = 0*msiemens*cm**-2
-# syn_PYPY=all_synapses[0]
-# syn_PYPY.g_syn=0.00008*msiemens
-# syn_RETC=all_synapses_T[0]
-# syn_RETC.g_syn=0.0002*msiemens
-# syn_TCRE=all_synapses_T[-1]
-# syn_TCRE.g_syn=0.0004*msiemens
-
-
-###Simulation
-
-#Define the parameters of the simulation
-runtime=10*second
-np.seterr(all='raise')
-prefs.codegen.target = 'cython'
-#
-num_samples = int(runtime/defaultclock.dt)
-init_arr = zeros(num_samples)
-init_arr[0]=1
-init_timedarray = TimedArray(init_arr, dt=defaultclock.dt)
-
-#Run the simulation
-net.run(runtime,report='text',report_period=120*second)
-
-#Function to estimate the propagation speed of cortical up-states. 
+### Analyze propagation speed
 def analyze_propagation_speed(raster_PY):
     #we need to : 1-detect the up states and 2-compute the propagation speed in each up state
     list_up_states_beginning=[]
@@ -352,50 +56,156 @@ def analyze_propagation_speed(raster_PY):
     print("Std propagation speed: "+str(std(list_up_states_speed)))
     return
 
-analyze_propagation_speed(R2_PYs)
 
-#Mean firing rate of PY neurons
-print('Mean firing rate of PY neurons:')
-print(len(R2_PYs.t)/N_PY/runtime)
+###Create the complete model and run it
+def thalamocortical_network(seed_value, analyze_speed, fig_number, raw_data, plot_figure):
+    # Set seed for reproducibility
+    seed(seed_value)
+    
+    # Close all plots
+    close('all')
+    
+    ### Standard parameters
+    N = 100
+    N_PY = N
+    N_TC = N_PY // 2
+    N_RE = N_PY // 2
+    N_IN = N_PY // 4 
+    
+    # Conductances
+    g_syn_ampa_tcpy = 0.0001 * msiemens
+    g_syn_ampa_tcin = 0.0001 * msiemens
+    g_syn_ampa_pytc = 0.000025 * msiemens
+    g_syn_ampa_pyre = 0.00005 * msiemens
+    
+    # Areas of the different neurons
+    s_Soma_PYIN = 10**-6 * cm**2
+    s_Dend_PY = 165 * s_Soma_PYIN
+    s_Dend_IN = 50 * s_Soma_PYIN
+    s_TC = 2.9E-4 * cm**2
+    s_RE = 1.43e-4 * cm**2
+    
+    # Radius of connection
+    TC_PY = 10 
+    TC_IN = 2 
+    PY_RE = 5 
+    PY_TC = 5
+    
+    #Amplitudes for minis
+    A_PY_PY = 0.00006*msiemens
+    A_PY_IN = 0.000025*msiemens
+    
+    ### Creation of the substructures
+    net = Network(collect())
+    
+    print("Updating N and minis amplitudes before instantiating Thalamus & Cortical later for Figure n°: "+str(fig_number))
+    A_PY_PY, A_PY_IN, N = figure_conditions_pre(str(fig_number),A_PY_PY, A_PY_IN, N)
+    
+    # Thalamus ("T")
+    all_neurons_T, all_synapses_T, all_monitors_T = create_thalamic_subparts(N // 2)
+    RE, TC = all_neurons_T  
+    V1_RE, V2_TC, R1_RE, R2_TC, I1_RE, I2_TC = all_monitors_T
+    
+    net.add(all_neurons_T)
+    net.add(all_synapses_T)
+    net.add(all_monitors_T)
+    
+    # Layer Cortex
+    if fig_number == "11-1":
+        all_neurons, all_synapses, all_gap_junctions, all_monitors = create_cortical_layer(N,log,A_PY_PY,A_PY_IN)
+    else:
+        all_neurons, all_synapses, all_gap_junctions, all_monitors = create_cortical_layer(N,exp,A_PY_PY,A_PY_IN)
+    PY_dendrite, PY_soma, IN_dendrite, IN_soma = all_neurons
+    V1_PYd, V2_PYs, V3_INd, V4_INs, R2_PYs, R4_INs, I1_PYd, I2_INd, S1, S2, M0, M1 = all_monitors
+    S_AMPA_PY_PY, S_AMPA_PY_IN, S_NMDA_PY_PY, S_NMDA_PY_IN, S_GABAA_IN_PY = all_synapses
+    
+    net.add(all_neurons)
+    net.add(all_synapses)
+    net.add(all_gap_junctions)
+    net.add(all_monitors)
+    print("Thalamus & Cortical layer initialized")
 
-#Compute spectral power in four different frequency bands
-from scipy import signal
-sampling_freq=1/(0.02*ms)/Hz
-freqs,Spectrum=signal.periodogram(V2_PYs.v[50], sampling_freq,'flattop', scaling='spectrum')
-figure()
-plot(freqs,Spectrum)
-print()
-power_0_2_Hz=sum(Spectrum[where(freqs<2)[0]])
-print('Power in the 0-2Hz band: '+str(power_0_2_Hz))
-power_10_20_Hz=sum(Spectrum[where(freqs<10)[0][-1]:where(freqs>20)[0][0]])
-print('Power in the 10-20Hz band: '+str(power_10_20_Hz))
-power_20_30_Hz=sum(Spectrum[where(freqs<20)[0][-1]:where(freqs>30)[0][0]])
-print('Power in the 20-30Hz band: '+str(power_20_30_Hz))
-power_30_40_Hz=sum(Spectrum[where(freqs<30)[0][-1]:where(freqs>40)[0][0]])
-print('Power in the 30-40Hz band: '+str(power_30_40_Hz))
+    print("Updating other parameters to plot Figure n°: "+str(fig_number))
+    runtime, g_syn_ampa_tcpy, g_syn_ampa_tcin, g_syn_ampa_pytc, g_syn_ampa_pyre, modulation, base_rate, g_syn_ampa_stim, monitor_poisson = figure_conditions(
+    fig_number, all_synapses, all_synapses_T, all_neurons_T, all_neurons, g_syn_ampa_tcpy, g_syn_ampa_tcin, g_syn_ampa_pytc, g_syn_ampa_pyre
+    )
+    
+    ### Creation of the synapses
+    # Cortico-thalamic synapses
+    S_AMPA_PY_TC = syn_ampa_thal(PY_soma, TC, 'IsynAMPA_PY_TC', s_TC,
+                                 'abs(floor(i*'+str(N_TC)+'/'+str(N_PY)+') -j)<='+str(PY_TC)+'',
+                                 g_syn_ampa_pytc) 
+    S_AMPA_PY_TC.t_last_spike = -100 * ms
+    net.add(S_AMPA_PY_TC)
+    
+    S_AMPA_PY_RE = syn_ampa_thal(PY_soma, RE, 'IsynAMPA_PY_RE', s_RE,
+                                 'abs(floor(i*'+str(N_RE)+'/'+str(N_PY)+') -j)<='+str(PY_RE)+'',
+                                 g_syn_ampa_pyre) 
+    S_AMPA_PY_RE.t_last_spike = -100 * ms
+    net.add(S_AMPA_PY_RE) 
+    
+    # Thalamo-cortical synapses
+    S_AMPA_TC_PY = syn_ampa_thal(TC, PY_dendrite, 'IsynAMPA_TC_PY', s_Dend_PY,
+                                 'abs(floor(i*'+str(N_PY)+'/'+str(N_TC)+') -j)<='+str(TC_PY)+'',
+                                 g_syn_ampa_tcpy) 
+    S_AMPA_TC_PY.t_last_spike = -1000 * ms
+    net.add(S_AMPA_TC_PY)
+    
+    S_AMPA_TC_IN = syn_ampa_thal(TC, IN_dendrite, 'IsynAMPA_TC_IN', s_Dend_IN,
+                                 'abs(floor(i*'+str(N_IN)+'/'+str(N_TC)+') -j)<='+str(TC_IN)+'',
+                                 g_syn_ampa_tcin) 
+    S_AMPA_TC_IN.t_last_spike = -1000 * ms
+    net.add(S_AMPA_TC_IN)
+    
+    if fig_number in ["17-A1", "18-A1", "17-A2", "18-A2", "17-A3", "18-A3", "17-B1", "18-B1", "17-B2", "18-B2", "17-B3", "18-B3", "19"]: 
+        Poisson_stim = PoissonGroup(N_TC // 4, rates='base_rate + 0.9 * base_rate * sin(2 * pi * modulation * t)')
+        S_AMPA_stim_TC = syn_ampa_thal(Poisson_stim, TC, 'IsynAMPA_stim_TC', s_TC, 'j > 18 and j < 31', g_syn_ampa_stim)
+        S_AMPA_stim_TC.t_last_spike = -1000 * ms
+        monitor_poisson = SpikeMonitor(Poisson_stim)
+        net.add([Poisson_stim, S_AMPA_stim_TC, monitor_poisson])
+    print("Synapses initialized")
 
-###Export raw data
+    ### Simulation
+    # Define the parameters of the simulation
+    np.seterr(all='raise')
+    prefs.codegen.target = 'cython'
+    
+    # Create a TimedArray for initialization
+    num_samples = int(runtime / defaultclock.dt)
+    init_arr = zeros(num_samples)
+    init_arr[0] = 1
+    init_timedarray = TimedArray(init_arr, dt=defaultclock.dt)
+       
+    # Run the simulation
+    print("Simulation ready to run")
+       
+    net.run(runtime, report='text', report_period=120*second)
+    
+    # If analyze speed is needed
+    if analyze_speed:
+        analyze_propagation_speed(R2_PYs)
+    # Mean firing rate of PY neurons
+    print('Mean firing rate of PY neurons:')
+    print(len(R2_PYs.t) / N_PY / runtime)
+    
+    ###plot figures here
+    if plot_figure:
+         figure_plotting(str(fig_number),all_monitors,all_monitors_T,all_synapses,monitor_poisson,runtime, N)
+    
+    ### Raw data here
+    if raw_data:
+        figure_rawdata(str(fig_number),all_monitors,all_monitors_T,monitor_poisson)
 
-#Uncomment to save the raw data in .txt as needed
+    return net
 
-# savetxt('PY_v.txt',V2_PYs.v/mV) #All PY soma membrane potentials
-# savetxt('IN_v.txt',V4_INs.v/mV) #All IN soma membrane potentials
-# savetxt('PYdend_v.txt',V1_PYd.v/mV) #All PY dendrite membrane potentials
-# savetxt('INdend_v.txt',V3_INd.v/mV) #All IN dendrite membrane potentials
-# savetxt('TC_v.txt',V2_TC.v/mV) #All TC membrane potentials
-# savetxt('RE_v.txt',V1_RE.v/mV) #All RE membrane potentials
-# savetxt('time30.txt',V2_PYs.t/ms) #Time array
-
-# savetxt('PY_v_c.txt',V2_PYs.v[N_PY//2]/mV) #One PY soma membrane potential
-# savetxt('IN_v_c.txt',V4_INs.v[12]/mV) #One IN soma membrane potential
-# savetxt('PYdend_v_c.txt',V1_PYd.v[12]/mV) #One PY dendrite membrane potential
-# savetxt('INdend_v_c.txt',V3_INd.v[N_IN/2]/mV) #One IN dendrite membrane potential
-# savetxt('TC_v_c.txt',V2_TC.v[25]/mV) #One TC membrane potential
-# savetxt('RE_v_c.txt',V1_RE.v[25]/mV) #One RE membrane potential
-# savetxt('time_c.txt',V2_PYs.t[N_PY//2]/ms) #Time array
-
-# savetxt('PY_raster.txt',R2_PYs.i) #PY soma spikes
-# savetxt('PY_raster_time.txt',R2_PYs.t) #time PY soma spikes
-# savetxt('IN_raster.txt',R4_INs.i) #IN soma spikes
-# savetxt('TC_raster.txt',R2_TC.i) #TC spikes
-# savetxt('RE_raster.txt',R1_RE.i) #RE spikes
+### Call the function to run the simulation
+if __name__ == "__main__":
+    print("Start")
+    seed_value = 4168
+    analyze_speed = False #True of False
+    fig_number = "5"
+    raw_data = False #True or False
+    plot_figure = True #True or False
+    thalamocortical_network(seed_value,analyze_speed,fig_number,raw_data,plot_figure)
+    #Should you wish to plot some data outside of the provided codes to plot the paper's figures, you can uncomment the following line and plot as you wish
+    #net, all_monitors_T, all_monitors = thalamocortical_network(see_value,analyze_speed,fig_number,rawdata)

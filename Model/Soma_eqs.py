@@ -79,15 +79,3 @@ Soma_eqs = '''
      
 
     '''
-    
-    #exp and log used for figure 12
-    
-    #log
-    # mean_rate_PY = (log((t-t_last_spike_PY + 50*ms)/(50*ms))/400*kHz)*int((t-t_last_spike_PY)>70*ms) : Hz
-    # mean_rate_IN = (log((t-t_last_spike_PY + 50*ms)/(50*ms))/400*kHz)*int((t-t_last_spike_PY)>70*ms) : Hz
-    # mean_rate_GABAA = (log((t-t_last_spike_IN + 50*ms)/(50*ms))/400*kHz)*int((t-t_last_spike_IN)>70*ms) : Hz
-    
-    #exp
-    # mean_rate_PY = ((2/(1 +exp(-(t-t_last_spike_PY)/(400*ms))) - 1)/100/ms)*int((t-t_last_spike_PY)>70*ms) : Hz
-    # mean_rate_IN = ((2/(1 +exp(-(t-t_last_spike_PY)/(400*ms))) - 1)/100/ms)*int((t-t_last_spike_PY)>70*ms) : Hz
-    # mean_rate_GABAA = ((2/(1 +exp(-(t-t_last_spike_IN)/(400*ms))) - 1)/100/ms)*int((t-t_last_spike_PY)>70*ms) : Hz

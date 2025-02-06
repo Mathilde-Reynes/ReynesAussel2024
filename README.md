@@ -28,16 +28,19 @@ The model is organized with each component in its own Python file:
 ### Synapses:
 - Synapses.py: Equations for AMPA, NMDA, GABA_A, and GABA_B synapses.
 
-### Thalamocortical System:
+### Thalamocortical sub-systems:
 - Cortical_layer.py: Defines the cortical compartment, including pyramidal and interneurons, and their synapses.
 - Thalamus.py: Defines the thalamic compartment, including thalamic relay and reticular cells, and their synapses.
 
 ### Simulation:
-- Thalamo_cortical.py: Simulates the full model, allowing selection of neuron numbers and simulation duration. Data can be saved from this file.
-
+- Thalamo_cortical.py: Simulates the full model through the function thalamocortical_network(seed_value,analyze_speed,fig_number,raw_data,plot_figure) with: 
+    - analyze_speed (True/False) allows the user to compute the mean and std propagation speed of cortical up-states
+    - fig_number (str such as "9-A1","5" etc.) allows the user to run the simulation with the parameters necessary to reproduce a specific figure from the article
+    - raw_data (True/False) allows the user to select if raw data (.txt files) should be saved
+    - plot_figure (True/False) allows the user to plot the figure corresponding to the fig_number
 
 ## 4. Additional Files
-Code for plotting each figure is available in the ‘Figures’ folder on the GitHub repository. [Dataset 1](https://doi.org/10.5281/zenodo.13308394) generated from the present model and [Dataset 2](https://doi.org/10.5281/zenodo.13308394) generated from the original model are both accessible via Zenodo. After download, both folders should be placed in \Reynes_Aussel, alongside Figures and Model folders.
+Code for plotting figures 2, 3, 4 using Bazhenov et al. (2002) original data is available in the ‘Figures’ folder on the GitHub repository. [Dataset 1](https://doi.org/10.5281/zenodo.13308394) generated from the present model and [Dataset 2](https://doi.org/10.5281/zenodo.13308394) generated from the original model are both accessible via Zenodo. After download, both folders should be placed in \Reynes_Aussel, alongside Figures and Model folders.
 
 
 References
