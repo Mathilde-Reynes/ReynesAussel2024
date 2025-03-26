@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from brian2.units.constants import *
 import matplotlib.gridspec as gridspec
+import gc
 from Soma_eqs import *
 from Soma_eqs_exp import *
 from Dendritic_eqs import *
@@ -64,6 +65,7 @@ def thalamocortical_network(seed_value, analyze_speed, fig_number, raw_data, plo
     
     # Close all plots
     close('all')
+    start_scope()
     
     ### Standard parameters
     N = 100
@@ -76,7 +78,7 @@ def thalamocortical_network(seed_value, analyze_speed, fig_number, raw_data, plo
     g_syn_ampa_tcpy = 0.0001 * msiemens
     g_syn_ampa_tcin = 0.0001 * msiemens
     g_syn_ampa_pytc = 0.000025 * msiemens
-    g_syn_ampa_pyre = 0.00005 * msiemens
+    g_syn_ampa_pyre = 0.00005 * msiemens 
     
     # Areas of the different neurons
     s_Soma_PYIN = 10**-6 * cm**2
@@ -96,8 +98,8 @@ def thalamocortical_network(seed_value, analyze_speed, fig_number, raw_data, plo
     A_PY_IN = 0.000025*msiemens
     
     ### Creation of the substructures
-    net = Network(collect())
-    
+    net = Network()
+        
     print("Updating N and minis amplitudes before instantiating Thalamus & Cortical later for Figure n°: "+str(fig_number))
     A_PY_PY, A_PY_IN, N = figure_conditions_pre(str(fig_number),A_PY_PY, A_PY_IN, N)
     
@@ -135,6 +137,9 @@ def thalamocortical_network(seed_value, analyze_speed, fig_number, raw_data, plo
     S_AMPA_PY_TC = syn_ampa_thal(PY_soma, TC, 'IsynAMPA_PY_TC', s_TC,
                                  'abs(floor(i*'+str(N_TC)+'/'+str(N_PY)+') -j)<='+str(PY_TC)+'',
                                  g_syn_ampa_pytc) 
+    #In Brian2, i are the presynaptic neuron indices (PY) and j are the postsynaptic indices (TC).
+    #Here, we scale i by (N_TC / N_PY) using floor() to map PY neurons to TC neurons,
+    #ensuring each TC neuron receives input from nearby PY neurons within a defined range (PY_TC).
     S_AMPA_PY_TC.t_last_spike = -100 * ms
     net.add(S_AMPA_PY_TC)
     
@@ -200,6 +205,9 @@ def thalamocortical_network(seed_value, analyze_speed, fig_number, raw_data, plo
 
 ### Call the function to run the simulation
 if __name__ == "__main__":
+    gc.collect()
+    print("Forced garbage collection to free up memory")
+    print(f"Objects in memory: {len(gc.get_objects())}")
     print("Start")
     seed_value = 4168
     analyze_speed = False #True of False
@@ -207,5 +215,3 @@ if __name__ == "__main__":
     raw_data = False #True or False
     plot_figure = True #True or False
     thalamocortical_network(seed_value,analyze_speed,fig_number,raw_data,plot_figure)
-    #Should you wish to plot some data outside of the provided codes to plot the paper's figures, you can uncomment the following line and plot as you wish
-    #net, all_monitors_T, all_monitors = thalamocortical_network(see_value,analyze_speed,fig_number,rawdata)

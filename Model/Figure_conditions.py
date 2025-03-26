@@ -62,7 +62,7 @@ def figure_conditions(fig_number,all_synapses,all_synapses_T,all_neurons_T,all_n
     
     # Figure 5 
     if fig_number == "5" :
-        runtime = 30*second
+        runtime = 5*second #30
     else :
         runtime = 10*second
         

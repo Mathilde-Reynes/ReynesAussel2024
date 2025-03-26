@@ -212,7 +212,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         ax1 = plt.subplot(gs[0, 0])
         im1 = ax1.imshow(V2_PYs.v/mV, aspect='auto', cmap='YlGnBu', vmax=-60, vmin=-75, 
                      extent=[0, runtime, N-1, 0], interpolation='bicubic')
-        ax1.set_title('Conductance PY-IN = 0.02$\mu$S', size=30, loc='left')
+        ax1.set_title(r'Conductance PY-IN = 0.02$\mu$S', size=30, loc='left')
         ax1.set_ylabel('Neuron index', size=30, labelpad=30)
         ax1.set_xlim(0.1, 5.1)
         ax1.yaxis.set_major_locator(MultipleLocator(base=25))

@@ -95,6 +95,9 @@ def create_thalamic_subparts(N):
     
     ###Instantiate synapses
     S_GABAA_RE_TC = syn_gabaa_thal(RE,TC,'IsynGABAA_RE_TC',s_TC,'abs(i-j)<='+str(RE_TC)+'',g_syn_gabaa_retc,E_gabaa_RE_TC,alpha_gabaa_thal,beta_gabaa_thal)
+    #In brian2, i are the presynaptic neuron indices (RE) and j are the postsynaptic indices (TC)
+    #Here we connect neurons where the absolute index difference is ≤ RE_TC (abs(i - j) <= RE_TC),
+    #ensuring neurons only connect within a given range of indices and avoiding self-connections (i ≠ j)
     S_GABAA_RE_TC.t_last_spike = -1000*ms
     S_GABAB_RE_TC = syn_gabab(RE,TC,'IsynGABAB_RE_TC',s_TC,'abs(i-j)<='+str(RE_TC)+'') 
     S_GABAB_RE_TC.t_last_spike = -1000*ms

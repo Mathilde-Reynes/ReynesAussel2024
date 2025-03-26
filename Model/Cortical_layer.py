@@ -179,6 +179,9 @@ def create_cortical_layer(N,mini_form,A_PY_PY,A_PY_IN):
     ###Instantiate synapses
     #AMPA
     S_AMPA_PY_PY = syn_ampa(PY_soma,PY_dendrite,'IsynAMPA_PY_PY',s_Dend_PY,'abs(i-j)<='+str(PY_PY)+' and i!=j',g_syn_ampa_pypy,A_PY_PY,'IEPSPs_PY_PY',0)
+    #In brian2, i are the presynaptic neuron indices and j are the postsynaptic indices
+    #Here we connect neurons where the absolute index difference is ≤ PY_PY (abs(i - j) <= PY_PY),
+    #ensuring neurons only connect within a given range of indices and avoiding self-connections (i ≠ j)
     S_AMPA_PY_PY.t_last_spike = -1000*ms
     S_AMPA_PY_PY.t_last_spike_Poisson_PY = -100*ms
     S_AMPA_PY_PY.t_last_spike_Poisson_IN = -100*ms
