@@ -1,51 +1,51 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-#TC_eqs.ipy provides the equations to create the reticular cells of the thalamus.
+# TC_eqs.ipy provides the equations to create the reticular cells of the thalamus.
 
 from brian2 import *
 import numpy as np
 
 ###Parameters
 
-#Membrane capacitance per unit of surface
-Cm_RE = 1*ufarad/cm**2
+# Membrane capacitance per unit of surface
+Cm_RE = 1 * ufarad / cm**2
 
-#Conductances
-g_na_RE = 100*msiemens*cm**-2
-g_t_RE = 2.3*msiemens*cm**-2
-g_l_RE = 0.05*msiemens*cm**-2
-g_k_RE = 10*msiemens*cm**-2
+# Conductances
+g_na_RE = 100 * msiemens * cm**-2
+g_t_RE = 2.3 * msiemens * cm**-2
+g_l_RE = 0.05 * msiemens * cm**-2
+g_k_RE = 10 * msiemens * cm**-2
 
-#Reversal potentials
-E_kl = -95*mV
-E_l_TC = -70*mV
-E_l_RE = -77*mV
-E_na = 50*mV
-E_k_RE = -95*mV
-E_ca0 = 1000*8.31441*(273.15 + 36)/(2*96489)*mV #13.31*mV
+# Reversal potentials
+E_kl = -95 * mV
+E_l_TC = -70 * mV
+E_l_RE = -77 * mV
+E_na = 50 * mV
+E_k_RE = -95 * mV
+E_ca0 = 1000 * 8.31441 * (273.15 + 36) / (2 * 96489) * mV  # 13.31*mV
 
-#Calcium parameters
-tau_CA_RE = 5*ms
-A_RE = 5.1819E-5*(mM*cm**2)/(ms*uA)
-CA_inf = 2.4E-4*mM 
-CA_0 = 2*mM
+# Calcium parameters
+tau_CA_RE = 5 * ms
+A_RE = 5.1819e-5 * (mM * cm**2) / (ms * uA)
+CA_inf = 2.4e-4 * mM
+CA_0 = 2 * mM
 
-#Temperature-dependent variables 
+# Temperature-dependent variables
 T = 36
-Qm_RE = 5**((T-24)/10)
-Qh_RE = 3**((T-24)/10)
+Qm_RE = 5 ** ((T - 24) / 10)
+Qh_RE = 3 ** ((T - 24) / 10)
 Q = 2.3
-Qhyp = pow(3,((T-36)/10))
+Qhyp = pow(3, ((T - 36) / 10))
 
-#Shift in voltage
-Vtr_RE = -50*mV
-VtrK_RE = -50*mV
+# Shift in voltage
+Vtr_RE = -50 * mV
+VtrK_RE = -50 * mV
 
 
 ###Equations
 
-RE_eqs = '''
+RE_eqs = """
 
     dv/dt = (- I_kl - I_na - I_k - I_t - I_l - Isyn_RE + Iext) * (1/Cm_RE) : volt
     v2 = v - Vtr_RE : volt
@@ -95,4 +95,4 @@ RE_eqs = '''
         
     g_kl_RE : siemens * meter**-2
         
-    '''
+    """

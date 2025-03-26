@@ -6,34 +6,34 @@ from brian2 import *
 import numpy as np
 
 ###Parameters
-#Area
-s_soma = 10**-6*cm**2
-#Membrane capacitance per unit of surface
-Cm = 0.75*ufarad/cm**2 
-#Ion-specific conductances per unit of surface
-g_hva = 0.01*msiemens*cm**-2
-g_kca = 0.3*msiemens*cm**-2
-g_l = 0.033*msiemens*cm**-2
-#Ion-specific reversal potential
-E_na = 50*mV 
-E_k = -90*mV
-E_ca = 140*mV
-E_kl = -95*mV
-E_kca = -90*mV
-#Calcium constants
-CAinf = 2.4E-4*mM
-#Time constants
-tauCA = 165*ms
-tau_m_nap = 0.1991*ms
-#Other constants 
-Qt = pow(2.3,((36-23)/10))
-Tad = pow(2.3,((36-23)/10))
-Phi_m = pow(2.3,((36-23)/10))
+# Area
+s_soma = 10**-6 * cm**2
+# Membrane capacitance per unit of surface
+Cm = 0.75 * ufarad / cm**2
+# Ion-specific conductances per unit of surface
+g_hva = 0.01 * msiemens * cm**-2
+g_kca = 0.3 * msiemens * cm**-2
+g_l = 0.033 * msiemens * cm**-2
+# Ion-specific reversal potential
+E_na = 50 * mV
+E_k = -90 * mV
+E_ca = 140 * mV
+E_kl = -95 * mV
+E_kca = -90 * mV
+# Calcium constants
+CAinf = 2.4e-4 * mM
+# Time constants
+tauCA = 165 * ms
+tau_m_nap = 0.1991 * ms
+# Other constants
+Qt = pow(2.3, ((36 - 23) / 10))
+Tad = pow(2.3, ((36 - 23) / 10))
+Phi_m = pow(2.3, ((36 - 23) / 10))
 
 
 ###Equations
 
-Dendritic_eqs = '''
+Dendritic_eqs = """
 
     dv/dt = (- I_kl - I_na - I_nap - I_km - I_kca - I_hva - I_l - Isyn - Igap - IEPSPs + Iext) * (1/Cm)  : volt 
    
@@ -121,4 +121,4 @@ Dendritic_eqs = '''
     
     E_l : volt 
 
-    '''
+    """

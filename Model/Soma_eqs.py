@@ -5,28 +5,28 @@ from brian2 import *
 
 ###Parameters
 
-#Area
-s_soma = 10**-6*cm**2
+# Area
+s_soma = 10**-6 * cm**2
 
-#Time constants
-tau_m_nap = 0.1991*ms
+# Time constants
+tau_m_nap = 0.1991 * ms
 
-#Ion-specific reversal potential
-E_na = 50*mV
-E_k = -90*mV
+# Ion-specific reversal potential
+E_na = 50 * mV
+E_k = -90 * mV
 
-#Other constants 
-Qt = pow(2.3,((36-23)/10))
-Tad = pow(2.3,((36-23)/10))
-Phi_m = pow(2.3,((36-23)/10))
+# Other constants
+Qt = pow(2.3, ((36 - 23) / 10))
+Tad = pow(2.3, ((36 - 23) / 10))
+Phi_m = pow(2.3, ((36 - 23) / 10))
 
-#Somatic and dendritic compartments
+# Somatic and dendritic compartments
 R = 10 * Mohm
 g_ds = 1 / (R * s_soma)
 
 ###Equations
 
-Soma_eqs = '''
+Soma_eqs = """
 
     v = -68*mV*init_timestep + truev*(1-init_timestep) : volt
     init_timestep = init_timedarray(t) : 1
@@ -78,4 +78,4 @@ Soma_eqs = '''
     mean_rate_GABAA = (log((t-t_last_spike_IN + 50*ms)/(50*ms))/400*kHz)*int((t-t_last_spike_IN)>70*ms) : Hz
      
 
-    '''
+    """

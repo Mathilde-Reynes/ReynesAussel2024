@@ -1,64 +1,64 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-#TC_eqs.ipy provides the equations to create the thalamic relay cells of the thalamus.
+# TC_eqs.ipy provides the equations to create the thalamic relay cells of the thalamus.
 
 from brian2 import *
 import numpy as np
 
 ###Parameters
 
-#Membrane capacitance per 2unit of surface
-Cm_TC = 1*ufarad/cm**2
+# Membrane capacitance per 2unit of surface
+Cm_TC = 1 * ufarad / cm**2
 
-#Conductances
-g_na_TC = 90*msiemens*cm**-2 
-g_t_TC = 2.2*msiemens*cm**-2 
-g_l_TC = 0.01*msiemens*cm**-2
-g_k_TC = 12*msiemens*cm**-2
-g_h = 0.017*msiemens*cm**-2 
-g_a = 0*msiemens*cm**-2 
+# Conductances
+g_na_TC = 90 * msiemens * cm**-2
+g_t_TC = 2.2 * msiemens * cm**-2
+g_l_TC = 0.01 * msiemens * cm**-2
+g_k_TC = 12 * msiemens * cm**-2
+g_h = 0.017 * msiemens * cm**-2
+g_a = 0 * msiemens * cm**-2
 
-#Reversal potentials
-E_kl = -95*mV
-E_l_TC = -70*mV
-E_h = -40*mV
-E_na = 50*mV
-E_k_TC = -95*mV
-E_ca0 = 1000*8.31441*(273.15 + 36)/(2*96489)*mV #13.31*mV approx
+# Reversal potentials
+E_kl = -95 * mV
+E_l_TC = -70 * mV
+E_h = -40 * mV
+E_na = 50 * mV
+E_k_TC = -95 * mV
+E_ca0 = 1000 * 8.31441 * (273.15 + 36) / (2 * 96489) * mV  # 13.31*mV approx
 
-#Calcium parameters
-tau_CA_TC = 5*ms
-A_TC = 5.1819E-5*(mM*cm**2)/(ms*uA)
-CA_inf = 2.4E-4*mM 
-CA_0 = 2*mM #unit was found in Vijayan and Kopell 10.1073/pnas.1215385109
+# Calcium parameters
+tau_CA_TC = 5 * ms
+A_TC = 5.1819e-5 * (mM * cm**2) / (ms * uA)
+CA_inf = 2.4e-4 * mM
+CA_0 = 2 * mM  # unit was found in Vijayan and Kopell 10.1073/pnas.1215385109
 
-#Temperature-dependent variables 
+# Temperature-dependent variables
 T = 36
-Qm_TC = 3.55**((T-24)/10)
-Qh_TC = 3**((T-24)/10)
-Qhyp = pow(3,((T-36)/10))
-Tad = pow(3,((T-23.5)/10))
+Qm_TC = 3.55 ** ((T - 24) / 10)
+Qh_TC = 3 ** ((T - 24) / 10)
+Qhyp = pow(3, ((T - 36) / 10))
+Tad = pow(3, ((T - 23.5) / 10))
 
-#Rates for open and close channels dynamics
+# Rates for open and close channels dynamics
 k = 2
-k1 = 7.9012E7*(mM**-4)*ms**-1
-k2 = 0.0004*ms**-1 
-k3 = 0.1*ms**-1
-k4 = 0.001*ms**-1
+k1 = 7.9012e7 * (mM**-4) * ms**-1
+k2 = 0.0004 * ms**-1
+k3 = 0.1 * ms**-1
+k4 = 0.001 * ms**-1
 
-#ModelDB parameters
-cac=0.0015*mM
-pc=0.007
+# ModelDB parameters
+cac = 0.0015 * mM
+pc = 0.007
 
-#Parameters to match modelDB
-Vtr_TC= -40*mV
-VtrK_TC= -25*mV
+# Parameters to match modelDB
+Vtr_TC = -40 * mV
+VtrK_TC = -25 * mV
 
 
 ###Equations
 
-TC_eqs = '''
+TC_eqs = """
     
     dv/dt = (- I_kl - I_na - I_k - I_t - I_l - I_h - I_a - Isyn_TC + Iext) * (1/Cm_TC) : volt
     v2 = v - Vtr_TC : volt
@@ -139,4 +139,4 @@ TC_eqs = '''
     
     g_kl_TC : siemens * meter**-2
     
-    '''
+    """
