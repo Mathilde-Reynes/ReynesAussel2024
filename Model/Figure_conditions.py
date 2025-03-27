@@ -73,9 +73,12 @@ def figure_conditions(
 
     # Figure 5
     if fig_number == "5":
-        runtime = 5 * second  # 30
+        runtime = 30 * second  # 30
     else:
         runtime = 10 * second
+        print(
+            "As the fig_number provided was not recognized, a 10-seconds simulation with standard parameters will run (as per done for figure 5). For reference, possible fig_number are: 5, 7, 8, 9-A1, 9-A2, 9-A3, 9-B1, 9-B2, 9-B3, 10-1, 10-2, 10-3, 11-1, 11-2, 12-A1, 12-A2, 12-B1, 12-B2, 13-A, 13-B, 14, 15-A, 15-B, 15-C, 15-D, 16-A1, 16-A2, 16-A3, 16-A4, 16-B1, 16-B2, 16-B3, 16-B5, 16-B4, 16-B6, 16-B7, 17-A1, 17-A2, 17-A3, 18-A1, 18-A2, 18-A3, 17-B1, 17-B2, 17-B3, 18-B1, 18-B2, 18-B3, 19, S1, S2, S3-A1, S3-A2, S3-A3, S3-A4, S3-B1, S3-B2, S3-B3, S3-B4, S3-B5, S3-B6, S3-B7"
+        )
 
     # Figure 7
     if fig_number == "7":

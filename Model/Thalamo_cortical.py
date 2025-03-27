@@ -285,7 +285,6 @@ def thalamocortical_network(seed_value, analyze_speed, fig_number, raw_data, plo
 if __name__ == "__main__":
     gc.collect()
     print("Forced garbage collection to free up memory")
-    print(f"Objects in memory: {len(gc.get_objects())}")
     print("Start")
     seed_value = 4168
     analyze_speed = False  # True of False

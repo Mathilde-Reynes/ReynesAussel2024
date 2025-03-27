@@ -63,7 +63,7 @@ V_TC = StateMonitor(Bazhenov_TC,('v','IsynAMPA_PY_TC'),record=True)
 run(simulation_time, report='text',report_period=60*second)
 
 a, b = 'Present model', 'Original model'
-alphaa, linea, lineb = 0.60, 1.5, 1.3
+alphaa, linea, lineb = 0.8, 1.8, 1.8
 fig, ax = plt.subplots(3, 1, sharex=True, figsize=(15, 15))
 
 def configure_axis(axis, title, ylabel, y_major_locator_base, beg, end, show_legend=False):
@@ -79,14 +79,14 @@ def configure_axis(axis, title, ylabel, y_major_locator_base, beg, end, show_leg
     if show_legend:
         axis.legend(loc="upper right", fontsize=23)
 
-ax[0].plot(time_bazhenov_s,v_PY_soma_bazhenov[:int((simulation_time/0.02)/ms),50], color="black", linewidth=lineb)
+ax[0].plot(time_bazhenov_s,v_PY_soma_bazhenov[:int((simulation_time/0.02)/ms),50], color="black", linewidth=1.3)
 configure_axis(ax[0], 'Membrane potential of axosomatic compartment', 'mV', 25, 5, 6)
 #
-ax[1].plot(time_bazhenov_s,v_TC_bazhenov[:int((simulation_time/0.02)/ms),25], color="black", linewidth=lineb)
+ax[1].plot(time_bazhenov_s,v_TC_bazhenov[:int((simulation_time/0.02)/ms),25], color="black", linewidth=1.3)
 configure_axis(ax[1], 'Membrane potential of thalamic relay cell', 'mV', 25, 5, 6, show_legend=True)
 #
-ax[2].plot(V_TC.t/second,V_TC.IsynAMPA_PY_TC[0]/(20*0.01*amp*meter**-2), label=a, color="#2A52BE", linewidth=linea) #Normalize by 20 (which is the number of incoming synapses in the model of Bazhenov but is not taking into account here as brian consider N_income = 1 in that test scenario)
-ax[2].plot(time_bazhenov_s,a_CX_TC_bazhenov[:int((simulation_time/0.02)/ms)], label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[2].plot(V_TC.t/second,V_TC.IsynAMPA_PY_TC[0]/(20*0.01*amp*meter**-2), label=a, color="#4B9CD3", linewidth=linea) #Normalize by 20 (which is the number of incoming synapses in the model of Bazhenov but is not taking into account here as brian consider N_income = 1 in that test scenario)
+ax[2].plot(time_bazhenov_s,a_CX_TC_bazhenov[:int((simulation_time/0.02)/ms)], label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[2], 'AMPA mediated synapse from PY to TC', 'mA/cm²', 0.02, 5, 6, show_legend=True)
 ax[2].set_xlabel('Time (s)', size=30, labelpad=25)
 #
@@ -95,14 +95,14 @@ plt.show()
 
 
 fig, ax = plt.subplots(3, 1, sharex=True, figsize=(15, 15))
-ax[0].plot(time_bazhenov_s,v_PY_soma_bazhenov[:int((simulation_time/0.02)/ms),50], color="black", linewidth=lineb)
+ax[0].plot(time_bazhenov_s,v_PY_soma_bazhenov[:int((simulation_time/0.02)/ms),50], color="black", linewidth=1.3)
 configure_axis(ax[0], 'Membrane potential of axosomatic compartment', 'mV', 25, 5.230, 5.236)
 #
-ax[1].plot(time_bazhenov_s,v_TC_bazhenov[:int((simulation_time/0.02)/ms),25], color="black", linewidth=lineb)
+ax[1].plot(time_bazhenov_s,v_TC_bazhenov[:int((simulation_time/0.02)/ms),25], color="black", linewidth=1.3)
 configure_axis(ax[1], 'Membrane potential of thalamic relay cell','mV', 25, 5.230, 5.236, show_legend=True)
 #
-ax[2].plot(V_TC.t/second,V_TC.IsynAMPA_PY_TC[0]/(20*0.01*amp*meter**-2), label=a, color="#2A52BE", linewidth=linea)
-ax[2].plot(time_bazhenov_s,a_CX_TC_bazhenov[:int((simulation_time/0.02)/ms)], label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[2].plot(V_TC.t/second,V_TC.IsynAMPA_PY_TC[0]/(20*0.01*amp*meter**-2), label=a, color="#4B9CD3", linewidth=linea)
+ax[2].plot(time_bazhenov_s,a_CX_TC_bazhenov[:int((simulation_time/0.02)/ms)], label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[2], 'AMPA mediated synapse from PY to TC', 'mA/cm²', 0.02, 5.230, 5.236, show_legend=True)
 ax[2].set_xlabel('Time (s)', size=30, labelpad=25)
 #

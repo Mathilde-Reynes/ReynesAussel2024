@@ -6,23 +6,23 @@ from matplotlib.ticker import MultipleLocator
 
 simulation_time=6000*ms
 
-v_bazhenov=genfromtxt('../../Data/v_TC')
-Ik_bazhenov=genfromtxt('../../Data/I_k_TC')[:,15]
-Ina_bazhenov=genfromtxt('../../Data/I_na_TC')[:,15]
-It_bazhenov=genfromtxt('../../Data/I_t_TC')[:,15]
-Ih_bazhenov=genfromtxt('../../Data/I_h_TC')[:,15]
-Il_bazhenov=genfromtxt('../../Data/I_l_TC')[:,15]
-Ikl_bazhenov=genfromtxt('../../Data/I_kl_TC')[:,15]
-hna_bazhenov=genfromtxt('../../Data/h_na_TC')[:,15]
-mna_bazhenov=genfromtxt('../../Data/m_na_TC')[:,15]
-mnainf_bazhenov=genfromtxt('../../Data/m_inf_na_tc')[:,15]
-hnainf_bazhenov=genfromtxt('../../Data/h_inf_na_tc')[:,15]
-taumna_bazhenov=genfromtxt('../../Data/tau_m_na_tc')[:,15]
-tauhna_bazhenov=genfromtxt('../../Data/tau_h_na_tc')[:,15]
-alphamna_bazhenov=genfromtxt('../../Data/alpha_m_TC')[:,15]
-alphahna_bazhenov=genfromtxt('../../Data/alpha_h_TC')[:,15]
-betamna_bazhenov=genfromtxt('../../Data/beta_m_TC')[:,15]
-betahna_bazhenov=genfromtxt('../../Data/beta_h_TC')[:,15]
+v_bazhenov=genfromtxt('../../Data_bazhenov/v_TC')
+Ik_bazhenov=genfromtxt('../../Data_bazhenov/I_k_TC')[:,15]
+Ina_bazhenov=genfromtxt('../../Data_bazhenov/I_na_TC')[:,15]
+It_bazhenov=genfromtxt('../../Data_bazhenov/I_t_TC')[:,15]
+Ih_bazhenov=genfromtxt('../../Data_bazhenov/I_h_TC')[:,15]
+Il_bazhenov=genfromtxt('../../Data_bazhenov/I_l_TC')[:,15]
+Ikl_bazhenov=genfromtxt('../../Data_bazhenov/I_kl_TC')[:,15]
+hna_bazhenov=genfromtxt('../../Data_bazhenov/h_na_TC')[:,15]
+mna_bazhenov=genfromtxt('../../Data_bazhenov/m_na_TC')[:,15]
+mnainf_bazhenov=genfromtxt('../../Data_bazhenov/m_inf_na_tc')[:,15]
+hnainf_bazhenov=genfromtxt('../../Data_bazhenov/h_inf_na_tc')[:,15]
+taumna_bazhenov=genfromtxt('../../Data_bazhenov/tau_m_na_tc')[:,15]
+tauhna_bazhenov=genfromtxt('../../Data_bazhenov/tau_h_na_tc')[:,15]
+alphamna_bazhenov=genfromtxt('../../Data_bazhenov/alpha_m_TC')[:,15]
+alphahna_bazhenov=genfromtxt('../../Data_bazhenov/alpha_h_TC')[:,15]
+betamna_bazhenov=genfromtxt('../../Data_bazhenov/beta_m_TC')[:,15]
+betahna_bazhenov=genfromtxt('../../Data_bazhenov/beta_h_TC')[:,15]
 
 time_bazhenov=arange(0,int(simulation_time/ms),0.02)
 array_v_bazhenov=TimedArray(v_bazhenov[:,15],0.02*ms)
@@ -195,7 +195,7 @@ run(simulation_time, report='text',report_period=180*second)
 # Figure 3A
 
 a, b = 'Present model', 'Original model'
-alphaa, linea, lineb = 0.60, 1.5, 1.3
+alphaa, linea, lineb = 0.6, 1.8, 1.8
 
 def configure_axis(axis, title, ylabel, y_major_locator_base, beg, end, show_legend=False):
     axis.set_title(title, size=35, loc='left')
@@ -211,31 +211,31 @@ def configure_axis(axis, title, ylabel, y_major_locator_base, beg, end, show_leg
         axis.legend(loc="upper right", fontsize=23)
 
 fig, ax = plt.subplots(7, 1, sharex=True, figsize=(15, 30))
-ax[0].plot(time_bazhenov, v_bazhenov[:int((simulation_time / 0.02) / ms), 15], color="black", linewidth=lineb)
+ax[0].plot(time_bazhenov, v_bazhenov[:int((simulation_time / 0.02) / ms), 15], color="black", linewidth=1.5)
 configure_axis(ax[0], 'Membrane potential used for computations', 'mV', 25, 0, 3000)
 #
-ax[1].plot(V1.t / ms, V1.I_na[0] / (10 * amp * meter**-2), label=a, color="#2A52BE", linewidth=linea)
-ax[1].plot(time_bazhenov, Ina_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#4B9CD3", alpha=alphaa, linewidth=lineb)
+ax[1].plot(V1.t / ms, V1.I_na[0] / (10 * amp * meter**-2), label=a, color="#4B9CD3", linewidth=1.5)
+ax[1].plot(time_bazhenov, Ina_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#d0db61", alpha=alphaa, linewidth=lineb)
 configure_axis(ax[1], 'Fast sodium current, $I_{Na}$', 'mA/cm²', 0.25, 0, 3000, show_legend=True)
 #
-ax[2].plot(V1.t / ms, V1.I_k[0] / (10 * amp * meter**-2), label=a, color="#2A52BE", linewidth=linea)
-ax[2].plot(time_bazhenov, Ik_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[2].plot(V1.t / ms, V1.I_k[0] / (10 * amp * meter**-2), label=a, color="#4B9CD3", linewidth=1.5)
+ax[2].plot(time_bazhenov, Ik_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[2], 'Fast potassium current, $I_{K}$', 'mA/cm²', 0.10, 0, 3000, show_legend=True)
 #
-ax[3].plot(V1.t / ms, V1.I_t[0] / (10 * amp * meter**-2), label=a, color="#2A52BE", linewidth=linea)
-ax[3].plot(time_bazhenov, It_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[3].plot(V1.t / ms, V1.I_t[0] / (10 * amp * meter**-2), label=a, color="#4B9CD3", linewidth=1.5)
+ax[3].plot(time_bazhenov, It_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[3], 'Low threshold calcium current, $I_{t}$', 'mA/cm²', 0.005, 0, 3000, show_legend=True)
 #
-ax[4].plot(V1.t / ms, V1.I_h[0] / (10 * amp * meter**-2), label=a, color="#2A52BE", linewidth=linea)
-ax[4].plot(time_bazhenov, Ih_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[4].plot(V1.t / ms, V1.I_h[0] / (10 * amp * meter**-2), label=a, color="#4B9CD3", linewidth=1.5)
+ax[4].plot(time_bazhenov, Ih_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[4], 'Hyperpolarization activated cation current, $I_{h}$', 'mA/cm²', 0.0005, 0, 3000, show_legend=True)
 #
-ax[5].plot(V1.t / ms, V1.I_kl[0] / (10 * amp * meter**-2), label=a, color="#2A52BE", linewidth=linea)
-ax[5].plot(time_bazhenov, -Ikl_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[5].plot(V1.t / ms, V1.I_kl[0] / (10 * amp * meter**-2), label=a, color="#4B9CD3", linewidth=1.5)
+ax[5].plot(time_bazhenov, -Ikl_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[5], 'Potassium leak current, $I_{Kl}$', 'mA/cm²', 0.002, 0, 3000, show_legend=True)
 #
-ax[6].plot(V1.t / ms, V1.I_l[0] / (10 * amp * meter**-2), label=a, color="#2A52BE", linewidth=linea)
-ax[6].plot(time_bazhenov, -Il_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[6].plot(V1.t / ms, V1.I_l[0] / (10 * amp * meter**-2), label=a, color="#4B9CD3", linewidth=1.5)
+ax[6].plot(time_bazhenov, -Il_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[6], 'Leak current, $I_{L}$', 'mA/cm²', 0.0005, 0, 3000, show_legend=True)
 ax[6].set_xlabel('Time (ms)', size=30, labelpad=25)
 #
@@ -244,19 +244,19 @@ plt.show()
 
 # Figure 3B
 fig, ax = plt.subplots(4, 1, sharex=True, figsize=(15, 25))
-ax[0].plot(time_bazhenov, v_bazhenov[:int((simulation_time / 0.02) / ms), 15], color="black", linewidth=lineb)
+ax[0].plot(time_bazhenov, v_bazhenov[:int((simulation_time / 0.02) / ms), 15], color="black", linewidth=1.5)
 configure_axis(ax[0], 'Membrane potential used for computations', 'mV', 25, 0, 500)
 #
-ax[1].plot(V1.t / ms, V1.I_na[0] / (10 * amp * meter**-2), label=a, color="#2A52BE", linewidth=linea)
-ax[1].plot(time_bazhenov, Ina_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#4B9CD3", alpha=alphaa, linewidth=lineb)
+ax[1].plot(V1.t / ms, V1.I_na[0] / (10 * amp * meter**-2), label=a, color="#4B9CD3", linewidth=linea)
+ax[1].plot(time_bazhenov, Ina_bazhenov[:int((simulation_time / 0.02) / ms)] / 1000, label=b, color="#d0db61", alpha=alphaa, linewidth=lineb)
 configure_axis(ax[1], 'Fast sodium current, $I_{Na}$', 'nA/nm²', 0.25, 1312, 1314, show_legend=True)
 #
-ax[2].plot(V1.t / ms, V1.m_na[0], label=a, color="#2A52BE", linewidth=linea)
-ax[2].plot(time_bazhenov, mna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[2].plot(V1.t / ms, V1.m_na[0], label=a, color="#4B9CD3", linewidth=linea)
+ax[2].plot(time_bazhenov, mna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[2], 'Activation gating variable, $m$', '', 0.5, 1312, 1314, show_legend=True)
 #
-ax[3].plot(V1.t / ms, V1.h_na[0], label=a, color="#2A52BE", linewidth=linea)
-ax[3].plot(time_bazhenov, hna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[3].plot(V1.t / ms, V1.h_na[0], label=a, color="#4B9CD3", linewidth=linea)
+ax[3].plot(time_bazhenov, hna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[3], 'Inactivation gating variable, $h$', '', 0.5, 1312, 1314, show_legend=True)
 ax[3].set_xlabel('Time (ms)', size=30, labelpad=25)
 ax[3].xaxis.set_major_locator(MultipleLocator(0.5))
@@ -267,20 +267,20 @@ plt.show()
 # Figure 3C
 fig, ax = plt.subplots(4, 1, sharex=True, figsize=(15, 25))
 #
-ax[0].plot(V1.t / ms, (V1.alpham_na[0])/1000, label=a, color="#2A52BE", linewidth=linea)
-ax[0].plot(time_bazhenov, alphamna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[0].plot(V1.t / ms, (V1.alpham_na[0])/1000, label=a, color="#4B9CD3", linewidth=1.5)
+ax[0].plot(time_bazhenov, alphamna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[0], r'$\alpha_m$', 'kHz', 5, 1312, 1314, show_legend=True)
 #
-ax[1].plot(V1.t / ms, (V1.betam_na[0])/1000, label=a, color="#2A52BE", linewidth=linea)
-ax[1].plot(time_bazhenov, betamna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[1].plot(V1.t / ms, (V1.betam_na[0])/1000, label=a, color="#4B9CD3", linewidth=linea)
+ax[1].plot(time_bazhenov, betamna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[1], r'$\beta_m$', 'kHz', 5, 1312, 1314, show_legend=True)
 #
-ax[2].plot(V1.t / ms, (V1.tau_m_na[0])/0.001, label=a, color="#2A52BE", linewidth=linea)
-ax[2].plot(time_bazhenov, taumna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[2].plot(V1.t / ms, (V1.tau_m_na[0])/0.001, label=a, color="#4B9CD3", linewidth=linea)
+ax[2].plot(time_bazhenov, taumna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[2], r'$\tau_m$', 'ms', 0.02, 1312, 1314, show_legend=True)
 #
-ax[3].plot(V1.t / ms, V1.mna_inf[0], label=a, color="#2A52BE", linewidth=linea)
-ax[3].plot(time_bazhenov, mnainf_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[3].plot(V1.t / ms, V1.mna_inf[0], label=a, color="#4B9CD3", linewidth=linea)
+ax[3].plot(time_bazhenov, mnainf_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[3], r'$m \infty$', '', 0.5, 1312, 1314, show_legend=True)
 ax[3].set_xlabel('Time (ms)', size=30, labelpad=25)
 ax[3].xaxis.set_major_locator(MultipleLocator(0.5))
@@ -291,20 +291,20 @@ plt.show()
 # Figure 3D
 fig, ax = plt.subplots(4, 1, sharex=True, figsize=(15, 25))
 #
-ax[0].plot(V1.t / ms, (V1.alphah_na[0])/1000, label=a, color="#2A52BE", linewidth=linea)
-ax[0].plot(time_bazhenov, alphahna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[0].plot(V1.t / ms, (V1.alphah_na[0])/1000, label=a, color="#4B9CD3", linewidth=1.5)
+ax[0].plot(time_bazhenov, alphahna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[0], r'$\alpha_h$', 'kHz', 1, 1312, 1314, show_legend=True)
 #
-ax[1].plot(V1.t / ms, (V1.betah_na[0])/1000, label=a, color="#2A52BE", linewidth=linea)
-ax[1].plot(time_bazhenov, betahna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[1].plot(V1.t / ms, (V1.betah_na[0])/1000, label=a, color="#4B9CD3", linewidth=linea)
+ax[1].plot(time_bazhenov, betahna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[1], r'$\beta_h$', 'kHz', 1, 1312, 1314, show_legend=True)
 #
-ax[2].plot(V1.t / ms, (V1.tau_h_na[0])/0.001, label=a, color="#2A52BE", linewidth=linea)
-ax[2].plot(time_bazhenov, tauhna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[2].plot(V1.t / ms, (V1.tau_h_na[0])/0.001, label=a, color="#4B9CD3", linewidth=linea)
+ax[2].plot(time_bazhenov, tauhna_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[2], r'$\tau_h$', 'ms', 2, 1312, 1314, show_legend=True)
 #
-ax[3].plot(V1.t / ms, V1.hna_inf[0], label=a, color="#2A52BE", linewidth=linea)
-ax[3].plot(time_bazhenov, hnainf_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#4B9CD3", linewidth=lineb, alpha=alphaa)
+ax[3].plot(V1.t / ms, V1.hna_inf[0], label=a, color="#4B9CD3", linewidth=linea)
+ax[3].plot(time_bazhenov, hnainf_bazhenov[:int((simulation_time / 0.02) / ms)], label=b, color="#d0db61", linewidth=lineb, alpha=alphaa)
 configure_axis(ax[3], r'$h \infty$', '', 0.5, 1312, 1314, show_legend=True)
 ax[3].set_xlabel('Time (ms)', size=30, labelpad=25)
 ax[3].xaxis.set_major_locator(MultipleLocator(0.5))
