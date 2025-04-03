@@ -22,14 +22,14 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         if not os.path.exists(folder_name):
             os.makedirs(folder_name)
         try:
-            np.savetxt(os.path.join(folder_name, "PY_raster.txt"), R2_PYs.i)
-            np.savetxt(os.path.join(folder_name, "TC_raster.txt"), R2_TC.i)
+            np.savetxt(os.path.join(folder_name, "PYs_v.txt"), V2_PYs.v / mV)
+            np.savetxt(os.path.join(folder_name, "TC_v.txt"), V2_TC.v / mV)
             print(f"Raw data saved to {os.path.abspath(folder_name)}")
         except Exception as e:
             print(f"Error saving raw data: {e}")
 
     # Figure 7
-    if fig_number == "7":
+    elif fig_number == "7":
         folder_name = f"Figure {fig_number}"
         if not os.path.exists(folder_name):
             os.makedirs(folder_name)
@@ -42,7 +42,7 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         print(f"Raw data saved to {os.path.abspath(folder_name)}")
 
     # Figure 8
-    if fig_number == "8":
+    elif fig_number == "8":
         folder_name = f"Figure {fig_number}"
         if not os.path.exists(folder_name):
             os.makedirs(folder_name)
@@ -58,7 +58,7 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         print(f"Raw data saved to {os.path.abspath(folder_name)}")
 
     # Figure 9/10/11/19
-    if fig_number in [
+    elif fig_number in [
         "9-A1",
         "9-A2",
         "9-A3",
@@ -79,7 +79,7 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         print(f"Raw data saved to {os.path.abspath(folder_name)}")
 
     # Figure 12/13
-    if fig_number in ["12-A1", "12-A2", "13-A", "13-B"]:
+    elif fig_number in ["12-A1", "12-A2", "13-A", "13-B"]:
         folder_name = f"Figure {fig_number}"
         if not os.path.exists(folder_name):
             os.makedirs(folder_name)
@@ -88,7 +88,7 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         print(f"Raw data saved to {os.path.abspath(folder_name)}")
 
     # Figure 14
-    if fig_number == "14":
+    elif fig_number == "14":
         folder_name = f"Figure {fig_number}"
         if not os.path.exists(folder_name):
             os.makedirs(folder_name)
@@ -100,7 +100,7 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         print(f"Raw data saved to {os.path.abspath(folder_name)}")
 
     # Figure 15
-    if fig_number in ["15-A", "15-B", "15-C", "15-D"]:
+    elif fig_number in ["15-A", "15-B", "15-C", "15-D"]:
         folder_name = f"Figure {fig_number}"
         if not os.path.exists(folder_name):
             os.makedirs(folder_name)
@@ -110,7 +110,7 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         print(f"Raw data saved to {os.path.abspath(folder_name)}")
 
     # Figure 16/S3
-    if fig_number in [
+    elif fig_number in [
         "16-A1",
         "16-A2",
         "16-A3",
@@ -130,7 +130,7 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         print(f"Raw data saved to {os.path.abspath(folder_name)}")
 
     # Figure 17/18
-    if fig_number in [
+    elif fig_number in [
         "17-A1",
         "18-A1",
         "17-A2",
@@ -156,7 +156,7 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         print(f"Raw data saved to {os.path.abspath(folder_name)}")
 
     # S1
-    if fig_number == "S1":
+    elif fig_number == "S1":
         folder_name = f"Figure {fig_number}"
         if not os.path.exists(folder_name):
             os.makedirs(folder_name)
@@ -167,7 +167,7 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         print(f"Raw data saved to {os.path.abspath(folder_name)}")
 
     # S2
-    if fig_number == "S2":
+    elif fig_number == "S2":
         folder_name = f"Figure {fig_number}"
         if not os.path.exists(folder_name):
             os.makedirs(folder_name)
@@ -176,3 +176,18 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         savetxt(os.path.join(folder_name, "PYd_v.txt"), V1_PYd.v / mV)
         savetxt(os.path.join(folder_name, "INd_v.txt"), V3_INd.v / mV)
         print(f"Raw data saved to {os.path.abspath(folder_name)}")
+
+    # S4
+    elif fig_number in ["S4-B", "S4-C", "S4-D", "S4-E"]:
+        folder_name = f"Figure {fig_number}"
+        if not os.path.exists(folder_name):
+            os.makedirs(folder_name)
+        try:
+            np.savetxt(os.path.join(folder_name, "PYs_v.txt"), V2_PYs.v / mV)
+            np.savetxt(os.path.join(folder_name, "TC_v.txt"), V2_TC.v / mV)
+            print(f"Raw data saved to {os.path.abspath(folder_name)}")
+        except Exception as e:
+            print(f"Error saving raw data: {e}")
+
+    else:
+        None

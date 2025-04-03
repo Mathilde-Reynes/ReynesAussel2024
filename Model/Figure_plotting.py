@@ -57,7 +57,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         plt.show()
 
     # Figure 7
-    if fig_number == "7":
+    elif fig_number == "7":
         fig, ax = subplots(4, 1, sharex=True, figsize=(19, 18))
         ax[0].plot(V2_PYs.t, V2_PYs.v[N // 2] / mV, color="tab:blue", linewidth=1.5)
         ax[0].set_title("PY", size=30, loc="left")
@@ -104,7 +104,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         plt.show()
 
     # Figure 8
-    if fig_number == "8":
+    elif fig_number == "8":
         n_start = 25
         fig, ax = subplots(7, 1, sharex=True, figsize=(19, 34))
         ax[0].plot(V2_PYs.t / ms, V2_PYs.v[n_start - 4] / mV, linewidth=0.4, color="tab:blue", alpha=0.6)
@@ -254,7 +254,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         fig.tight_layout()
 
     # Figure 9&11
-    if fig_number in ["9-A1", "9-A2", "9-A3", "9-B1", "9-B2", "9-B3", "11-1", "11-2"]:
+    elif fig_number in ["9-A1", "9-A2", "9-A3", "9-B1", "9-B2", "9-B3", "11-1", "11-2"]:
         fig, ax = plt.subplots(figsize=(15, 5))
         ax.plot(V2_PYs.t, V2_PYs.v[N // 2] / mV, color="tab:blue", linewidth=1.5)
         ax.set_title(f"PY N={N}", size=35, loc="left")
@@ -269,7 +269,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         plt.show()
 
     # Figure 10
-    if fig_number in ["10-1", "10-2", "10-3"]:
+    elif fig_number in ["10-1", "10-2", "10-3"]:
         fig, ax = plt.subplots(figsize=(15, 5))
         ax.plot(V2_PYs.t, V2_PYs.v[N // 2] / mV, color="tab:blue", linewidth=1.5)
         ax.set_title("PY", size=35, loc="left")
@@ -284,14 +284,14 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         plt.show()
 
     # Figure 12
-    if fig_number in ["12-A1", "12-A2"]:
+    elif fig_number in ["12-A1", "12-A2"]:
         fig = plt.figure(figsize=(15, 12))
         gs = gridspec.GridSpec(2, 2, width_ratios=[20, 0.5], height_ratios=[1, 1], wspace=0.05, hspace=0.3)
         ax1 = plt.subplot(gs[0, 0])
         im1 = ax1.imshow(
             V2_PYs.v / mV,
             aspect="auto",
-            cmap="YlGnBu",
+            cmap="Greys",
             vmax=-60,
             vmin=-75,
             extent=[0, runtime, N - 1, 0],
@@ -299,6 +299,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         )
         ax1.set_title(r"Conductance PY-IN = 0.02$\mu$S", size=30, loc="left")
         ax1.set_ylabel("Neuron index", size=30, labelpad=30)
+        ax1.set_xlabel("Time (s)", size=30, labelpad=30)
         ax1.set_xlim(0.1, 5.1)
         ax1.yaxis.set_major_locator(MultipleLocator(base=25))
         ax1.tick_params(axis="both", which="major", labelsize=25, width=2)
@@ -309,7 +310,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         plt.show()
 
     # Figure 13
-    if fig_number in ["13-A", "13-B"]:
+    elif fig_number in ["13-A", "13-B"]:
         fig1, ax1 = plt.subplots(figsize=(19, 9))
         ax1.spines["top"].set_visible(False)
         ax1.spines["right"].set_visible(False)
@@ -325,7 +326,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         plt.show()
 
     # Figure 14
-    if fig_number == "14":
+    elif fig_number == "14":
         n_choice = 22
         fig, ax = subplots(5, 1, sharex=True, figsize=(19, 29))
         ax[0].plot(V2_PYs.t / ms, V2_PYs.v[n_choice - 4] / mV, linewidth=0.4, color="tab:blue", alpha=0.6)
@@ -416,7 +417,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         plt.show()
 
     # Figure 15
-    if fig_number in ["15-A", "15-B", "15-C", "15-D"]:
+    elif fig_number in ["15-A", "15-B", "15-C", "15-D"]:
         fig, ax = subplots(3, 1, sharex=True, figsize=(12, 15))
         ax[0].plot(V2_PYs.t, V2_PYs.v[N // 2] / mV, color="tab:blue", linewidth=1.5)
         ax[0].set_title("PY", size=35, loc="left")
@@ -450,7 +451,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         plt.show()
 
     # Figure 16 & S3
-    if fig_number in [
+    elif fig_number in [
         "16-A1",
         "16-A2",
         "16-A3",
@@ -478,7 +479,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         plt.show()
 
     # Figure 17
-    if fig_number in [
+    elif fig_number in [
         "17-A1",
         "18-A1",
         "17-A2",
@@ -648,7 +649,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
             plt.show()
 
     # Figure 19
-    if fig_number in ["19"]:
+    elif fig_number in ["19"]:
         fig, ax = subplots(2, 1, sharex=True, figsize=(12, 15))
         ax[0].plot(V2_PYs.t, V2_PYs.v[0] / mV, color="tab:blue", linewidth=1.5)
         ax[0].set_title("Away from stimulus", size=35, loc="left")
@@ -672,7 +673,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         plt.show()
 
     # Supplementary 1
-    if fig_number == "S1":
+    elif fig_number == "S1":
         # S1-A
         fig, ax = subplots(4, 1, sharex=True, figsize=(19, 24))
         ax[0].plot(V2_PYs.t, V2_PYs.v[50] / mV, color="tab:blue", linewidth=1.5)
@@ -764,7 +765,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         ax[3].tick_params(axis="both", which="major", labelsize=25, width=2)
 
     # Supplementary 2
-    if fig_number == "S2":
+    elif fig_number == "S2":
         fig, ax = subplots(4, 1, sharex=True, figsize=(19, 24))
         ax[0].plot(time_s, VPY_s[50], color="tab:blue", linewidth=1.5)
         ax[0].set_title("PY axosomatic compartment", size=30, loc="left")
@@ -813,3 +814,71 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         ax[3].yaxis.set_major_locator(MultipleLocator(base=25))
         ax[3].tick_params(axis="both", which="major", labelsize=25, width=2)
         fig.tight_layout()
+
+    elif fig_number in ["S4-B", "S4-C", "S4-D", "S4-E"]:
+        fig = plt.figure(figsize=(12, 4))
+        gs = gridspec.GridSpec(1, 2, width_ratios=[20, 0.5], height_ratios=[1], wspace=0.05)
+        ax1 = plt.subplot(gs[0])
+        im1 = ax1.imshow(
+            V2_PYs.v / mV,
+            aspect="auto",
+            cmap="Greys",
+            vmin=-75,
+            vmax=-60,
+            extent=[0, runtime, 100, 0],
+            interpolation="bicubic",
+        )
+
+        ax1.set_title("PY Neurons", size=30, loc="left", pad=30)
+        ax1.set_xlabel("Time (s)", size=25, labelpad=10)
+        ax1.set_ylabel("Neuron index", size=25, labelpad=30)
+        ax1.set_xlim(0, 15)
+        ax1.yaxis.set_major_locator(MultipleLocator(base=25))
+        ax1.tick_params(axis="both", which="major", labelsize=25, width=2)
+
+        cbar_ax = plt.subplot(gs[1])
+        cbar = fig.colorbar(im1, cax=cbar_ax, orientation="vertical")
+        cbar.set_label("Membrane potential (mV)", size=25, labelpad=30)
+        cbar.ax.tick_params(labelsize=25, width=2)
+        plt.show()
+
+    else:
+        fig = plt.figure(figsize=(20, 12))
+        gs = gridspec.GridSpec(2, 2, width_ratios=[20, 0.5], height_ratios=[2, 1], wspace=0.05, hspace=0.3)
+        ax1 = plt.subplot(gs[0, 0])
+        im1 = ax1.imshow(
+            V2_PYs.v / mV,
+            aspect="auto",
+            cmap="Greys",
+            vmax=-60,
+            vmin=-75,
+            extent=[0, runtime, N - 1, 0],
+            interpolation="bicubic",
+        )
+        ax1.set_title("PY", size=30, loc="left")
+        ax1.set_ylabel("Neuron index", size=30, labelpad=30)
+        ax1.set_xlim(0, 30)
+        ax1.yaxis.set_major_locator(MultipleLocator(base=25))
+        ax1.tick_params(axis="both", which="major", labelsize=25, width=2)
+        ax2 = plt.subplot(gs[1, 0])
+        im2 = ax2.imshow(
+            V2_TC.v / mV,
+            aspect="auto",
+            cmap="Greys",
+            vmax=-60,
+            vmin=-75,
+            extent=[0, runtime, 50, 0],
+            interpolation="bicubic",
+        )
+        ax2.set_title("TC", size=30, loc="left")
+        ax2.set_xlabel("Time (s)", size=30, labelpad=10)
+        ax2.set_ylabel("Neuron index", size=30, labelpad=30)
+        ax2.set_xlim(0, 30)
+        ax2.yaxis.set_major_locator(MultipleLocator(base=25))
+        ax2.tick_params(axis="both", which="major", labelsize=25, width=2)
+
+        cbar_ax = plt.subplot(gs[:, 1])
+        cbar = fig.colorbar(im1, cax=cbar_ax, orientation="vertical")
+        cbar.set_label("Membrane potential (mV)", size=30, labelpad=30)
+        cbar.ax.tick_params(labelsize=25, width=2)
+        plt.show()

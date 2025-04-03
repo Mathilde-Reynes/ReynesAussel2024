@@ -25,9 +25,9 @@ def create_cortical_layer(N, mini_form, A_PY_PY, A_PY_IN):
 
     ###PARAMETERS
     # Channel-specific conductances per unit of surface
-    g_syn_ampa_pypy = 0.00015 * msiemens  # 0.00015*msiemens
+    g_syn_ampa_pypy = 0.00015 * msiemens
     g_syn_nmda_pypy = 0.00001 * msiemens
-    g_syn_ampa_pyin = 0.00005 * msiemens  # 0.00005
+    g_syn_ampa_pyin = 0.00005 * msiemens 
     g_syn_nmda_pyin = 0.000008 * msiemens
     g_syn_gabaa_inpy = 0.00005 * msiemens
 
@@ -65,6 +65,7 @@ def create_cortical_layer(N, mini_form, A_PY_PY, A_PY_IN):
     PY_dendrite.g_nap = 3.5 * msiemens * cm**-2
     PY_dendrite.g_km = 0.01 * msiemens * cm**-2
     PY_dendrite.g_kl = 0.0025 * msiemens * cm**-2  # 0.0025*msiemens*cm**-2
+    PY_dendrite.g_kca = 0.3 * msiemens * cm**-2
     PY_dendrite.E_l = -68 * mV
     PY_dendrite.rho = 165
 
@@ -116,6 +117,7 @@ def create_cortical_layer(N, mini_form, A_PY_PY, A_PY_IN):
     IN_dendrite.g_nap = 0.0 * msiemens * cm**-2
     IN_dendrite.g_km = 0.01 * msiemens * cm**-2
     IN_dendrite.g_kl = 0.00 * msiemens * cm**-2
+    IN_dendrite.g_kca = 0.3 * msiemens * cm**-2
     IN_dendrite.E_l = -70 * mV
     IN_dendrite.rho = 50
 

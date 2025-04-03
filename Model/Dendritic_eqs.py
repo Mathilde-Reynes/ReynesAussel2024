@@ -12,7 +12,6 @@ s_soma = 10**-6 * cm**2
 Cm = 0.75 * ufarad / cm**2
 # Ion-specific conductances per unit of surface
 g_hva = 0.01 * msiemens * cm**-2
-g_kca = 0.3 * msiemens * cm**-2
 g_l = 0.033 * msiemens * cm**-2
 # Ion-specific reversal potential
 E_na = 50 * mV
@@ -118,6 +117,8 @@ Dendritic_eqs = """
     g_km : siemens * meter**-2
     
     g_kl : siemens * meter**-2
+    
+    g_kca : siemens * meter**-2
     
     E_l : volt 
 

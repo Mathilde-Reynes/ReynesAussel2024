@@ -36,6 +36,9 @@ def figure_conditions_pre(fig_number, A_PY_PY, A_PY_IN, N):
         A_PY_PY = 0.00006 * msiemens * 0.5
         A_PY_IN = 0.000025 * msiemens * 0.5
 
+    elif fig_number == "S4-D":
+        A_PY_PY = 0.00006 * msiemens * 0.8
+
     else:
         None
 
@@ -69,152 +72,8 @@ def figure_conditions(
     monitor_poisson = None
     g_syn_ampa_stim = None
 
-    # For figure 2 to 4, please refer to the corresponding .py files as values are computed using Bazhenov et al. (2002) original results
+    # Dictionnaries
 
-    # Figure 5
-    if fig_number == "5":
-        runtime = 30 * second  # 30
-    else:
-        runtime = 10 * second
-        print(
-            "As the fig_number provided was not recognized, a 10-seconds simulation with standard parameters will run (as per done for figure 5). For reference, possible fig_number are: 5, 7, 8, 9-A1, 9-A2, 9-A3, 9-B1, 9-B2, 9-B3, 10-1, 10-2, 10-3, 11-1, 11-2, 12-A1, 12-A2, 12-B1, 12-B2, 13-A, 13-B, 14, 15-A, 15-B, 15-C, 15-D, 16-A1, 16-A2, 16-A3, 16-A4, 16-B1, 16-B2, 16-B3, 16-B5, 16-B4, 16-B6, 16-B7, 17-A1, 17-A2, 17-A3, 18-A1, 18-A2, 18-A3, 17-B1, 17-B2, 17-B3, 18-B1, 18-B2, 18-B3, 19, S1, S2, S3-A1, S3-A2, S3-A3, S3-A4, S3-B1, S3-B2, S3-B3, S3-B4, S3-B5, S3-B6, S3-B7"
-        )
-
-    # Figure 7
-    if fig_number == "7":
-        runtime = 30 * second
-
-    # Figure 8
-    if fig_number == "8":
-        runtime = 10 * second
-
-    # Figure 9
-    if fig_number in ["9-A1", "9-A2", "9-A3", "9-B1", "9-B2", "9-B3"]:
-        runtime = 8 * second
-        g_syn_ampa_tcpy = 0 * msiemens
-        g_syn_ampa_tcin = 0 * msiemens
-        g_syn_ampa_pytc = 0 * msiemens
-        g_syn_ampa_pyre = 0 * msiemens
-
-    # Figure 10
-    if fig_number in ["10-1", "10-3"]:
-        runtime = 20 * second
-        g_syn_ampa_tcpy = 0 * msiemens
-        g_syn_ampa_tcin = 0 * msiemens
-        g_syn_ampa_pytc = 0 * msiemens
-        g_syn_ampa_pyre = 0 * msiemens
-    if fig_number == "10-2":
-        runtime = 20 * second
-        g_syn_ampa_tcpy = 0 * msiemens
-        g_syn_ampa_tcin = 0 * msiemens
-        g_syn_ampa_pytc = 0 * msiemens
-        g_syn_ampa_pyre = 0 * msiemens
-        syn_PYPY = all_synapses[0]
-        syn_PYPY.g_syn = 0.00015 * msiemens * 0.5
-        syn_PYPY_nmda = all_synapses[2]
-        syn_PYPY_nmda.g_syn = 0.00001 * msiemens * 0.5
-        syn_PYIN = all_synapses[1]
-        syn_PYIN.g_syn = 0.00005 * msiemens * 0.5
-        syn_PYIN_nmda = all_synapses[3]
-        syn_PYIN_nmda.g_syn = 0.000008 * msiemens * 0.5
-        syn_INPY = all_synapses[4]
-        syn_INPY.g_syn = 0.00005 * msiemens * 0.5
-
-    # Figure 11
-    if fig_number == "11-1":
-        runtime = 8 * second
-    if fig_number == "11-2":
-        runtime = 8 * second
-
-    # Figure 12
-    if fig_number == "12-A1":
-        runtime = 8 * second
-        g_syn_ampa_tcpy = 0 * msiemens
-        g_syn_ampa_tcin = 0 * msiemens
-        g_syn_ampa_pytc = 0 * msiemens
-        g_syn_ampa_pyre = 0 * msiemens
-        g_syn_ampa_pyin = 0.00002 * msiemens
-    if fig_number == "12-A2":
-        runtime = 8 * second
-        g_syn_ampa_tcpy = 0 * msiemens
-        g_syn_ampa_tcin = 0 * msiemens
-        g_syn_ampa_pytc = 0 * msiemens
-        g_syn_ampa_pyre = 0 * msiemens
-        g_syn_ampa_pyin = 0.00007 * msiemens
-    if fig_number == "12-B1":
-        runtime = 20 * second
-        g_syn_ampa_tcpy = 0 * msiemens
-        g_syn_ampa_tcin = 0 * msiemens
-        g_syn_ampa_pytc = 0 * msiemens
-        g_syn_ampa_pyre = 0 * msiemens
-        g_syn_ampa_pypy = (
-            0.00012 * msiemens
-        )  # 0.00012*msiemens ; 0.00013*msiemens ; 0.00014*msiemens ; 0.00015*msiemens ; 0.00016*msiemens
-    if fig_number == "12-B2":
-        runtime = 20 * second
-        g_syn_ampa_tcpy = 0 * msiemens
-        g_syn_ampa_tcin = 0 * msiemens
-        g_syn_ampa_pytc = 0 * msiemens
-        g_syn_ampa_pyre = 0 * msiemens
-        g_syn_ampa_pyin = (
-            0.00002 * msiemens
-        )  # 0.00002*msiemens ; 0.00003*msiemens ; 0.00004*msiemens ; 0.00005*msiemens ; 0.00006*msiemens ; 0.00007*msiemens ; 0.00008*msiemens
-
-    # Figure 13
-    if fig_number == "13-A":
-        runtime = 10 * second
-    if fig_number == "13-B":
-        runtime = 10 * second
-        g_syn_ampa_tcpy = 0 * msiemens
-        g_syn_ampa_tcin = 0 * msiemens
-        g_syn_ampa_pytc = 0 * msiemens
-        g_syn_ampa_pyre = 0 * msiemens
-
-    # Figure 14
-    if fig_number == "14":
-        runtime = 10 * second
-
-    # Figure 15
-    if fig_number == "15-A":
-        runtime = 20 * second
-        PY_dendrite.g_kl = 0 * msiemens * cm**-2
-        TC.g_kl_TC = 0 * msiemens * cm**-2
-        RE.g_kl_RE = 0 * msiemens * cm**-2
-        syn_PYPY = all_synapses[0]
-        syn_PYPY.g_syn = 0.00015 * msiemens
-        syn_RETC = all_synapses_T[0]
-        syn_RETC.g_syn = 0.0002 * msiemens
-        syn_TCRE = all_synapses_T[-1]
-        syn_TCRE.g_syn = 0.0004 * msiemens
-    if fig_number == "15-B":
-        runtime = 20 * second
-        PY_dendrite.g_kl = 0 * msiemens * cm**-2
-        TC.g_kl_TC = 0 * msiemens * cm**-2
-        RE.g_kl_RE = 0 * msiemens * cm**-2
-        syn_PYPY = all_synapses[0]
-        syn_PYPY.g_syn = 0.00009 * msiemens
-        syn_RETC = all_synapses_T[0]
-        syn_RETC.g_syn = 0.0001 * msiemens
-        syn_TCRE = all_synapses_T[-1]
-    if fig_number == "15-C":
-        runtime = 20 * second
-        PY_dendrite.g_kl = 0 * msiemens * cm**-2
-        TC.g_kl_TC = 0 * msiemens * cm**-2
-        RE.g_kl_RE = 0 * msiemens * cm**-2
-        syn_PYPY = all_synapses[0]
-        syn_PYPY.g_syn = 0.00009 * msiemens
-        syn_RETC = all_synapses_T[0]
-        syn_RETC.g_syn = 0.0002 * msiemens
-        syn_TCRE = all_synapses_T[-1]
-        syn_TCRE.g_syn = 0.0004 * msiemens
-    if fig_number == "15-D":
-        runtime = 20 * second
-        syn_PYPY = all_synapses[0]
-        syn_PYPY.g_syn = (
-            0.0001 * msiemens
-        )  # 0.00008*msiemens ; 0.0001*msiemens ; 0.00012*msiemens ; 0.00014*msiemens ; 0.00016*msiemens
-
-    # Figure 16
     params_16 = {
         "16-A1": {
             "runtime": 30 * second,
@@ -305,19 +164,7 @@ def figure_conditions(
             "syn_TCRE": 0.0002333 * msiemens,
         },
     }
-    if fig_number in params_16:
-        params = params_16[fig_number]
-        runtime = params["runtime"]
-        PY_dendrite.g_kl = params["g_kl_PY"]
-        TC.g_kl_TC = params["g_kl_TC"]
-        syn_PYPY = all_synapses[0]
-        syn_PYPY.g_syn = params["syn_PYPY"]
-        syn_RETC = all_synapses_T[0]
-        syn_RETC.g_syn = params["syn_RETC"]
-        syn_TCRE = all_synapses_T[-1]
-        syn_TCRE.g_syn = params["syn_TCRE"]
 
-    # Figure 17/18/19
     stim_params = {
         "17-A1": {
             "runtime": 15 * second,
@@ -398,27 +245,7 @@ def figure_conditions(
             "base_rate": 25 * Hz,
         },
     }
-    if fig_number in stim_params:
-        params = stim_params[fig_number]
-        runtime = params["runtime"]
-        modulation = params["modulation"]
-        g_syn = params["g_syn"]
-        base_rate = params["base_rate"]
-        PY_dendrite.g_kl = 0.003 * msiemens * cm**-2
-        TC.g_kl_TC = 0.003 * msiemens * cm**-2
-        syn_PYPY = all_synapses[0]
-        syn_PYPY.g_syn = g_syn
-        syn_RETC = all_synapses_T[0]
-        syn_RETC.g_syn = 0.0002 * msiemens
-        syn_TCRE = all_synapses_T[-1]
-        syn_TCRE.g_syn = 0.0004 * msiemens
-        g_syn_ampa_stim = 0.0004 * msiemens
 
-    # Supplementary 1 & 2
-    if fig_number == "S1" or fig_number == "S2":
-        runtime = 10 * second
-
-    # Supplementary 3
     stim_params_S3 = {
         "S3-A1": {
             "g_kl": 0.0025 * msiemens * cm**-2,
@@ -498,7 +325,160 @@ def figure_conditions(
             "g_kl_TC": 0.0005 * msiemens * cm**-2,
         },
     }
-    if fig_number in stim_params_S3:
+
+    # For figure 2 to 4, please refer to the corresponding .py files as values are computed using Bazhenov et al. (2002) original results
+
+    if fig_number == "5":
+        runtime = 15 * second  # 30
+    elif fig_number == "7":
+        runtime = 30 * second
+    elif fig_number == "8":
+        runtime = 10 * second
+    elif fig_number in ["9-A1", "9-A2", "9-A3", "9-B1", "9-B2", "9-B3"]:
+        runtime = 8 * second
+        g_syn_ampa_tcpy = 0 * msiemens
+        g_syn_ampa_tcin = 0 * msiemens
+        g_syn_ampa_pytc = 0 * msiemens
+        g_syn_ampa_pyre = 0 * msiemens
+    elif fig_number in ["10-1", "10-3"]:
+        runtime = 20 * second
+        g_syn_ampa_tcpy = 0 * msiemens
+        g_syn_ampa_tcin = 0 * msiemens
+        g_syn_ampa_pytc = 0 * msiemens
+        g_syn_ampa_pyre = 0 * msiemens
+    elif fig_number == "10-2":
+        runtime = 20 * second
+        g_syn_ampa_tcpy = 0 * msiemens
+        g_syn_ampa_tcin = 0 * msiemens
+        g_syn_ampa_pytc = 0 * msiemens
+        g_syn_ampa_pyre = 0 * msiemens
+        syn_PYPY = all_synapses[0]
+        syn_PYPY.g_syn = 0.00015 * msiemens * 0.5
+        syn_PYPY_nmda = all_synapses[2]
+        syn_PYPY_nmda.g_syn = 0.00001 * msiemens * 0.5
+        syn_PYIN = all_synapses[1]
+        syn_PYIN.g_syn = 0.00005 * msiemens * 0.5
+        syn_PYIN_nmda = all_synapses[3]
+        syn_PYIN_nmda.g_syn = 0.000008 * msiemens * 0.5
+        syn_INPY = all_synapses[4]
+        syn_INPY.g_syn = 0.00005 * msiemens * 0.5
+    elif fig_number == "11-1":
+        runtime = 8 * second
+    elif fig_number == "11-2":
+        runtime = 8 * second
+    elif fig_number == "12-A1":
+        runtime = 8 * second
+        g_syn_ampa_tcpy = 0 * msiemens
+        g_syn_ampa_tcin = 0 * msiemens
+        g_syn_ampa_pytc = 0 * msiemens
+        g_syn_ampa_pyre = 0 * msiemens
+        syn_PYIN = all_synapses[1]
+        syn_PYIN.g_syn = 0.00002 * msiemens
+    elif fig_number == "12-A2":
+        runtime = 8 * second
+        g_syn_ampa_tcpy = 0 * msiemens
+        g_syn_ampa_tcin = 0 * msiemens
+        g_syn_ampa_pytc = 0 * msiemens
+        g_syn_ampa_pyre = 0 * msiemens
+        syn_PYIN = all_synapses[1]
+        syn_PYIN.g_syn = 0.00007 * msiemens
+    elif fig_number == "12-B1":
+        runtime = 20 * second
+        g_syn_ampa_tcpy = 0 * msiemens
+        g_syn_ampa_tcin = 0 * msiemens
+        g_syn_ampa_pytc = 0 * msiemens
+        g_syn_ampa_pyre = 0 * msiemens
+        syn_PYPY = all_synapses[0]
+        syn_PYPY.g_syn = (
+            0.00012 * msiemens
+        )  # 0.00012*msiemens ; 0.00013*msiemens ; 0.00014*msiemens ; 0.00015*msiemens ; 0.00016*msiemens
+    elif fig_number == "12-B2":
+        runtime = 20 * second
+        g_syn_ampa_tcpy = 0 * msiemens
+        g_syn_ampa_tcin = 0 * msiemens
+        g_syn_ampa_pytc = 0 * msiemens
+        g_syn_ampa_pyre = 0 * msiemens
+        syn_PYIN = all_synapses[1]
+        syn_PYIN.g_syn = (
+            0.00002 * msiemens
+        )  # 0.00002*msiemens ; 0.00003*msiemens ; 0.00004*msiemens ; 0.00005*msiemens ; 0.00006*msiemens ; 0.00007*msiemens ; 0.00008*msiemens
+    elif fig_number == "13-A":
+        runtime = 10 * second
+    elif fig_number == "13-B":
+        runtime = 10 * second
+        g_syn_ampa_tcpy = 0 * msiemens
+        g_syn_ampa_tcin = 0 * msiemens
+        g_syn_ampa_pytc = 0 * msiemens
+        g_syn_ampa_pyre = 0 * msiemens
+    elif fig_number == "14":
+        runtime = 10 * second
+    elif fig_number == "15-A":
+        runtime = 20 * second
+        PY_dendrite.g_kl = 0 * msiemens * cm**-2
+        TC.g_kl_TC = 0 * msiemens * cm**-2
+        RE.g_kl_RE = 0 * msiemens * cm**-2
+        syn_PYPY = all_synapses[0]
+        syn_PYPY.g_syn = 0.00015 * msiemens
+        syn_RETC = all_synapses_T[0]
+        syn_RETC.g_syn = 0.0002 * msiemens
+        syn_TCRE = all_synapses_T[-1]
+        syn_TCRE.g_syn = 0.0004 * msiemens
+    elif fig_number == "15-B":
+        runtime = 20 * second
+        PY_dendrite.g_kl = 0 * msiemens * cm**-2
+        TC.g_kl_TC = 0 * msiemens * cm**-2
+        RE.g_kl_RE = 0 * msiemens * cm**-2
+        syn_PYPY = all_synapses[0]
+        syn_PYPY.g_syn = 0.00009 * msiemens
+        syn_RETC = all_synapses_T[0]
+        syn_RETC.g_syn = 0.0001 * msiemens
+        syn_TCRE = all_synapses_T[-1]
+    elif fig_number == "15-C":
+        runtime = 20 * second
+        PY_dendrite.g_kl = 0 * msiemens * cm**-2
+        TC.g_kl_TC = 0 * msiemens * cm**-2
+        RE.g_kl_RE = 0 * msiemens * cm**-2
+        syn_PYPY = all_synapses[0]
+        syn_PYPY.g_syn = 0.00009 * msiemens
+        syn_RETC = all_synapses_T[0]
+        syn_RETC.g_syn = 0.0002 * msiemens
+        syn_TCRE = all_synapses_T[-1]
+        syn_TCRE.g_syn = 0.0004 * msiemens
+    elif fig_number == "15-D":
+        runtime = 20 * second
+        syn_PYPY = all_synapses[0]
+        syn_PYPY.g_syn = (
+            0.0001 * msiemens
+        )  # 0.00008*msiemens ; 0.0001*msiemens ; 0.00012*msiemens ; 0.00014*msiemens ; 0.00016*msiemens
+    elif fig_number in params_16:
+        params = params_16[fig_number]
+        runtime = params["runtime"]
+        PY_dendrite.g_kl = params["g_kl_PY"]
+        TC.g_kl_TC = params["g_kl_TC"]
+        syn_PYPY = all_synapses[0]
+        syn_PYPY.g_syn = params["syn_PYPY"]
+        syn_RETC = all_synapses_T[0]
+        syn_RETC.g_syn = params["syn_RETC"]
+        syn_TCRE = all_synapses_T[-1]
+        syn_TCRE.g_syn = params["syn_TCRE"]
+    elif fig_number in stim_params:
+        params = stim_params[fig_number]
+        runtime = params["runtime"]
+        modulation = params["modulation"]
+        g_syn = params["g_syn"]
+        base_rate = params["base_rate"]
+        PY_dendrite.g_kl = 0.003 * msiemens * cm**-2
+        TC.g_kl_TC = 0.003 * msiemens * cm**-2
+        syn_PYPY = all_synapses[0]
+        syn_PYPY.g_syn = g_syn
+        syn_RETC = all_synapses_T[0]
+        syn_RETC.g_syn = 0.0002 * msiemens
+        syn_TCRE = all_synapses_T[-1]
+        syn_TCRE.g_syn = 0.0004 * msiemens
+        g_syn_ampa_stim = 0.0004 * msiemens
+    elif fig_number == "S1" or fig_number == "S2":
+        runtime = 10 * second
+    elif fig_number in stim_params_S3:
         params = stim_params_S3[fig_number]
         PY_dendrite.g_kl = params["g_kl"]
         TC.g_kl_TC = params["g_kl_TC"]
@@ -508,6 +488,22 @@ def figure_conditions(
         syn_RETC.g_syn = params["g_syn_RETC"]
         syn_TCRE = all_synapses_T[-1]
         syn_TCRE.g_syn = params["g_syn_TCRE"]
+    elif fig_number == "S4-B":
+        runtime = 15 * second
+    elif fig_number == "S4-C":
+        g_syn_ampa_tcpy = 0.00001 * msiemens
+        g_syn_ampa_tcin = 0.00001 * msiemens
+        runtime = 15 * second
+    elif fig_number == "S4-D":
+        runtime = 15 * second
+    elif fig_number == "S4-E":
+        PY_dendrite.g_kca = 0.06 * msiemens * cm**-2
+        runtime = 15 * second
+    else:
+        runtime = 10 * second
+        print(
+            "As the fig_number provided was not recognized, a 10-seconds simulation with standard parameters will run (as per done for figure 5). For reference, possible fig_number are: 5, 7, 8, 9-A1, 9-A2, 9-A3, 9-B1, 9-B2, 9-B3, 10-1, 10-2, 10-3, 11-1, 11-2, 12-A1, 12-A2, 12-B1, 12-B2, 13-A, 13-B, 14, 15-A, 15-B, 15-C, 15-D, 16-A1, 16-A2, 16-A3, 16-A4, 16-B1, 16-B2, 16-B3, 16-B5, 16-B4, 16-B6, 16-B7, 17-A1, 17-A2, 17-A3, 18-A1, 18-A2, 18-A3, 17-B1, 17-B2, 17-B3, 18-B1, 18-B2, 18-B3, 19, S1, S2, S3-A1, S3-A2, S3-A3, S3-A4, S3-B1, S3-B2, S3-B3, S3-B4, S3-B5, S3-B6, S3-B7, S4-B, S4-C, S4-D, S4-E"
+        )
 
     return (
         runtime,

@@ -24,7 +24,7 @@ fig = plt.figure(figsize=(12, 4))
 gs = gridspec.GridSpec(1, 2, width_ratios=[20, 0.5], height_ratios=[1], wspace=0.05)
 
 ax1 = plt.subplot(gs[0])
-im1 = ax1.imshow(v_PY_bazhenov.T, aspect='auto', cmap='YlGnBu', vmin=-75, vmax=-60, 
+im1 = ax1.imshow(v_PY_bazhenov.T, aspect='auto', cmap='Greys', vmin=-75, vmax=-60, 
                  extent=[0, 25, 100, 0], interpolation='bicubic')
 
 ax1.set_title('PY Neurons', size=30, loc='left', pad=30)
@@ -38,5 +38,4 @@ cbar_ax = plt.subplot(gs[1])
 cbar = fig.colorbar(im1, cax=cbar_ax, orientation='vertical')
 cbar.set_label('Membrane potential (mV)', size=25, labelpad=30)
 cbar.ax.tick_params(labelsize=25, width=2)
-plt.savefig(r"C:\Users\Mathilde\Desktop\Reynes_Aussel\Figures\Figure6-cmapfullmodel\raster_bazhenov.png", dpi=300, bbox_inches='tight')
 plt.show()
