@@ -120,7 +120,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         ax[0].spines["right"].set_visible(False)
         ax[0].spines["bottom"].set_visible(True)
         ax[0].spines["left"].set_visible(True)
-        ax[0].set_xlim([3250, 3700])
+        ax[0].set_xlim([3200, 3650])
         ax[0].yaxis.set_major_locator(MultipleLocator(base=25))
         ax[0].tick_params(axis="both", which="major", labelsize=25, width=2)
         ax[0].set_title("Pyramidal cells", size=30, loc="left")
@@ -219,6 +219,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         ax[5].tick_params(axis="both", which="major", labelsize=25, width=2)
         ax[5].set_title("Synaptic GABAA current IN-PY", size=30, loc="left")
         ax[5].set_ylabel(r"$10 \, \mathrm{mA} \cdot \mathrm{m}^{-2}$", size=30, labelpad=65)
+        ax[5].set_ylim([0, 4])
         #
         ax[6].plot(
             S1.t / ms, S1.D[(S_AMPA_PY_PY.j[:] == n_start).nonzero()[0][0]], color="black", linewidth=1.5
@@ -251,7 +252,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         ax[6].tick_params(axis="both", which="major", labelsize=25, width=2)
         ax[6].set_title("AMPA synaptic depression from input synapses", size=30, loc="left")
         ax[6].set_xlabel("ms", size=30, labelpad=30)
-        fig.tight_layout()
+        plt.show()
 
     # Figure 9&11
     elif fig_number in ["9-A1", "9-A2", "9-A3", "9-B1", "9-B2", "9-B3", "11-1", "11-2"]:
