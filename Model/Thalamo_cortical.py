@@ -288,7 +288,7 @@ if __name__ == "__main__":
     print("Start")
     seed_value = 4168
     analyze_speed = False  # True of False
-    fig_number = "8"
+    fig_number = "5"
     raw_data = False  # True or False
     plot_figure = True  # True or False
     thalamocortical_network(seed_value, analyze_speed, fig_number, raw_data, plot_figure)

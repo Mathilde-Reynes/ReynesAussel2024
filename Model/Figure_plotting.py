@@ -22,7 +22,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         im1 = ax1.imshow(
             V2_PYs.v / mV,
             aspect="auto",
-            cmap="YlGnBu",
+            cmap="Greys",
             vmax=-60,
             vmin=-75,
             extent=[0, runtime, N - 1, 0],
@@ -37,7 +37,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         im2 = ax2.imshow(
             V2_TC.v / mV,
             aspect="auto",
-            cmap="YlGnBu",
+            cmap="Greys",
             vmax=-60,
             vmin=-75,
             extent=[0, runtime, 50, 0],

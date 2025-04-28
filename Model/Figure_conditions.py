@@ -329,7 +329,7 @@ def figure_conditions(
     # For figure 2 to 4, please refer to the corresponding .py files as values are computed using Bazhenov et al. (2002) original results
 
     if fig_number == "5":
-        runtime = 15 * second  # 30
+        runtime = 30 * second  # 30
     elif fig_number == "7":
         runtime = 30 * second
     elif fig_number == "8":
