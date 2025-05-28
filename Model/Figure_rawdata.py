@@ -109,7 +109,7 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         savetxt(os.path.join(folder_name, "RE_v.txt"), V1_RE.v / mV)
         print(f"Raw data saved to {os.path.abspath(folder_name)}")
 
-    # Figure 16/S3
+    # Figure 16/S4
     elif fig_number in [
         "16-A1",
         "16-A2",
@@ -122,6 +122,17 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         "16-B5",
         "16-B6",
         "16-B7",
+        "S4-A1",
+        "S4-B1",
+        "S4-A2",
+        "S4-B3",
+        "S4-A3",
+        "S4-B5",
+        "S4-A4",
+        "S4-B7",
+        "S4-B2",
+        "S4-B4",
+        "S4-B6"
     ]:
         folder_name = f"Figure {fig_number}"
         if not os.path.exists(folder_name):
@@ -177,8 +188,8 @@ def figure_rawdata(fig_number, all_monitors, all_monitors_T, monitor_poisson):
         savetxt(os.path.join(folder_name, "INd_v.txt"), V3_INd.v / mV)
         print(f"Raw data saved to {os.path.abspath(folder_name)}")
 
-    # S4
-    elif fig_number in ["S4-B", "S4-C", "S4-D", "S4-E"]:
+    # S3
+    elif fig_number in ["S3-B", "S3-C", "S3-D", "S3-E"]:
         folder_name = f"Figure {fig_number}"
         if not os.path.exists(folder_name):
             os.makedirs(folder_name)

@@ -451,7 +451,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         ax[2].tick_params(axis="both", which="major", labelsize=30, width=2)
         plt.show()
 
-    # Figure 16 & S3
+    # Figure 16 & S4
     elif fig_number in [
         "16-A1",
         "16-A2",
@@ -464,7 +464,17 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         "16-B5",
         "16-B6",
         "16-B7",
-        "S3",
+        "S4-A1",
+        "S4-B1",
+        "S4-A2",
+        "S4-B3",
+        "S4-A3",
+        "S4-B5",
+        "S4-A4",
+        "S4-B7",
+        "S4-B2",
+        "S4-B4",
+        "S4-B6"
     ]:
         fig, ax = plt.subplots(figsize=(15, 5))
         ax.plot(V2_PYs.t, V2_PYs.v[N // 2] / mV, color="tab:blue", linewidth=1.5)
@@ -816,7 +826,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         ax[3].tick_params(axis="both", which="major", labelsize=25, width=2)
         fig.tight_layout()
 
-    elif fig_number in ["S4-B", "S4-C", "S4-D", "S4-E"]:
+    elif fig_number in ["S3-B", "S3-C", "S3-D", "S3-E"]:
         fig = plt.figure(figsize=(12, 4))
         gs = gridspec.GridSpec(1, 2, width_ratios=[20, 0.5], height_ratios=[1], wspace=0.05)
         ax1 = plt.subplot(gs[0])
