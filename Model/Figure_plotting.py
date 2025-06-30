@@ -451,7 +451,7 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         ax[2].tick_params(axis="both", which="major", labelsize=30, width=2)
         plt.show()
 
-    # Figure 16 & S4
+    # Figure 16 & S5
     elif fig_number in [
         "16-A1",
         "16-A2",
@@ -464,17 +464,17 @@ def figure_plotting(fig_number, all_monitors, all_monitors_T, all_synapses, moni
         "16-B5",
         "16-B6",
         "16-B7",
-        "S4-A1",
-        "S4-B1",
-        "S4-A2",
-        "S4-B3",
-        "S4-A3",
-        "S4-B5",
-        "S4-A4",
-        "S4-B7",
-        "S4-B2",
-        "S4-B4",
-        "S4-B6"
+        "S5-A1",
+        "S5-B1",
+        "S5-A2",
+        "S5-B3",
+        "S5-A3",
+        "S5-B5",
+        "S5-A4",
+        "S5-B7",
+        "S5-B2",
+        "S5-B4",
+        "S5-B6"
     ]:
         fig, ax = plt.subplots(figsize=(15, 5))
         ax.plot(V2_PYs.t, V2_PYs.v[N // 2] / mV, color="tab:blue", linewidth=1.5)

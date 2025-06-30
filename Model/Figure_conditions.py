@@ -246,78 +246,78 @@ def figure_conditions(
         },
     }
 
-    stim_params_S4 = {
-        "S4-A1": {
+    stim_params_S5 = {
+        "S5-A1": {
             "g_kl": 0.0025 * msiemens * cm**-2,
             "g_syn_PYPY": 0.00015 * msiemens,
             "g_syn_RETC": 0.0002 * msiemens,
             "g_syn_TCRE": 0.0004 * msiemens,
             "g_kl_TC": 0.003 * msiemens * cm**-2,
         },
-        "S4-B1": {
+        "S5-B1": {
             "g_kl": 0.0025 * msiemens * cm**-2,
             "g_syn_PYPY": 0.00015 * msiemens,
             "g_syn_RETC": 0.0002 * msiemens,
             "g_syn_TCRE": 0.0004 * msiemens,
             "g_kl_TC": 0.003 * msiemens * cm**-2,
         },
-        "S4-A2": {
+        "S5-A2": {
             "g_kl": 0.0025 * 4 / 6 * msiemens * cm**-2,
             "g_syn_PYPY": 0.0001266 * msiemens,
             "g_syn_RETC": 0.0002 * msiemens,
             "g_syn_TCRE": 0.0004 * msiemens,
             "g_kl_TC": 0.002 * msiemens * cm**-2,
         },
-        "S4-B3": {
+        "S5-B3": {
             "g_kl": 0.0025 * 4 / 6 * msiemens * cm**-2,
             "g_syn_PYPY": 0.0001266 * msiemens,
             "g_syn_RETC": 0.0002 * msiemens,
             "g_syn_TCRE": 0.0004 * msiemens,
             "g_kl_TC": 0.002 * msiemens * cm**-2,
         },
-        "S4-A3": {
+        "S5-A3": {
             "g_kl": 0.0025 * 2 / 6 * msiemens * cm**-2,
             "g_syn_PYPY": 0.0001033 * msiemens,
             "g_syn_RETC": 0.0002 * msiemens,
             "g_syn_TCRE": 0.0004 * msiemens,
             "g_kl_TC": 0.001 * msiemens * cm**-2,
         },
-        "S4-B5": {
+        "S5-B5": {
             "g_kl": 0.0025 * 2 / 6 * msiemens * cm**-2,
             "g_syn_PYPY": 0.0001033 * msiemens,
             "g_syn_RETC": 0.0002 * msiemens,
             "g_syn_TCRE": 0.0004 * msiemens,
             "g_kl_TC": 0.001 * msiemens * cm**-2,
         },
-        "S4-A4": {
+        "S5-A4": {
             "g_kl": 0 * msiemens * cm**-2,
             "g_syn_PYPY": 0.00008 * msiemens,
             "g_syn_RETC": 0.0002 * msiemens,
             "g_syn_TCRE": 0.0004 * msiemens,
             "g_kl_TC": 0 * msiemens * cm**-2,
         },
-        "S4-B7": {
+        "S5-B7": {
             "g_kl": 0 * msiemens * cm**-2,
             "g_syn_PYPY": 0.00008 * msiemens,
             "g_syn_RETC": 0.0002 * msiemens,
             "g_syn_TCRE": 0.0004 * msiemens,
             "g_kl_TC": 0 * msiemens * cm**-2,
         },
-        "S4-B2": {
+        "S5-B2": {
             "g_kl": 0.0025 * 5 / 6 * msiemens * cm**-2,
             "g_syn_PYPY": 0.00013833 * msiemens,
             "g_syn_RETC": 0.0002 * msiemens,
             "g_syn_TCRE": 0.0004 * msiemens,
             "g_kl_TC": 0.0025 * msiemens * cm**-2,
         },
-        "S4-B4": {
+        "S5-B4": {
             "g_kl": 0.0025 * 3 / 6 * msiemens * cm**-2,
             "g_syn_PYPY": 0.000115 * msiemens,
             "g_syn_RETC": 0.0002 * msiemens,
             "g_syn_TCRE": 0.0004 * msiemens,
             "g_kl_TC": 0.0015 * msiemens * cm**-2,
         },
-        "S4-B6": {
+        "S5-B6": {
             "g_kl": 0.00025 * 1 / 6 * msiemens * cm**-2,
             "g_syn_PYPY": 0.00009166 * msiemens,
             "g_syn_RETC": 0.0002 * msiemens,
@@ -478,8 +478,8 @@ def figure_conditions(
         g_syn_ampa_stim = 0.0004 * msiemens
     elif fig_number == "S1" or fig_number == "S2":
         runtime = 10 * second
-    elif fig_number in stim_params_S4:
-        params = stim_params_S4[fig_number]
+    elif fig_number in stim_params_S5:
+        params = stim_params_S5[fig_number]
         PY_dendrite.g_kl = params["g_kl"]
         TC.g_kl_TC = params["g_kl_TC"]
         syn_PYPY = all_synapses[0]
@@ -502,7 +502,7 @@ def figure_conditions(
     else:
         runtime = 10 * second
         print(
-            "As the fig_number provided was not recognized, a 10-seconds simulation with standard parameters will run (as per done for figure 5). For reference, possible fig_number are: 5, 7, 8, 9-A1, 9-A2, 9-A3, 9-B1, 9-B2, 9-B3, 10-1, 10-2, 10-3, 11-1, 11-2, 12-A1, 12-A2, 12-B1, 12-B2, 13-A, 13-B, 14, 15-A, 15-B, 15-C, 15-D, 16-A1, 16-A2, 16-A3, 16-A4, 16-B1, 16-B2, 16-B3, 16-B5, 16-B4, 16-B6, 16-B7, 17-A1, 17-A2, 17-A3, 18-A1, 18-A2, 18-A3, 17-B1, 17-B2, 17-B3, 18-B1, 18-B2, 18-B3, 19, S1, S2, S3-B, S3-C, S3-D, S3-E, S4-A1, S4-A2, S4-A3, S4-A4, S4-B1, S4-B2, S4-B3, S4-B4, S4-B5, S4-B6, S4-B7"
+            "As the fig_number provided was not recognized, a 10-seconds simulation with standard parameters will run (as per done for figure 5). For reference, possible fig_number are: 5, 7, 8, 9-A1, 9-A2, 9-A3, 9-B1, 9-B2, 9-B3, 10-1, 10-2, 10-3, 11-1, 11-2, 12-A1, 12-A2, 12-B1, 12-B2, 13-A, 13-B, 14, 15-A, 15-B, 15-C, 15-D, 16-A1, 16-A2, 16-A3, 16-A4, 16-B1, 16-B2, 16-B3, 16-B5, 16-B4, 16-B6, 16-B7, 17-A1, 17-A2, 17-A3, 18-A1, 18-A2, 18-A3, 17-B1, 17-B2, 17-B3, 18-B1, 18-B2, 18-B3, 19, S1, S2, S3-B, S3-C, S3-D, S3-E, S5-A1, S5-A2, S5-A3, S5-A4, S5-B1, S5-B2, S5-B3, S5-B4, S5-B5, S5-B6, S5-B7"
         )
 
     return (
